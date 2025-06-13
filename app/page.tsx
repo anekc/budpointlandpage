@@ -14,6 +14,9 @@ export default function Home() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [lastSubmitTime, setLastSubmitTime] = useState<number>(0)
   const [submitCount, setSubmitCount] = useState<number>(0)
+  const [emailTouched, setEmailTouched] = useState(false)
+  const [isEmailValid, setIsEmailValid] = useState(false)
+  const [showValidation, setShowValidation] = useState(false)
   
   // Parallax scroll effects
   const { scrollYProgress } = useScroll()
@@ -30,13 +33,26 @@ export default function Home() {
     const browserLang = navigator.language.startsWith('es') ? 'es' : 'en'
     setLanguage(browserLang)
     
+    // Listen for system theme changes
     const handleChange = (e: MediaQueryListEvent) => setIsDark(e.matches)
     darkModeQuery.addEventListener('change', handleChange)
     return () => darkModeQuery.removeEventListener('change', handleChange)
   }, [])
 
-  const toggleDarkMode = () => setIsDark(!isDark)
-  const toggleLanguage = () => setLanguage(language === 'en' ? 'es' : 'en')
+  // Debounced email validation
+  useEffect(() => {
+    if (!emailTouched || email.length === 0) {
+      setShowValidation(false)
+      return
+    }
+
+    const timer = setTimeout(() => {
+      setIsEmailValid(validateEmail(email))
+      setShowValidation(true)
+    }, 800) // Wait 800ms after user stops typing
+
+    return () => clearTimeout(timer)
+  }, [email, emailTouched])
 
   // Scroll to waitlist section
   const scrollToWaitlist = () => {
@@ -49,7 +65,39 @@ export default function Home() {
   // Waitlist form handlers
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
+    if (!emailRegex.test(email)) return false
+    
+    // Lista de dominios de email permitidos (proveedores confiables)
+    const allowedDomains = [
+      'gmail.com',
+      'outlook.com',
+      'hotmail.com',
+      'yahoo.com',
+      'yahoo.es',
+      'icloud.com',
+      'me.com',
+      'live.com',
+      'msn.com',
+      'aol.com',
+      'protonmail.com',
+      'zoho.com',
+      'mail.com',
+      'gmx.com',
+      'yandex.com',
+      'tutanota.com'
+    ]
+    
+    const domain = email.toLowerCase().split('@')[1]
+    return allowedDomains.includes(domain)
+  }
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEmail = e.target.value
+    setEmail(newEmail)
+    setShowValidation(false) // Hide validation while typing
+    if (!emailTouched) {
+      setEmailTouched(true)
+    }
   }
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
@@ -155,6 +203,8 @@ export default function Home() {
       successMessage: "Thanks! You're on the waitlist. We'll notify you when Budpoint launches.",
       errorMessage: "Please enter a valid email address or wait before trying again.",
       tryAgain: "OK",
+      emailInvalid: "Please use Gmail, Outlook, Yahoo, iCloud or another trusted email provider",
+      emailValid: "Email looks good!",
       appPreview: "App Preview",
       appPreviewDesc: "Experience the intuitive and useful interface designed for iOS",
       swipeHint: "Swipe to explore more screens",
@@ -211,6 +261,8 @@ export default function Home() {
       successMessage: "¡Gracias! Estás en la lista de espera. Te notificaremos cuando Budpoint se lance.",
       errorMessage: "Por favor ingresa un correo electrónico válido o espera antes de intentar de nuevo.",
       tryAgain: "OK",
+      emailInvalid: "Por favor usa Gmail, Outlook, Yahoo, iCloud u otro proveedor de correo confiable",
+      emailValid: "El correo electrónico parece correcto!",
       appPreview: "Vista Previa de la App",
       appPreviewDesc: "Experimenta la interfaz intuitiva y útil diseñada para iOS",
       swipeHint: "Desliza para explorar más pantallas",
@@ -254,7 +306,7 @@ export default function Home() {
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
       {/* Fixed Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-black/90' : 'bg-white/90'} backdrop-blur-sm border-b ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-black/60' : 'bg-white/60'} backdrop-blur-md border-b ${isDark ? 'border-gray-800/50' : 'border-gray-200/50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
@@ -266,20 +318,6 @@ export default function Home() {
                 className="rounded-lg"
               />
               <span className="text-xl font-bold">Budpoint</span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <button 
-                onClick={toggleLanguage}
-                className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
-              >
-                {language === 'en' ? '🇪🇸 ES' : '🇺🇸 EN'}
-              </button>
-              <button 
-                onClick={toggleDarkMode}
-                className={`p-2 rounded-md transition-colors ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
-              >
-                {isDark ? '☀️' : '🌙'}
-              </button>
             </div>
           </div>
         </div>
@@ -303,12 +341,22 @@ export default function Home() {
                 className="mx-auto rounded-3xl shadow-2xl"
               />
             </motion.div>
-            <h1 className="text-4xl font-bold sm:text-6xl mb-6">
+            <motion.h1 
+              className="text-4xl font-bold sm:text-6xl mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               {currentLang.title}
-            </h1>
-            <p className={`mt-6 text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            </motion.h1>
+            <motion.p 
+              className={`mt-6 text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
               {currentLang.subtitle}
-            </p>
+            </motion.p>
             <motion.div 
               className="mt-10"
               initial={{ opacity: 0, y: 30 }}
@@ -327,10 +375,24 @@ export default function Home() {
           {/* App Preview Section - RESPONSIVE */}
           <motion.div className="pt-20 pb-10" style={{ y: screenshotsY }}>
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">{currentLang.appPreview}</h2>
-              <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              <motion.h2 
+                className="text-3xl font-bold mb-4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                {currentLang.appPreview}
+              </motion.h2>
+              <motion.p 
+                className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
                 {currentLang.appPreviewDesc}
-              </p>
+              </motion.p>
             </div>
             
             {/* Screenshots Container - RESPONSIVE GRID */}
@@ -338,7 +400,14 @@ export default function Home() {
               {/* Mobile: Single column stack, Tablet: 2 columns, Desktop: 3 columns */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto px-4">
                 {screenshots.map((screenshot, index) => (
-                  <div key={screenshot.name} className="group mx-auto">
+                  <motion.div 
+                    key={screenshot.name} 
+                    className="group mx-auto"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
                     <div className="relative transform transition-all duration-300 hover:scale-105">
                       {/* iPhone Simulation - Realistic */}
                       <div className="relative max-w-[280px] md:max-w-[320px] lg:max-w-[350px] mx-auto">
@@ -385,7 +454,7 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
               
@@ -567,10 +636,24 @@ export default function Home() {
           {/* Pricing Section */}
           <div className={`py-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
             <div className="text-center">
-              <h2 className="text-3xl font-bold mb-8">{currentLang.pricing}</h2>
+              <motion.h2 
+                className="text-3xl font-bold mb-8"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                {currentLang.pricing}
+              </motion.h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {/* Free Plan */}
-                <div className={`p-6 rounded-xl shadow-lg flex flex-col ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+                <motion.div 
+                  className={`p-6 rounded-xl shadow-lg flex flex-col ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                >
                   <h3 className="text-xl font-bold mb-4">{currentLang.free}</h3>
                   <p className="text-3xl font-bold mb-6">$0</p>
                   <ul className="text-left space-y-2 mb-8 flex-grow">
@@ -584,10 +667,16 @@ export default function Home() {
                   <button className={`w-full py-3 rounded-lg font-semibold mt-auto ${isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-800'}`}>
                     {currentLang.comingSoon}
                   </button>
-                </div>
+                </motion.div>
 
                 {/* Pro Monthly Plan */}
-                <div className={`p-6 rounded-xl shadow-lg border-2 border-blue-600 flex flex-col ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+                <motion.div 
+                  className={`p-6 rounded-xl shadow-lg border-2 border-blue-600 flex flex-col ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
                   <h3 className="text-xl font-bold mb-4 text-blue-600">{currentLang.pro}</h3>
                   <p className="text-3xl font-bold mb-6">{currentLang.proPrice}</p>
                   <ul className="text-left space-y-2 mb-8 flex-grow">
@@ -601,10 +690,16 @@ export default function Home() {
                   <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors mt-auto">
                     {currentLang.comingSoon}
                   </button>
-                </div>
+                </motion.div>
 
                 {/* Pro Annual Plan */}
-                <div className={`p-6 rounded-xl shadow-lg flex flex-col relative ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+                <motion.div 
+                  className={`p-6 rounded-xl shadow-lg flex flex-col relative ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                >
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                       {currentLang.annualSavings}
@@ -623,10 +718,16 @@ export default function Home() {
                   <button className="w-full bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors mt-auto">
                     {currentLang.comingSoon}
                   </button>
-                </div>
+                </motion.div>
 
                 {/* Lifetime Plan */}
-                <div className={`p-6 rounded-xl shadow-lg flex flex-col relative ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+                <motion.div 
+                  className={`p-6 rounded-xl shadow-lg flex flex-col relative ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                       {currentLang.lifetimeBest}
@@ -645,22 +746,39 @@ export default function Home() {
                   <button className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors mt-auto">
                     {currentLang.comingSoon}
                   </button>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
           
           {/* Waitlist Section */}
           <div id="waitlist-section" className="py-20 text-center">
-            <h2 className="text-3xl font-bold mb-4">
+            <motion.h2 
+              className="text-3xl font-bold mb-4"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
               {currentLang.waitlistTitle}
-            </h2>
-            <p className={`text-lg mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            </motion.h2>
+            <motion.p 
+              className={`text-lg mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               {currentLang.waitlistSubtitle}
-            </p>
+            </motion.p>
             
             {submitStatus === 'success' ? (
-              <div className="max-w-md mx-auto">
+              <motion.div 
+                className="max-w-md mx-auto"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
                 <div className={`p-6 rounded-lg ${isDark ? 'bg-green-900/20 border border-green-800' : 'bg-green-50 border border-green-200'}`}>
                   <div className="text-4xl mb-4">✅</div>
                   <p className={`text-lg font-medium ${isDark ? 'text-green-400' : 'text-green-800'}`}>
@@ -673,28 +791,63 @@ export default function Home() {
                     {currentLang.tryAgain}
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ) : (
-              <form onSubmit={handleWaitlistSubmit} className="max-w-md mx-auto">
-                <div className="flex gap-4">
-                  <input 
-                    type="email" 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={currentLang.emailPlaceholder}
-                    required
-                    disabled={isSubmitting}
-                    className={`flex-1 px-4 py-3 border rounded-lg transition-colors ${
-                      submitStatus === 'error' 
-                        ? isDark ? 'bg-red-900/20 border-red-800 text-white placeholder-red-400' : 'bg-red-50 border-red-300 text-gray-900 placeholder-red-400'
-                        : isDark ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900'
-                    } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  />
+              <motion.form 
+                onSubmit={handleWaitlistSubmit} 
+                className="max-w-md mx-auto"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex gap-4 items-start">
+                  <div className="flex-1">
+                    <div className="h-20"> {/* Fixed height container */}
+                      <input 
+                        type="email" 
+                        value={email}
+                        onChange={handleEmailChange}
+                        onBlur={() => setEmailTouched(true)}
+                        placeholder={currentLang.emailPlaceholder}
+                        required
+                        disabled={isSubmitting}
+                        className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 ${
+                          submitStatus === 'error' 
+                            ? isDark ? 'bg-red-900/20 border-red-800 text-white placeholder-red-400' : 'bg-red-50 border-red-300 text-gray-900 placeholder-red-400'
+                            : showValidation
+                              ? isEmailValid
+                                ? isDark ? 'bg-green-900/20 border-green-700 text-white placeholder-gray-400' : 'bg-green-50 border-green-300 text-gray-900'
+                                : isDark ? 'bg-red-900/20 border-red-700 text-white placeholder-gray-400' : 'bg-red-50 border-red-300 text-gray-900'
+                              : isDark ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900'
+                        } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      />
+                      {showValidation && (
+                        <div className="mt-2 flex items-center text-sm">
+                          {isEmailValid ? (
+                            <>
+                              <span className="text-green-500 mr-2">✓</span>
+                              <span className={isDark ? 'text-green-400' : 'text-green-600'}>
+                                {currentLang.emailValid}
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <span className="text-red-500 mr-2">✗</span>
+                              <span className={isDark ? 'text-red-400' : 'text-red-600'}>
+                                {currentLang.emailInvalid}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
                   <button 
                     type="submit"
-                    disabled={isSubmitting || !email.trim()}
-                    className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
-                      isSubmitting || !email.trim()
+                    disabled={isSubmitting || !email.trim() || (showValidation && !isEmailValid)}
+                    className={`px-6 py-3 rounded-lg font-semibold transition-colors self-start ${
+                      isSubmitting || !email.trim() || (showValidation && !isEmailValid)
                         ? isDark ? 'bg-gray-700 text-gray-400 cursor-not-allowed' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                         : 'bg-blue-600 text-white hover:bg-blue-700'
                     }`}
@@ -707,14 +860,26 @@ export default function Home() {
                     {currentLang.errorMessage}
                   </p>
                 )}
-              </form>
+              </motion.form>
             )}
           </div>
 
           {/* Footer */}
-          <footer className={`py-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
+          <motion.footer 
+            className={`py-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <div className="text-center">
-              <div className="flex items-center justify-center space-x-3 mb-4">
+              <motion.div 
+                className="flex items-center justify-center space-x-3 mb-4"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
                 <Image 
                   src="/logo.png" 
                   alt="Budpoint Logo" 
@@ -723,12 +888,18 @@ export default function Home() {
                   className="rounded"
                 />
                 <span className="font-semibold">Budpoint</span>
-              </div>
-              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                © 2024 Budpoint. {language === 'en' ? 'All rights reserved.' : 'Todos los derechos reservados.'}
-              </p>
+              </motion.div>
+              <motion.p 
+                className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                © 2025 Budpoint. {language === 'en' ? 'All rights reserved.' : 'Todos los derechos reservados.'}
+              </motion.p>
             </div>
-          </footer>
+          </motion.footer>
         </div>
       </div>
     </div>
