@@ -213,7 +213,7 @@ export default function Home() {
       smartNotifications: "iOS 18.4+ Optimized", 
       smartNotificationsDesc: "Built specifically for latest iOS with native performance and modern design patterns",
       multiCurrency: "Complete Widget Integration",
-      multiCurrencyDesc: "Home screen widgets with live data, quick actions, and 15-minute automatic updates"
+      multiCurrencyDesc: "Home screen widgets with live data and quick actions for instant budget monitoring"
     },
     es: {
       title: "Toma Control de tus Finanzas",
@@ -269,7 +269,7 @@ export default function Home() {
       smartNotifications: "Optimizado para iOS 18.4+",
       smartNotificationsDesc: "Construido específicamente para el iOS más reciente con rendimiento nativo y patrones de diseño modernos",
       multiCurrency: "Integración Completa de Widgets",
-      multiCurrencyDesc: "Widgets de pantalla principal con datos en vivo, acciones rápidas y actualizaciones automáticas cada 15 minutos"
+      multiCurrencyDesc: "Widgets de pantalla principal con datos en vivo y acciones rápidas para monitoreo instantáneo del presupuesto"
     }
   }
 
