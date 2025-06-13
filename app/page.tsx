@@ -744,7 +744,7 @@ export default function Home() {
                   </div>
                 </div>
                 <p className={`mb-4 italic ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                  "{currentLang.testimonial1}"
+                  &quot;{currentLang.testimonial1}&quot;
                 </p>
                 <div className="flex items-center">
                   <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-600' : 'bg-blue-500'} flex items-center justify-center text-white font-semibold mr-3`}>
@@ -774,7 +774,7 @@ export default function Home() {
                   </div>
                 </div>
                 <p className={`mb-4 italic ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                  "{currentLang.testimonial2}"
+                  &quot;{currentLang.testimonial2}&quot;
                 </p>
                 <div className="flex items-center">
                   <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-green-600' : 'bg-green-500'} flex items-center justify-center text-white font-semibold mr-3`}>
@@ -804,7 +804,7 @@ export default function Home() {
                   </div>
                 </div>
                 <p className={`mb-4 italic ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                  "{currentLang.testimonial3}"
+                  &quot;{currentLang.testimonial3}&quot;
                 </p>
                 <div className="flex items-center">
                   <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-purple-600' : 'bg-purple-500'} flex items-center justify-center text-white font-semibold mr-3`}>
