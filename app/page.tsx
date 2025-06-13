@@ -18,6 +18,9 @@ export default function Home() {
   const [isEmailValid, setIsEmailValid] = useState(false)
   const [showValidation, setShowValidation] = useState(false)
   
+  // Pricing plan selection state
+  const [selectedPlan, setSelectedPlan] = useState<'free' | 'pro' | 'annual' | 'lifetime'>('pro')
+  
   // Parallax scroll effects
   const { scrollYProgress } = useScroll()
   const heroY = useTransform(scrollYProgress, [0, 1], [0, -200])
@@ -679,7 +682,7 @@ export default function Home() {
               >
                 <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                   <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM4.828 7l2.828 2.828L5.828 12l2.828 2.828L6.828 17H4.828l-2.828-2.828L4.828 12 2 9.172 4.828 7z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.smartNotifications}</h3>
@@ -831,11 +834,16 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {/* Free Plan */}
                 <motion.div 
-                  className={`p-6 rounded-xl shadow-lg flex flex-col ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${
+                    selectedPlan === 'free' 
+                      ? `${isDark ? 'border-gray-400 bg-gray-800 shadow-xl scale-105' : 'border-gray-500 bg-white shadow-xl scale-105'}` 
+                      : `${isDark ? 'border-transparent bg-gray-800 hover:border-gray-600' : 'border-transparent bg-white hover:border-gray-300'}`
+                  }`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   viewport={{ once: true }}
+                  onClick={() => setSelectedPlan('free')}
                 >
                   <h3 className="text-xl font-bold mb-4">{currentLang.free}</h3>
                   <p className="text-3xl font-bold mb-6">$0</p>
@@ -854,11 +862,16 @@ export default function Home() {
 
                 {/* Pro Monthly Plan */}
                 <motion.div 
-                  className={`p-6 rounded-xl shadow-lg border-2 border-blue-600 flex flex-col ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${
+                    selectedPlan === 'pro' 
+                      ? `border-blue-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}` 
+                      : `border-transparent ${isDark ? 'bg-gray-800 hover:border-blue-400' : 'bg-white hover:border-blue-300'}`
+                  }`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
+                  onClick={() => setSelectedPlan('pro')}
                 >
                   <h3 className="text-xl font-bold mb-4 text-blue-600">{currentLang.pro}</h3>
                   <p className="text-3xl font-bold mb-6">{currentLang.proPrice}</p>
@@ -877,11 +890,16 @@ export default function Home() {
 
                 {/* Pro Annual Plan */}
                 <motion.div 
-                  className={`p-6 rounded-xl shadow-lg flex flex-col relative ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${
+                    selectedPlan === 'annual' 
+                      ? `border-orange-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}` 
+                      : `border-transparent ${isDark ? 'bg-gray-800 hover:border-orange-400' : 'bg-white hover:border-orange-300'}`
+                  }`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   viewport={{ once: true }}
+                  onClick={() => setSelectedPlan('annual')}
                 >
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
@@ -905,11 +923,16 @@ export default function Home() {
 
                 {/* Lifetime Plan */}
                 <motion.div 
-                  className={`p-6 rounded-xl shadow-lg flex flex-col relative ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${
+                    selectedPlan === 'lifetime' 
+                      ? `border-purple-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}` 
+                      : `border-transparent ${isDark ? 'bg-gray-800 hover:border-purple-400' : 'bg-white hover:border-purple-300'}`
+                  }`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
+                  onClick={() => setSelectedPlan('lifetime')}
                 >
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
