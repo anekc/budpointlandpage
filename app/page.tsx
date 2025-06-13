@@ -177,11 +177,9 @@ export default function Home() {
       icloudSync: "Advanced Transaction System",
       icloudSyncDesc: "Complete income, expense, and transfer tracking with smart categorization using intelligent tagging system",
       goals: "Intelligent Widgets",
-      goalsDesc: "Home screen widgets with real-time budget data, quick actions, and automatic 15-minute updates",
+      goalsDesc: "Home screen widgets with real-time budget data and quick actions for instant financial insights",
       scanning: "Pattern Recognition",
       scanningDesc: "Automatic budget creation based on historical spending analysis and financial behavior patterns",
-      insights: "Bilingual Experience",
-      insightsDesc: "Complete Spanish and English support with 200+ localized strings and automatic system language detection",
       pricing: "Simple Pricing",
       free: "Free",
               freeFeatures: ["Up to 3 accounts", "8 smart tags", "3 people for splits", "Automatic budgets", "Widget system"],
@@ -235,11 +233,9 @@ export default function Home() {
       icloudSync: "Sistema Avanzado de Transacciones",
       icloudSyncDesc: "Seguimiento completo de ingresos, gastos y transferencias con categorización inteligente usando 8 etiquetas gratis, ilimitadas con Pro",
       goals: "Widgets Inteligentes",
-      goalsDesc: "Widgets de pantalla principal con datos de presupuesto en tiempo real, acciones rápidas y actualizaciones automáticas cada 15 minutos",
+      goalsDesc: "Widgets de pantalla principal con datos de presupuesto en tiempo real y acciones rápidas para información financiera instantánea",
       scanning: "Reconocimiento de Patrones",
       scanningDesc: "Creación automática de presupuestos basada en análisis de gastos históricos y patrones de comportamiento financiero",
-      insights: "Experiencia Bilingüe",
-      insightsDesc: "Soporte completo en español e inglés con 200+ strings localizados y detección automática del idioma del sistema",
       pricing: "Precios Simples",
       free: "Gratis",
               freeFeatures: ["Hasta 3 cuentas", "8 etiquetas inteligentes", "3 personas para divisiones", "Presupuestos automáticos", "Sistema de widgets"],
@@ -561,17 +557,6 @@ export default function Home() {
                 <div className="text-4xl mb-4">🔍</div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.scanning}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.scanningDesc}</p>
-              </motion.div>
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.9 }}
-                viewport={{ once: true }}
-              >
-                <div className="text-4xl mb-4">🌐</div>
-                <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.insights}</h3>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.insightsDesc}</p>
               </motion.div>
             </div>
           </motion.div>
