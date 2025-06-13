@@ -160,8 +160,8 @@ export default function Home() {
 
   const t = {
     en: {
-      title: "Take Control of Your Finances",
-      subtitle: "Smart budgeting, expense tracking, and financial analytics designed for today's economy",
+      title: "Smarter Finance Management",
+      subtitle: "For modern shared expenses. Track personal spending, manage group costs, and get insights that actually matter",
       joinWaitlist: "Join Waitlist",
       features: "Features",
       multiAccount: "Multi-Account Management",
@@ -180,6 +180,8 @@ export default function Home() {
       goalsDesc: "Home screen widgets with real-time budget data and quick actions for instant financial insights",
       scanning: "Pattern Recognition",
       scanningDesc: "Automatic budget creation based on historical spending analysis and financial behavior patterns",
+      personalTracking: "Personal Expense Tracking",
+      personalTrackingDesc: "Track only YOUR expenses. When someone asks you to buy something for them, it doesn't count toward your personal spending totals",
       pricing: "Simple Pricing",
       free: "Free",
               freeFeatures: ["Up to 3 accounts", "8 smart tags", "3 people for splits", "Automatic budgets", "Widget system"],
@@ -213,11 +215,22 @@ export default function Home() {
       smartNotifications: "iOS 18.4+ Optimized", 
       smartNotificationsDesc: "Built specifically for latest iOS with native performance and modern design patterns",
       multiCurrency: "Complete Widget Integration",
-      multiCurrencyDesc: "Home screen widgets with live data and quick actions for instant budget monitoring"
+      multiCurrencyDesc: "Home screen widgets with live data and quick actions for instant budget monitoring",
+      betaTestersTitle: "What Beta Testers Say",
+      betaTestersSubtitle: "Real feedback from early users who've been testing Budpoint",
+      testimonial1: "Controlling my budget is now super easy! I love how everything is organized and I can see exactly where my money goes.",
+      testimonial1Author: "Sarah M.",
+      testimonial1Role: "Beta Tester",
+      testimonial2: "Before Budpoint, keeping track of expenses was a disaster because everything was mixed together. Now everything is perfectly organized!",
+      testimonial2Author: "Mike R.",
+      testimonial2Role: "Early User",
+      testimonial3: "The analytics always give me confidence about how much I can spend. I feel calm following a budget for the first time.",
+      testimonial3Author: "Jessica L.",
+      testimonial3Role: "Beta Tester"
     },
     es: {
-      title: "Toma Control de tus Finanzas",
-      subtitle: "Presupuestos inteligentes, seguimiento de gastos y análisis financiero diseñado para la economía actual",
+      title: "Gestión Financiera Inteligente",
+      subtitle: "Para gastos compartidos modernos. Rastrea gastos personales, gestiona costos grupales y obtén información que realmente importa",
       joinWaitlist: "Unirse a Lista de Espera",
       features: "Características",
       multiAccount: "Gestión Multi-Cuenta",
@@ -236,6 +249,8 @@ export default function Home() {
       goalsDesc: "Widgets de pantalla principal con datos de presupuesto en tiempo real y acciones rápidas para información financiera instantánea",
       scanning: "Reconocimiento de Patrones",
       scanningDesc: "Creación automática de presupuestos basada en análisis de gastos históricos y patrones de comportamiento financiero",
+      personalTracking: "Seguimiento Personal de Gastos",
+      personalTrackingDesc: "Rastrea solo TUS gastos. Cuando alguien te pide que compres algo para ellos, no cuenta hacia tus totales de gasto personal",
       pricing: "Precios Simples",
       free: "Gratis",
               freeFeatures: ["Hasta 3 cuentas", "8 etiquetas inteligentes", "3 personas para divisiones", "Presupuestos automáticos", "Sistema de widgets"],
@@ -269,7 +284,18 @@ export default function Home() {
       smartNotifications: "Optimizado para iOS 18.4+",
       smartNotificationsDesc: "Construido específicamente para el iOS más reciente con rendimiento nativo y patrones de diseño modernos",
       multiCurrency: "Integración Completa de Widgets",
-      multiCurrencyDesc: "Widgets de pantalla principal con datos en vivo y acciones rápidas para monitoreo instantáneo del presupuesto"
+      multiCurrencyDesc: "Widgets de pantalla principal con datos en vivo y acciones rápidas para monitoreo instantáneo del presupuesto",
+      betaTestersTitle: "Lo que Dicen los Beta Testers",
+      betaTestersSubtitle: "Comentarios reales de usuarios tempranos que han estado probando Budpoint",
+      testimonial1: "¡Controlar mi presupuesto ahora es súper fácil! Me encanta cómo todo está organizado y puedo ver exactamente a dónde va mi dinero.",
+      testimonial1Author: "Sarah M.",
+      testimonial1Role: "Beta Tester",
+      testimonial2: "Antes de Budpoint, hacer cuentas era un desastre porque estaba todo junto. ¡Ahora todo está perfectamente organizado!",
+      testimonial2Author: "Mike R.",
+      testimonial2Role: "Usuario Temprano",
+      testimonial3: "Los análisis siempre me dan certeza de cuánto puedo gastar. Me siento tranquila siguiendo un presupuesto por primera vez.",
+      testimonial3Author: "Jessica L.",
+      testimonial3Role: "Beta Tester"
     }
   }
 
@@ -477,7 +503,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">🏦</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-green-600">{currentLang.multiAccount}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.multiAccountDesc}</p>
               </motion.div>
@@ -488,7 +518,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">📊</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.smartBudgeting}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.smartBudgetingDesc}</p>
               </motion.div>
@@ -499,7 +533,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">🤝</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-purple-600">{currentLang.expenseTracking}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.expenseTrackingDesc}</p>
               </motion.div>
@@ -510,7 +548,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">🔄</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.analytics}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.analyticsDesc}</p>
               </motion.div>
@@ -521,7 +563,26 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">📊</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.personalTracking}</h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.personalTrackingDesc}</p>
+              </motion.div>
+              <motion.div 
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.security}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.securityDesc}</p>
               </motion.div>
@@ -532,7 +593,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">🔒</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-green-600">{currentLang.icloudSync}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.icloudSyncDesc}</p>
               </motion.div>
@@ -543,7 +608,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.7 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">📱</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-purple-600">{currentLang.goals}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.goalsDesc}</p>
               </motion.div>
@@ -554,9 +623,13 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.scanning}</h3>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.scanningDesc}</p>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.personalTracking}</h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.personalTrackingDesc}</p>
               </motion.div>
             </div>
           </motion.div>
@@ -589,7 +662,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">💎</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.realTime}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.realTimeDesc}</p>
               </motion.div>
@@ -600,7 +677,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">🚀</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM4.828 7l2.828 2.828L5.828 12l2.828 2.828L6.828 17H4.828l-2.828-2.828L4.828 12 2 9.172 4.828 7z" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.smartNotifications}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.smartNotificationsDesc}</p>
               </motion.div>
@@ -611,9 +692,126 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">📊</div>
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-green-600">{currentLang.multiCurrency}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.multiCurrencyDesc}</p>
+              </motion.div>
+            </div>
+          </motion.div>
+          
+          {/* Beta Testers Testimonials Section */}
+          <motion.div className="py-20">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-4"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              {currentLang.betaTestersTitle}
+            </motion.h2>
+            <motion.p 
+              className={`text-lg text-center mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              {currentLang.betaTestersSubtitle}
+            </motion.p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <motion.div 
+                className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className={`mb-4 italic ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  "{currentLang.testimonial1}"
+                </p>
+                <div className="flex items-center">
+                  <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-600' : 'bg-blue-500'} flex items-center justify-center text-white font-semibold mr-3`}>
+                    {currentLang.testimonial1Author.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold">{currentLang.testimonial1Author}</p>
+                    <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{currentLang.testimonial1Role}</p>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className={`mb-4 italic ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  "{currentLang.testimonial2}"
+                </p>
+                <div className="flex items-center">
+                  <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-green-600' : 'bg-green-500'} flex items-center justify-center text-white font-semibold mr-3`}>
+                    {currentLang.testimonial2Author.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold">{currentLang.testimonial2Author}</p>
+                    <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{currentLang.testimonial2Role}</p>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className={`mb-4 italic ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  "{currentLang.testimonial3}"
+                </p>
+                <div className="flex items-center">
+                  <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-purple-600' : 'bg-purple-500'} flex items-center justify-center text-white font-semibold mr-3`}>
+                    {currentLang.testimonial3Author.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold">{currentLang.testimonial3Author}</p>
+                    <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{currentLang.testimonial3Role}</p>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </motion.div>
