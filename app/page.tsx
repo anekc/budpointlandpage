@@ -185,7 +185,7 @@ export default function Home() {
       scanning: "iCloud Sync (Pro)",
       scanningDesc: "Smart bidirectional sync with intelligent conflict resolution, battery optimization, and complete data backup across devices",
       personalTracking: "Collaborative Features (Pro)",
-      personalTrackingDesc: "Connect with friends via Firebase, share transactions in real-time, and track individual spending with person-specific analytics",
+      personalTrackingDesc: "Connect with friends, share transactions in real-time, and track individual spending with person-specific analytics",
       pricing: "Simple Pricing",
       free: "Free",
               freeFeatures: ["Up to 2 accounts", "5 smart tags", "2 people for splits", "3 budgets per period", "Widget system"],
@@ -254,7 +254,7 @@ export default function Home() {
       scanning: "Sincronización iCloud (Pro)",
       scanningDesc: "Sincronización bidireccional inteligente con resolución de conflictos, optimización de batería y respaldo completo entre dispositivos",
       personalTracking: "Funciones Colaborativas (Pro)",
-      personalTrackingDesc: "Conéctate con amigos vía Firebase, comparte transacciones en tiempo real y rastrea gastos individuales con análisis por persona",
+      personalTrackingDesc: "Conéctate con amigos, comparte transacciones en tiempo real y rastrea gastos individuales con análisis por persona",
       pricing: "Precios Simples",
       free: "Gratis",
               freeFeatures: ["Hasta 2 cuentas", "5 etiquetas inteligentes", "2 personas para divisiones", "3 presupuestos por período", "Sistema de widgets"],
@@ -976,7 +976,7 @@ export default function Home() {
               </div>
               <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
                 <h3 className="text-lg font-semibold mb-2">Can I share expenses with friends?</h3>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>Absolutely! Pro users can share expenses in real-time with friends and partners through Firebase integration.</p>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>Absolutely! Pro users can share expenses in real-time with friends and partners seamlessly.</p>
               </div>
             </div>
           </div>
