@@ -18,11 +18,11 @@ export default function TermsOfService() {
   }, [])
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+    <div className={`min-h-screen ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
       {/* Simple Header */}
-      <header className={`${isDark ? 'bg-black border-gray-800' : 'bg-white border-gray-200'} border-b transition-colors duration-300`}>
+      <header className={`${isDark ? 'bg-black border-gray-800' : 'bg-white border-gray-200'} border-b`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <Link href="/" className={`flex items-center space-x-2 ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'} transition-colors`}>
+          <Link href="/" className={`flex items-center space-x-2 ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}>
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -166,7 +166,7 @@ export default function TermsOfService() {
             <p className={`leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
               If you have any questions about these Terms of Service, please contact us through 
               the support section in the app or by sending an email to{' '}
-              <a href="mailto:support@budpoint.app" className={`${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'} transition-colors`}>
+              <a href="mailto:support@budpoint.app" className={`${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}>
                 support@budpoint.app
               </a>.
             </p>

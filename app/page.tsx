@@ -399,7 +399,7 @@ export default function Home() {
           </motion.div>
 
           {/* App Preview Section - RESPONSIVE */}
-          <motion.div className="pt-20 pb-10" style={{ y: screenshotsY }}>
+          <motion.div id="screenshots" className="pt-20 pb-10" style={{ y: screenshotsY }}>
             <div className="text-center mb-16">
               <motion.h2 
                 className="text-3xl font-bold mb-4"
@@ -489,7 +489,7 @@ export default function Home() {
           </motion.div>
           
           {/* Features Section */}
-          <motion.div className="pt-10 pb-20" style={{ y: featuresY }}>
+          <motion.div id="features" className="pt-10 pb-20" style={{ y: featuresY }}>
             <motion.h2 
               className="text-3xl font-bold text-center mb-12"
               initial={{ opacity: 0, y: 50 }}
@@ -822,7 +822,7 @@ export default function Home() {
           </motion.div>
           
           {/* Pricing Section */}
-          <div className={`py-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+          <div id="pricing" className={`py-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
             <div className="text-center">
               <motion.h2 
                 className="text-3xl font-bold mb-8"
@@ -959,8 +959,30 @@ export default function Home() {
             </div>
           </div>
           
+          {/* FAQ Section */}
+          <div id="faq" className={`py-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+              <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Get answers to common questions about Budpoint</p>
+            </div>
+            <div className="max-w-3xl mx-auto space-y-6">
+              <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+                <h3 className="text-lg font-semibold mb-2">When will Budpoint be available?</h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>Budpoint is coming soon to iOS. Join our waitlist to be notified when it launches!</p>
+              </div>
+              <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+                <h3 className="text-lg font-semibold mb-2">Is there a free version?</h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>Yes! Budpoint offers a generous free tier with 2 accounts, 5 tags, and 2 people for splits.</p>
+              </div>
+              <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+                <h3 className="text-lg font-semibold mb-2">Can I share expenses with friends?</h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>Absolutely! Pro users can share expenses in real-time with friends and partners through Firebase integration.</p>
+              </div>
+            </div>
+          </div>
+          
           {/* Waitlist Section */}
-          <div id="waitlist-section" className="py-20 text-center">
+          <div id="waitlist" className="py-20 text-center">
             <motion.h2 
               className="text-3xl font-bold mb-4"
               initial={{ opacity: 0, y: 30 }}
