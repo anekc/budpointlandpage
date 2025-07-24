@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import Footer from './components/Footer'
 
 export default function Home() {
   const [isDark, setIsDark] = useState(false)
@@ -168,32 +169,32 @@ export default function Home() {
       joinWaitlist: "Join Waitlist",
       features: "Features",
       multiAccount: "Multi-Account Management",
-      multiAccountDesc: "Track multiple bank accounts with real-time balance monitoring and intelligent account categorization",
-      smartBudgeting: "Intelligent Budget System",
-      smartBudgetingDesc: "Automatic budgets with 'Create with Rules' analyze your spending patterns, plus custom budget creation",
-      expenseTracking: "Advanced Split System",
-      expenseTrackingDesc: "Split expenses between multiple people with automatic calculations and intelligent distribution",
+      multiAccountDesc: "Track multiple accounts (Savings, Investment, Credit Card) with custom icons and colors for better organization",
+      smartBudgeting: "Advanced Budget System",
+      smartBudgetingDesc: "Tag-based budgets with real-time progress tracking and color-coded indicators to monitor your spending",
+      expenseTracking: "Smart Transaction Splits",
+      expenseTrackingDesc: "Split expenses with fixed amounts or percentages between multiple people. Track who pays what with automatic calculations",
       analytics: "Recurring Transactions",
-      analyticsDesc: "Schedule automatic transactions with weekly, biweekly, monthly, or annual frequencies",
-      security: "Smart Financial Dashboard",
-      securityDesc: "Real-time financial overview with intelligent charts and key performance indicators",
-      icloudSync: "Advanced Transaction System",
-      icloudSyncDesc: "Complete income, expense, and transfer tracking with smart categorization using intelligent tagging system",
-      goals: "Intelligent Widgets",
-      goalsDesc: "Home screen widgets with real-time budget data and quick actions for instant financial insights",
-      scanning: "Pattern Recognition",
-      scanningDesc: "Automatic budget creation based on historical spending analysis and financial behavior patterns",
-      personalTracking: "Personal Expense Tracking",
-      personalTrackingDesc: "Track only YOUR expenses. When someone asks you to buy something for them, it doesn't count toward your personal spending totals",
+      analyticsDesc: "Schedule automatic transactions with weekly, bi-weekly, monthly, or yearly frequencies with count-based repetitions",
+      security: "Rich Analytics Dashboard",
+      securityDesc: "Interactive charts with person-based expenses, tag distribution, and account balance tracking with visual indicators",
+      icloudSync: "Complete Transaction System",
+      icloudSyncDesc: "Income, expense, and transfer tracking with 150+ categorized icons across 10 categories for smart organization",
+      goals: "iOS Home Screen Widgets",
+      goalsDesc: "Small and medium widgets with budget summaries, quick actions, and deep linking to app functions",
+      scanning: "iCloud Sync (Pro)",
+      scanningDesc: "Smart bidirectional sync with intelligent conflict resolution, battery optimization, and complete data backup across devices",
+      personalTracking: "Collaborative Features (Pro)",
+      personalTrackingDesc: "Connect with friends via Firebase, share transactions in real-time, and track individual spending with person-specific analytics",
       pricing: "Simple Pricing",
       free: "Free",
-              freeFeatures: ["Up to 3 accounts", "8 smart tags", "3 people for splits", "Automatic budgets", "Widget system"],
+              freeFeatures: ["Up to 2 accounts", "5 smart tags", "2 people for splits", "3 budgets per period", "Widget system"],
       pro: "Pro",
-      proPrice: "$4.99/month",
-              proFeatures: ["Unlimited accounts", "Unlimited tags", "Unlimited people", "Custom budgets", "Recurring transactions", "iCloud sync", "Priority support"],
+      proPrice: "$3.99/month",
+              proFeatures: ["Unlimited accounts", "Unlimited tags", "Unlimited people", "Unlimited budgets", "Recurring transactions", "iCloud sync", "Collaborative features", "CSV export"],
       annual: "Annual",
-      annualPrice: "$49.99/year",
-      annualSavings: "Save 17%",
+      annualPrice: "$34.99/year",
+      annualSavings: "Save 27%",
       lifetime: "Lifetime",
       lifetimePrice: "$79.99",
       lifetimeBest: "Best Value",
@@ -213,12 +214,12 @@ export default function Home() {
       swipeHint: "Swipe to explore more screens",
       whyChoose: "Why Choose Budpoint?",
       whyChooseDesc: "Join thousands of users who trust Budpoint to manage their finances",
-      realTime: "Freemium System",
-      realTimeDesc: "Generous free tier with 3 accounts, 8 tags, and 3 people. Upgrade for unlimited everything",
-      smartNotifications: "iOS 18.4+ Optimized", 
-      smartNotificationsDesc: "Built specifically for latest iOS with native performance and modern design patterns",
-      multiCurrency: "Complete Widget Integration",
-      multiCurrencyDesc: "Home screen widgets with live data and quick actions for instant budget monitoring",
+      realTime: "Focus on YOUR Expenses",
+      realTimeDesc: "Track only your personal spending. When someone asks you to buy something for them, it doesn't count toward your budgets",
+      smartNotifications: "Smart Budget Categories", 
+      smartNotificationsDesc: "Special budgets for untagged expenses and unassigned tagged expenses, plus basic rules to get you started quickly",
+      multiCurrency: "Real-Time Expense Sharing",
+      multiCurrencyDesc: "Share expenses with friends or partners instantly so everyone's accounts stay up-to-date and balanced",
       betaTestersTitle: "What Beta Testers Say",
       betaTestersSubtitle: "Real feedback from early users who've been testing Budpoint",
       testimonial1: "Controlling my budget is now super easy! I love how everything is organized and I can see exactly where my money goes.",
@@ -237,32 +238,32 @@ export default function Home() {
       joinWaitlist: "Unirse a Lista de Espera",
       features: "Características",
       multiAccount: "Gestión Multi-Cuenta",
-      multiAccountDesc: "Rastrea múltiples cuentas bancarias con monitoreo de saldos en tiempo real. 3 cuentas gratis, ilimitadas con Pro",
-      smartBudgeting: "Sistema de Presupuestos Inteligente",
-      smartBudgetingDesc: "Presupuestos automáticos con 'Create with Rules' analizan tus patrones de gasto, presupuestos personalizados disponibles con Pro",
-      expenseTracking: "Sistema Avanzado de Divisiones",
-      expenseTrackingDesc: "Divide gastos entre múltiples personas con cálculos automáticos. Gestiona hasta 3 personas gratis, ilimitadas con Pro",
+      multiAccountDesc: "Rastrea múltiples cuentas (Ahorros, Inversión, Tarjeta de Crédito) con iconos y colores personalizados para mejor organización",
+      smartBudgeting: "Sistema Avanzado de Presupuestos",
+      smartBudgetingDesc: "Presupuestos basados en etiquetas con seguimiento en tiempo real e indicadores codificados por colores para monitorear tus gastos",
+      expenseTracking: "División Inteligente de Transacciones",
+      expenseTrackingDesc: "Divide gastos con montos fijos o porcentajes entre múltiples personas. Rastrea quién paga qué con cálculos automáticos",
       analytics: "Transacciones Recurrentes",
-      analyticsDesc: "Programa transacciones automáticas con frecuencias semanales, quincenales, mensuales o anuales",
-      security: "Dashboard Financiero Inteligente",
-      securityDesc: "Vista general financiera en tiempo real con gráficos inteligentes e indicadores clave de rendimiento",
-      icloudSync: "Sistema Avanzado de Transacciones",
-      icloudSyncDesc: "Seguimiento completo de ingresos, gastos y transferencias con categorización inteligente usando 8 etiquetas gratis, ilimitadas con Pro",
-      goals: "Widgets Inteligentes",
-      goalsDesc: "Widgets de pantalla principal con datos de presupuesto en tiempo real y acciones rápidas para información financiera instantánea",
-      scanning: "Reconocimiento de Patrones",
-      scanningDesc: "Creación automática de presupuestos basada en análisis de gastos históricos y patrones de comportamiento financiero",
-      personalTracking: "Seguimiento Personal de Gastos",
-      personalTrackingDesc: "Rastrea solo TUS gastos. Cuando alguien te pide que compres algo para ellos, no cuenta hacia tus totales de gasto personal",
+      analyticsDesc: "Programa transacciones automáticas con frecuencias semanales, quincenales, mensuales o anuales con repeticiones basadas en conteo",
+      security: "Dashboard de Análisis Avanzado",
+      securityDesc: "Gráficos interactivos con gastos por persona, distribución por etiquetas y seguimiento de balances con indicadores visuales",
+      icloudSync: "Sistema Completo de Transacciones",
+      icloudSyncDesc: "Seguimiento de ingresos, gastos y transferencias con 150+ iconos categorizados en 10 categorías para organización inteligente",
+      goals: "Widgets de iOS",
+      goalsDesc: "Widgets pequeños y medianos con resúmenes de presupuesto, acciones rápidas y enlaces directos a funciones de la app",
+      scanning: "Sincronización iCloud (Pro)",
+      scanningDesc: "Sincronización bidireccional inteligente con resolución de conflictos, optimización de batería y respaldo completo entre dispositivos",
+      personalTracking: "Funciones Colaborativas (Pro)",
+      personalTrackingDesc: "Conéctate con amigos vía Firebase, comparte transacciones en tiempo real y rastrea gastos individuales con análisis por persona",
       pricing: "Precios Simples",
       free: "Gratis",
-              freeFeatures: ["Hasta 3 cuentas", "8 etiquetas inteligentes", "3 personas para divisiones", "Presupuestos automáticos", "Sistema de widgets"],
+              freeFeatures: ["Hasta 2 cuentas", "5 etiquetas inteligentes", "2 personas para divisiones", "3 presupuestos por período", "Sistema de widgets"],
       pro: "Pro",
-      proPrice: "$4.99/mes",
-              proFeatures: ["Cuentas ilimitadas", "Etiquetas ilimitadas", "Personas ilimitadas", "Presupuestos personalizados", "Transacciones recurrentes", "Sincronización iCloud", "Soporte prioritario"],
+      proPrice: "$3.99/mes",
+              proFeatures: ["Cuentas ilimitadas", "Etiquetas ilimitadas", "Personas ilimitadas", "Presupuestos ilimitados", "Transacciones recurrentes", "Sincronización iCloud", "Funciones colaborativas", "Exportación CSV"],
       annual: "Anual",
-      annualPrice: "$49.99/año",
-      annualSavings: "Ahorra 17%",
+      annualPrice: "$34.99/año",
+      annualSavings: "Ahorra 27%",
       lifetime: "De por vida",
       lifetimePrice: "$79.99",
       lifetimeBest: "Mejor valor",
@@ -282,12 +283,12 @@ export default function Home() {
       swipeHint: "Desliza para explorar más pantallas",
       whyChoose: "¿Por qué elegir Budpoint?",
       whyChooseDesc: "Únete a miles de usuarios que confían en Budpoint para gestionar sus finanzas",
-      realTime: "Sistema Freemium",
-      realTimeDesc: "Nivel gratuito generoso con 3 cuentas, 8 etiquetas y 3 personas. Actualiza para obtener todo ilimitado",
-      smartNotifications: "Optimizado para iOS 18.4+",
-      smartNotificationsDesc: "Construido específicamente para el iOS más reciente con rendimiento nativo y patrones de diseño modernos",
-      multiCurrency: "Integración Completa de Widgets",
-      multiCurrencyDesc: "Widgets de pantalla principal con datos en vivo y acciones rápidas para monitoreo instantáneo del presupuesto",
+      realTime: "Enfócate en TUS Gastos",
+      realTimeDesc: "Rastrea solo tus gastos personales. Cuando alguien te pide que compres algo para ellos, no cuenta hacia tus presupuestos",
+      smartNotifications: "Categorías Inteligentes de Presupuesto",
+      smartNotificationsDesc: "Presupuestos especiales para gastos sin etiqueta y etiquetas sin asignar, más reglas básicas para empezar rápidamente",
+      multiCurrency: "Compartir Gastos en Tiempo Real",
+      multiCurrencyDesc: "Comparte gastos con amigos o pareja instantáneamente para que las cuentas de todos estén siempre actualizadas y balanceadas",
       betaTestersTitle: "Lo que Dicen los Beta Testers",
       betaTestersSubtitle: "Comentarios reales de usuarios tempranos que han estado probando Budpoint",
       testimonial1: "¡Controlar mi presupuesto ahora es súper fácil! Me encanta cómo todo está organizado y puedo ver exactamente a dónde va mi dinero.",
@@ -619,6 +620,21 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 text-purple-600">{currentLang.goals}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.goalsDesc}</p>
               </motion.div>
+              <motion.div 
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-indigo-600">{currentLang.scanning}</h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.scanningDesc}</p>
+              </motion.div>
 
             </div>
           </motion.div>
@@ -653,7 +669,7 @@ export default function Home() {
               >
                 <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                   <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.realTime}</h3>
@@ -668,7 +684,7 @@ export default function Home() {
               >
                 <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                   <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.smartNotifications}</h3>
@@ -683,7 +699,7 @@ export default function Home() {
               >
                 <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                   <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-green-600">{currentLang.multiCurrency}</h3>
@@ -1057,41 +1073,7 @@ export default function Home() {
           </div>
 
           {/* Footer */}
-          <motion.footer 
-            className={`py-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center">
-              <motion.div 
-                className="flex items-center justify-center space-x-3 mb-4"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <Image 
-                  src="/logo.png" 
-                  alt="Budpoint Logo" 
-                  width={24} 
-                  height={24}
-                  className="rounded"
-                />
-                <span className="font-semibold">Budpoint</span>
-              </motion.div>
-              <motion.p 
-                className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                © 2025 Budpoint. {language === 'en' ? 'All rights reserved.' : 'Todos los derechos reservados.'}
-              </motion.p>
-            </div>
-          </motion.footer>
+          <Footer />
         </div>
       </div>
     </div>
