@@ -6,7 +6,7 @@ import Link from 'next/link'
 // Lista de posts con títulos en ambos idiomas
 const posts = [
   {
-    slug: 'bienvenido-a-budpoint',
+    slug: 'welcome-to-budpoint',
     title: {
       es: 'Bienvenido al Blog de Budpoint',
       en: 'Welcome to the Budpoint Blog',
@@ -29,7 +29,7 @@ const posts = [
     },
   },
   {
-    slug: '5-tips-para-ahorrar',
+    slug: '5-tips-to-save-money',
     title: {
       es: '5 Tips para Ahorrar Dinero en 2026',
       en: '5 Tips to Save Money in 2026',
