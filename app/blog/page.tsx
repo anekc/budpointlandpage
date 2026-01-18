@@ -16,8 +16,8 @@ const posts = [
       en: 'Discover how Budpoint will help you take control of your personal finances smartly.',
     },
     date: {
-      es: '18 de Enero, 2025',
-      en: 'January 18, 2025',
+      es: '18 de Enero, 2026',
+      en: 'January 18, 2026',
     },
     readTime: {
       es: '3 min',
@@ -31,16 +31,16 @@ const posts = [
   {
     slug: '5-tips-para-ahorrar',
     title: {
-      es: '5 Tips para Ahorrar Dinero en 2025',
-      en: '5 Tips to Save Money in 2025',
+      es: '5 Tips para Ahorrar Dinero en 2026',
+      en: '5 Tips to Save Money in 2026',
     },
     description: {
       es: 'Estrategias prácticas para mejorar tus finanzas personales y empezar a ahorrar desde hoy.',
       en: 'Practical strategies to improve your personal finances and start saving today.',
     },
     date: {
-      es: '15 de Enero, 2025',
-      en: 'January 15, 2025',
+      es: '15 de Enero, 2026',
+      en: 'January 15, 2026',
     },
     readTime: {
       es: '5 min',
