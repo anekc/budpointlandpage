@@ -43,8 +43,8 @@ const posts = [
       en: 'January 15, 2026',
     },
     readTime: {
-      es: '5 min',
-      en: '5 min',
+      es: '8 min',
+      en: '8 min',
     },
     tags: {
       es: ['Tips', 'Finanzas'],
