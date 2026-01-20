@@ -188,8 +188,6 @@ export default function Home() {
       personalTrackingDesc: "Connect with friends, share transactions in real-time, and track individual spending with person-specific analytics",
       timeCost: "Time Cost Calculator (Pro)",
       timeCostDesc: "See how many work hours each purchase costs you. Connect your spending to your time and make smarter financial decisions",
-      futurePreview: "Future Transactions Preview",
-      futurePreviewDesc: "See upcoming recurring transactions before they happen. Plan ahead with a clear view of committed funds",
       periodComparison: "Period Comparison",
       periodComparisonDesc: "Automatic comparison vs previous period. See if you're spending more or less with visual indicators",
       savingsGoals: "Savings Goals",
@@ -265,8 +263,6 @@ export default function Home() {
       personalTrackingDesc: "Conéctate con amigos, comparte transacciones en tiempo real y rastrea gastos individuales con análisis por persona",
       timeCost: "Calculadora de Costo en Tiempo (Pro)",
       timeCostDesc: "Ve cuántas horas de trabajo te cuesta cada compra. Conecta tus gastos con tu tiempo y toma decisiones financieras más inteligentes",
-      futurePreview: "Vista Previa de Transacciones Futuras",
-      futurePreviewDesc: "Ve las transacciones recurrentes próximas antes de que ocurran. Planifica con una vista clara de los fondos comprometidos",
       periodComparison: "Comparación de Períodos",
       periodComparisonDesc: "Comparación automática vs período anterior. Ve si estás gastando más o menos con indicadores visuales",
       savingsGoals: "Metas de Ahorro",
@@ -672,23 +668,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 text-amber-600">{currentLang.timeCost}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.timeCostDesc}</p>
               </motion.div>
-              <motion.div
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 1.0 }}
-                viewport={{ once: true }}
-              >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-cyan-600">{currentLang.futurePreview}</h3>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.futurePreviewDesc}</p>
-              </motion.div>
-              <motion.div
+                            <motion.div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
