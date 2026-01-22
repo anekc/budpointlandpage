@@ -6,6 +6,29 @@ import Link from 'next/link'
 // Lista de posts con títulos en ambos idiomas
 const posts = [
   {
+    slug: 'why-budgeting-matters',
+    title: {
+      es: 'Por Qué es Importante Armar un Presupuesto',
+      en: 'Why Budgeting Matters',
+    },
+    description: {
+      es: 'Datos y estudios que demuestran cómo un presupuesto puede transformar tu bienestar financiero y reducir el estrés.',
+      en: 'Data and studies showing how a budget can transform your financial well-being and reduce stress.',
+    },
+    date: {
+      es: '21 de Enero, 2026',
+      en: 'January 21, 2026',
+    },
+    readTime: {
+      es: '10 min',
+      en: '10 min',
+    },
+    tags: {
+      es: ['Presupuesto', 'Finanzas', 'Datos'],
+      en: ['Budgeting', 'Finance', 'Data'],
+    },
+  },
+  {
     slug: 'welcome-to-budpoint',
     title: {
       es: 'Bienvenido al Blog de Budpoint',
