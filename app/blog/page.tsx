@@ -6,6 +6,29 @@ import Link from 'next/link'
 // Lista de posts con títulos en ambos idiomas
 const posts = [
   {
+    slug: 'how-to-choose-budget-period',
+    title: {
+      es: 'Cómo Elegir el Periodo de tu Presupuesto',
+      en: 'How to Choose Your Budget Period',
+    },
+    description: {
+      es: '¿Mensual, quincenal o por corte de tarjeta? Descubre cuál periodo funciona mejor para ti.',
+      en: 'Monthly, biweekly, or billing cycle? Find out which budget period works best for you.',
+    },
+    date: {
+      es: '22 de Enero, 2026',
+      en: 'January 22, 2026',
+    },
+    readTime: {
+      es: '8 min',
+      en: '8 min',
+    },
+    tags: {
+      es: ['Presupuesto', 'Tips', 'Guía'],
+      en: ['Budgeting', 'Tips', 'Guide'],
+    },
+  },
+  {
     slug: 'why-budgeting-matters',
     title: {
       es: 'Por Qué es Importante Armar un Presupuesto',
