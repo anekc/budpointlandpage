@@ -248,7 +248,7 @@ export default function Home() {
     },
     es: {
       title: "Gestión Financiera Inteligente",
-      subtitle: "Para gastos compartidos modernos. Controla tu dinero personal, administra costos grupales y obtén información que realmente importa",
+      subtitle: "Para gastos compartidos modernos. Lleva el control de tus finanzas, divide costos grupales y obtén información que realmente importa",
       joinWaitlist: "Unirse a Lista de Espera",
       features: "Características",
       multiAccount: "Gestión Multi-Cuenta",
