@@ -165,33 +165,33 @@ export default function Home() {
   const t = {
     en: {
       title: "Smarter Finance Management",
-      subtitle: "For modern shared expenses. Track personal spending, manage group costs, and get insights that actually matter",
+      subtitle: "Built for shared expenses. Monitor your spending, split group costs, and gain insights that truly matter",
       joinWaitlist: "Join Waitlist",
       features: "Features",
       multiAccount: "Multi-Account Management",
-      multiAccountDesc: "Track multiple accounts (Savings, Investment, Credit Card) with custom icons and colors for better organization",
+      multiAccountDesc: "Manage multiple accounts (Savings, Investment, Credit Card) with custom icons and colors for easy organization",
       smartBudgeting: "Advanced Budget System",
-      smartBudgetingDesc: "Tag-based budgets with real-time progress tracking and color-coded indicators to monitor your spending",
+      smartBudgetingDesc: "Tag-based budgets with real-time progress and color-coded indicators to monitor spending patterns",
       expenseTracking: "Smart Transaction Splits",
-      expenseTrackingDesc: "Split expenses with fixed amounts or percentages between multiple people. Track who pays what with automatic calculations",
+      expenseTrackingDesc: "Divide expenses by fixed amounts or percentages among multiple people. See who owes what with automatic calculations",
       analytics: "Recurring Transactions",
-      analyticsDesc: "Schedule automatic transactions with weekly, bi-weekly, monthly, or yearly frequencies with count-based repetitions",
+      analyticsDesc: "Schedule automatic entries weekly, bi-weekly, monthly, or yearly with customizable repetition counts",
       security: "Rich Analytics Dashboard",
-      securityDesc: "Interactive charts with person-based expenses, tag distribution, and account balance tracking with visual indicators",
+      securityDesc: "Interactive charts showing person-based spending, tag distribution, and balance trends with visual indicators",
       icloudSync: "Complete Transaction System",
-      icloudSyncDesc: "Income, expense, and transfer tracking with 150+ categorized icons across 10 categories for smart organization",
+      icloudSyncDesc: "Log income, expenses, and transfers with 150+ icons across 10 categories for effortless organization",
       goals: "iOS Home Screen Widgets",
-      goalsDesc: "Small and medium widgets with budget summaries, quick actions, and deep linking to app functions",
+      goalsDesc: "Small and medium widgets displaying budget summaries, quick actions, and direct links to app features",
       scanning: "iCloud Sync (Pro)",
-      scanningDesc: "Smart bidirectional sync with intelligent conflict resolution, battery optimization, and complete data backup across devices",
+      scanningDesc: "Bidirectional sync with conflict resolution, battery optimization, and complete backup across all devices",
       personalTracking: "Collaborative Features (Pro)",
-      personalTrackingDesc: "Connect with friends, share transactions in real-time, and track individual spending with person-specific analytics",
+      personalTrackingDesc: "Connect with friends, share entries instantly, and view individual spending with person-specific reports",
       timeCost: "Time Cost Calculator (Pro)",
-      timeCostDesc: "See how many work hours each purchase costs you. Connect your spending to your time and make smarter financial decisions",
+      timeCostDesc: "Discover how many work hours each purchase costs you. Link spending to your time for wiser decisions",
       periodComparison: "Period Comparison",
-      periodComparisonDesc: "Automatic comparison vs previous period. See if you're spending more or less with visual indicators",
+      periodComparisonDesc: "Automatic comparison with the previous period. Instantly see if you're spending more or less",
       savingsGoals: "Savings Goals",
-      savingsGoalsDesc: "Set savings targets with deadlines, track progress visually, and link goals to specific accounts",
+      savingsGoalsDesc: "Set targets with deadlines, visualize progress, and link goals to specific accounts",
       pricing: "Simple Pricing",
       free: "Free",
               freeFeatures: ["Up to 2 accounts", "5 smart tags", "2 people for splits", "3 budgets per period", "Widget system"],
@@ -206,7 +206,7 @@ export default function Home() {
       lifetimeBest: "Best Value",
       comingSoon: "Coming Soon",
       waitlistTitle: "Be the first to experience Budpoint",
-      waitlistSubtitle: "Join thousands of users waiting for the smartest finance app",
+      waitlistSubtitle: "Join thousands waiting for the most intuitive finance app",
       emailPlaceholder: "Enter your email address",
       join: "Join Waitlist",
       joining: "Joining...",
@@ -221,11 +221,11 @@ export default function Home() {
       whyChoose: "Why Choose Budpoint?",
       whyChooseDesc: "Join thousands of users who trust Budpoint to manage their finances",
       realTime: "Focus on YOUR Expenses",
-      realTimeDesc: "Track only your personal spending. When someone asks you to buy something for them, it doesn't count toward your budgets",
+      realTimeDesc: "Monitor only your personal spending. When someone asks you to buy something for them, it won't affect your budgets",
       smartNotifications: "Smart Budget Categories", 
-      smartNotificationsDesc: "Special budgets for untagged expenses and unassigned tagged expenses, plus basic rules to get you started quickly",
+      smartNotificationsDesc: "Dedicated budgets for untagged and unassigned expenses, plus starter rules to begin immediately",
       multiCurrency: "Real-Time Expense Sharing",
-      multiCurrencyDesc: "Share expenses with friends or partners instantly so everyone's accounts stay up-to-date and balanced",
+      multiCurrencyDesc: "Share costs with friends or partners instantly so everyone stays synchronized and balanced",
       betaTestersTitle: "What Beta Testers Say",
       betaTestersSubtitle: "Real feedback from early users who've been testing Budpoint",
       testimonial1: "Controlling my budget is now super easy! I love how everything is organized and I can see exactly where my money goes.",
@@ -236,37 +236,45 @@ export default function Home() {
       testimonial2Role: "Early User",
       testimonial3: "The analytics always give me confidence about how much I can spend. I feel calm following a budget for the first time.",
       testimonial3Author: "Jessica L.",
-      testimonial3Role: "Beta Tester"
+      testimonial3Role: "Beta Tester",
+      faqTitle: "Frequently Asked Questions",
+      faqSubtitle: "Get answers to common questions about Budpoint",
+      faq1Question: "When will Budpoint be available?",
+      faq1Answer: "Budpoint is coming soon to iOS. Join our waitlist to be notified when it launches!",
+      faq2Question: "Is there a free version?",
+      faq2Answer: "Yes! Budpoint offers a generous free tier with 2 accounts, 5 tags, and 2 people for splits.",
+      faq3Question: "Can I share expenses with friends?",
+      faq3Answer: "Absolutely! Pro users can share expenses in real-time with friends and partners seamlessly."
     },
     es: {
       title: "Gestión Financiera Inteligente",
-      subtitle: "Para gastos compartidos modernos. Rastrea gastos personales, gestiona costos grupales y obtén información que realmente importa",
+      subtitle: "Para gastos compartidos modernos. Controla tu dinero personal, administra costos grupales y obtén información que realmente importa",
       joinWaitlist: "Unirse a Lista de Espera",
       features: "Características",
       multiAccount: "Gestión Multi-Cuenta",
-      multiAccountDesc: "Rastrea múltiples cuentas (Ahorros, Inversión, Tarjeta de Crédito) con iconos y colores personalizados para mejor organización",
+      multiAccountDesc: "Administra múltiples cuentas (Ahorros, Inversión, Tarjeta) con iconos y colores personalizados para mejor organización",
       smartBudgeting: "Sistema Avanzado de Presupuestos",
-      smartBudgetingDesc: "Presupuestos basados en etiquetas con seguimiento en tiempo real e indicadores codificados por colores para monitorear tus gastos",
+      smartBudgetingDesc: "Presupuestos por etiquetas con progreso en tiempo real e indicadores de colores para monitorear tu gasto",
       expenseTracking: "División Inteligente de Transacciones",
-      expenseTrackingDesc: "Divide gastos con montos fijos o porcentajes entre múltiples personas. Rastrea quién paga qué con cálculos automáticos",
+      expenseTrackingDesc: "Divide gastos con montos fijos o porcentajes entre varias personas. Ve quién debe qué con cálculos automáticos",
       analytics: "Transacciones Recurrentes",
-      analyticsDesc: "Programa transacciones automáticas con frecuencias semanales, quincenales, mensuales o anuales con repeticiones basadas en conteo",
+      analyticsDesc: "Programa entradas automáticas semanales, quincenales, mensuales o anuales con repeticiones personalizables",
       security: "Dashboard de Análisis Avanzado",
-      securityDesc: "Gráficos interactivos con gastos por persona, distribución por etiquetas y seguimiento de balances con indicadores visuales",
+      securityDesc: "Gráficos interactivos mostrando gastos por persona, distribución por etiquetas y tendencias de balance",
       icloudSync: "Sistema Completo de Transacciones",
-      icloudSyncDesc: "Seguimiento de ingresos, gastos y transferencias con 150+ iconos categorizados en 10 categorías para organización inteligente",
+      icloudSyncDesc: "Registra ingresos, gastos y transferencias con 150+ iconos en 10 categorías para organización sin esfuerzo",
       goals: "Widgets de iOS",
-      goalsDesc: "Widgets pequeños y medianos con resúmenes de presupuesto, acciones rápidas y enlaces directos a funciones de la app",
+      goalsDesc: "Widgets pequeños y medianos con resúmenes de presupuesto, acciones rápidas y enlaces directos a la app",
       scanning: "Sincronización iCloud (Pro)",
-      scanningDesc: "Sincronización bidireccional inteligente con resolución de conflictos, optimización de batería y respaldo completo entre dispositivos",
+      scanningDesc: "Sincronización bidireccional con resolución de conflictos, optimización de batería y respaldo completo",
       personalTracking: "Funciones Colaborativas (Pro)",
-      personalTrackingDesc: "Conéctate con amigos, comparte transacciones en tiempo real y rastrea gastos individuales con análisis por persona",
+      personalTrackingDesc: "Conéctate con amigos, comparte entradas al instante y ve gastos individuales con reportes por persona",
       timeCost: "Calculadora de Costo en Tiempo (Pro)",
-      timeCostDesc: "Ve cuántas horas de trabajo te cuesta cada compra. Conecta tus gastos con tu tiempo y toma decisiones financieras más inteligentes",
+      timeCostDesc: "Descubre cuántas horas de trabajo te cuesta cada compra. Conecta tu gasto con tu tiempo para decidir mejor",
       periodComparison: "Comparación de Períodos",
-      periodComparisonDesc: "Comparación automática vs período anterior. Ve si estás gastando más o menos con indicadores visuales",
+      periodComparisonDesc: "Comparación automática con el período anterior. Ve al instante si estás gastando más o menos",
       savingsGoals: "Metas de Ahorro",
-      savingsGoalsDesc: "Establece objetivos de ahorro con fechas límite, rastrea el progreso visualmente y vincula metas a cuentas específicas",
+      savingsGoalsDesc: "Establece metas con fechas límite, visualiza el progreso y vincula objetivos a cuentas específicas",
       pricing: "Precios Simples",
       free: "Gratis",
               freeFeatures: ["Hasta 2 cuentas", "5 etiquetas inteligentes", "2 personas para divisiones", "3 presupuestos por período", "Sistema de widgets"],
@@ -281,7 +289,7 @@ export default function Home() {
       lifetimeBest: "Mejor valor",
       comingSoon: "Próximamente",
       waitlistTitle: "Sé el primero en experimentar Budpoint",
-      waitlistSubtitle: "Únete a miles de usuarios esperando la app financiera más inteligente",
+      waitlistSubtitle: "Únete a miles esperando la app de finanzas más intuitiva",
       emailPlaceholder: "Ingresa tu correo electrónico",
       join: "Unirse",
       joining: "Uniéndose...",
@@ -296,11 +304,11 @@ export default function Home() {
       whyChoose: "¿Por qué elegir Budpoint?",
       whyChooseDesc: "Únete a miles de usuarios que confían en Budpoint para gestionar sus finanzas",
       realTime: "Enfócate en TUS Gastos",
-      realTimeDesc: "Rastrea solo tus gastos personales. Cuando alguien te pide que compres algo para ellos, no cuenta hacia tus presupuestos",
+      realTimeDesc: "Monitorea solo tu gasto personal. Cuando alguien te pide comprar algo para ellos, no afecta tus presupuestos",
       smartNotifications: "Categorías Inteligentes de Presupuesto",
-      smartNotificationsDesc: "Presupuestos especiales para gastos sin etiqueta y etiquetas sin asignar, más reglas básicas para empezar rápidamente",
+      smartNotificationsDesc: "Presupuestos dedicados para gastos sin etiqueta y etiquetas sin asignar, más reglas iniciales para empezar de inmediato",
       multiCurrency: "Compartir Gastos en Tiempo Real",
-      multiCurrencyDesc: "Comparte gastos con amigos o pareja instantáneamente para que las cuentas de todos estén siempre actualizadas y balanceadas",
+      multiCurrencyDesc: "Comparte costos con amigos o pareja al instante para que todos estén sincronizados y balanceados",
       betaTestersTitle: "Lo que Dicen los Beta Testers",
       betaTestersSubtitle: "Comentarios reales de usuarios tempranos que han estado probando Budpoint",
       testimonial1: "¡Controlar mi presupuesto ahora es súper fácil! Me encanta cómo todo está organizado y puedo ver exactamente a dónde va mi dinero.",
@@ -311,7 +319,15 @@ export default function Home() {
       testimonial2Role: "Usuario Temprano",
       testimonial3: "Los análisis siempre me dan certeza de cuánto puedo gastar. Me siento tranquila siguiendo un presupuesto por primera vez.",
       testimonial3Author: "Jessica L.",
-      testimonial3Role: "Beta Tester"
+      testimonial3Role: "Beta Tester",
+      faqTitle: "Preguntas Frecuentes",
+      faqSubtitle: "Respuestas a preguntas comunes sobre Budpoint",
+      faq1Question: "¿Cuándo estará disponible Budpoint?",
+      faq1Answer: "Budpoint llegará pronto a iOS. ¡Únete a nuestra lista de espera para ser notificado cuando se lance!",
+      faq2Question: "¿Hay una versión gratuita?",
+      faq2Answer: "¡Sí! Budpoint ofrece un generoso plan gratuito con 2 cuentas, 5 etiquetas y 2 personas para divisiones.",
+      faq3Question: "¿Puedo compartir gastos con amigos?",
+      faq3Answer: "¡Por supuesto! Los usuarios Pro pueden compartir gastos en tiempo real con amigos y parejas sin problema."
     }
   }
 
@@ -1025,21 +1041,21 @@ export default function Home() {
           {/* FAQ Section */}
           <div id="faq" className={`py-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-              <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Get answers to common questions about Budpoint</p>
+              <h2 className="text-3xl font-bold mb-4">{currentLang.faqTitle}</h2>
+              <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{currentLang.faqSubtitle}</p>
             </div>
             <div className="max-w-3xl mx-auto space-y-6">
               <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-                <h3 className="text-lg font-semibold mb-2">When will Budpoint be available?</h3>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>Budpoint is coming soon to iOS. Join our waitlist to be notified when it launches!</p>
+                <h3 className="text-lg font-semibold mb-2">{currentLang.faq1Question}</h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.faq1Answer}</p>
               </div>
               <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-                <h3 className="text-lg font-semibold mb-2">Is there a free version?</h3>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>Yes! Budpoint offers a generous free tier with 2 accounts, 5 tags, and 2 people for splits.</p>
+                <h3 className="text-lg font-semibold mb-2">{currentLang.faq2Question}</h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.faq2Answer}</p>
               </div>
               <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-                <h3 className="text-lg font-semibold mb-2">Can I share expenses with friends?</h3>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>Absolutely! Pro users can share expenses in real-time with friends and partners seamlessly.</p>
+                <h3 className="text-lg font-semibold mb-2">{currentLang.faq3Question}</h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.faq3Answer}</p>
               </div>
             </div>
           </div>
