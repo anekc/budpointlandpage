@@ -60,7 +60,7 @@ export default function Home() {
 
   // Scroll to waitlist section
   const scrollToWaitlist = () => {
-    const waitlistSection = document.getElementById('waitlist-section')
+    const waitlistSection = document.getElementById('waitlist')
     if (waitlistSection) {
       waitlistSection.scrollIntoView({ behavior: 'smooth' })
     }
