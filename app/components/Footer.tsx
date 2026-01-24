@@ -4,24 +4,31 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
-export default function Footer() {
-  const [isDark, setIsDark] = useState(false)
+interface FooterProps {
+  isDark?: boolean
+}
+
+export default function Footer({ isDark: isDarkProp }: FooterProps) {
+  const [isDarkLocal, setIsDarkLocal] = useState(false)
   const [language, setLanguage] = useState('en')
 
   useEffect(() => {
-    // Detect system dark mode preference
+    // Detect system dark mode preference (only used if no prop passed)
     const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    setIsDark(darkModeQuery.matches)
+    setIsDarkLocal(darkModeQuery.matches)
 
     // Detect browser language
     const browserLang = navigator.language.startsWith('es') ? 'es' : 'en'
     setLanguage(browserLang)
 
     // Listen for system theme changes
-    const handleChange = (e: MediaQueryListEvent) => setIsDark(e.matches)
+    const handleChange = (e: MediaQueryListEvent) => setIsDarkLocal(e.matches)
     darkModeQuery.addEventListener('change', handleChange)
     return () => darkModeQuery.removeEventListener('change', handleChange)
   }, [])
+
+  // Use prop if provided, otherwise use local state
+  const isDark = isDarkProp !== undefined ? isDarkProp : isDarkLocal
 
   const t = {
     en: {
@@ -37,7 +44,7 @@ export default function Footer() {
       legal: "Legal",
       privacy: "Privacy Policy",
       terms: "Terms of Service",
-      copyright: "© 2025 Budpoint. All rights reserved.",
+      copyright: "© 2026 Budpoint. All rights reserved.",
       privacyShort: "Privacy",
       termsShort: "Terms"
     },
@@ -54,7 +61,7 @@ export default function Footer() {
       legal: "Legal",
       privacy: "Política de Privacidad",
       terms: "Términos de Servicio",
-      copyright: "© 2025 Budpoint. Todos los derechos reservados.",
+      copyright: "© 2026 Budpoint. Todos los derechos reservados.",
       privacyShort: "Privacidad",
       termsShort: "Términos"
     }
@@ -63,7 +70,9 @@ export default function Footer() {
   const currentLang = t[language as keyof typeof t]
 
   return (
-    <footer className={`transition-colors duration-300 ${isDark ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
+    <footer className={`transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+      {/* Gradient separator */}
+      <div className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}

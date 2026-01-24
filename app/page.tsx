@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Footer from './components/Footer'
 
 export default function Home() {
@@ -22,12 +22,7 @@ export default function Home() {
   // Pricing plan selection state
   const [selectedPlan, setSelectedPlan] = useState<'free' | 'pro' | 'annual' | 'lifetime'>('pro')
   
-  // Parallax scroll effects
-  const { scrollYProgress } = useScroll()
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, -200])
-  const screenshotsY = useTransform(scrollYProgress, [0, 1], [0, -100])
-  const featuresY = useTransform(scrollYProgress, [0, 1], [0, 50])
-
+  
   useEffect(() => {
     // Detect system dark mode preference
     const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -360,7 +355,7 @@ export default function Home() {
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
       {/* Fixed Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-black/60' : 'bg-white/60'} backdrop-blur-md border-b ${isDark ? 'border-gray-800/50' : 'border-gray-200/50'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-black/70' : 'bg-white/70'} backdrop-blur-xl border-b ${isDark ? 'border-gray-800/30' : 'border-gray-200/50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
@@ -373,12 +368,30 @@ export default function Home() {
               />
               <span className="text-xl font-bold">Budpoint</span>
             </div>
-            <a
-              href="/blog"
-              className={`font-medium hover:text-blue-600 transition-colors ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
-            >
-              Blog
-            </a>
+            <div className="flex items-center space-x-4">
+              <a
+                href="/blog"
+                className={`font-medium hover:text-blue-600 transition-colors ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
+              >
+                Blog
+              </a>
+              {/* Theme Toggle Button */}
+              <button
+                onClick={() => setIsDark(!isDark)}
+                className={`p-2 rounded-lg transition-all duration-300 ${isDark ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {isDark ? (
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -386,23 +399,23 @@ export default function Home() {
       <div className="pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
-          <motion.div className="text-center py-20" style={{ y: heroY }}>
+          <motion.div className="text-center py-20">
             <motion.div 
               className="mb-8"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <Image 
-                src="/logo.png" 
-                alt="Budpoint App Icon" 
-                width={120} 
+              <Image
+                src="/logo.png"
+                alt="Budpoint App Icon"
+                width={120}
                 height={120}
-                className="mx-auto rounded-3xl shadow-2xl"
+                className="mx-auto rounded-3xl shadow-2xl hover:shadow-[0_0_40px_rgba(59,130,246,0.4)] transition-shadow duration-300"
               />
             </motion.div>
-            <motion.h1 
-              className="text-4xl font-bold sm:text-6xl mb-6"
+            <motion.h1
+              className="text-4xl font-bold sm:text-6xl mb-6 text-gradient"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -423,9 +436,9 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <button 
+              <button
                 onClick={scrollToWaitlist}
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl text-lg font-semibold hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"
               >
                 {currentLang.joinWaitlist}
               </button>
@@ -433,7 +446,13 @@ export default function Home() {
           </motion.div>
 
           {/* App Preview Section - RESPONSIVE */}
-          <motion.div id="screenshots" className="pt-20 pb-10" style={{ y: screenshotsY }}>
+          {/* Gradient background - different intensity for each mode */}
+          <div className={`absolute left-0 right-0 h-[2500px] pointer-events-none overflow-hidden`} style={{ top: '0' }}>
+            {/* Main blobs - only in screenshots area */}
+            <div className={`absolute top-[500px] left-1/4 w-[600px] h-[600px] bg-blue-500 rounded-full filter blur-[200px] ${isDark ? 'opacity-20' : 'opacity-40'}`}></div>
+            <div className={`absolute top-[600px] right-1/4 w-[500px] h-[500px] bg-purple-500 rounded-full filter blur-[200px] ${isDark ? 'opacity-20' : 'opacity-35'}`}></div>
+          </div>
+          <motion.div id="screenshots" className="pt-20 pb-10">
             <div className="text-center mb-16">
               <motion.h2 
                 className="text-3xl font-bold mb-4"
@@ -468,11 +487,11 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <div className="relative transform transition-all duration-300 hover:scale-105">
+                    <div className="relative transition-all duration-500 hover:scale-105">
                       {/* iPhone Simulation - Realistic */}
                       <div className="relative max-w-[280px] md:max-w-[320px] lg:max-w-[350px] mx-auto">
                         {/* iPhone Frame */}
-                        <div className={`relative rounded-[2rem] md:rounded-[2.5rem] ${isDark ? 'bg-gray-900' : 'bg-gray-800'} shadow-2xl`}>
+                        <div className={`relative rounded-[2rem] md:rounded-[2.5rem] ${isDark ? 'bg-gray-900' : 'bg-gray-800'} shadow-2xl transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(99,102,241,0.4)]`}>
                           {/* Screen Container */}
                           <div className="relative p-2 md:p-2">
                             {/* Screen */}
@@ -506,8 +525,8 @@ export default function Home() {
                       
                       {/* Screenshot label */}
                       <div className="mt-6 text-center">
-                        <div className={`px-4 py-2 rounded-lg text-sm font-medium ${isDark ? 'bg-gray-800/50 text-gray-300' : 'bg-white/80 text-gray-700'} backdrop-blur-sm border ${isDark ? 'border-gray-700' : 'border-gray-200'} h-20 flex flex-col justify-center`}>
-                          <div className="font-semibold text-base">{screenshot.title[language as keyof typeof screenshot.title]}</div>
+                        <div className="flex flex-col justify-center">
+                          <div className={`font-semibold text-base ${isDark ? 'text-white' : 'text-gray-900'}`}>{screenshot.title[language as keyof typeof screenshot.title]}</div>
                           <div className={`text-sm mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'} leading-tight`}>
                             {screenshot.description[language as keyof typeof screenshot.description]}
                           </div>
@@ -523,7 +542,7 @@ export default function Home() {
           </motion.div>
           
           {/* Features Section */}
-          <motion.div id="features" className="pt-10 pb-20" style={{ y: featuresY }}>
+          <motion.div id="features" className="pt-10 pb-20">
             <motion.h2 
               className="text-3xl font-bold text-center mb-12"
               initial={{ opacity: 0, y: 50 }}
@@ -534,184 +553,184 @@ export default function Home() {
               {currentLang.features}
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+              <motion.div
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-green-500/10' : 'hover:shadow-green-500/20'} border border-transparent hover:border-green-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-green-600">{currentLang.multiAccount}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-green-500">{currentLang.multiAccount}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.multiAccountDesc}</p>
               </motion.div>
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+              <motion.div
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-blue-500/10' : 'hover:shadow-blue-500/20'} border border-transparent hover:border-blue-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.smartBudgeting}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-blue-500">{currentLang.smartBudgeting}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.smartBudgetingDesc}</p>
               </motion.div>
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+              <motion.div
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-purple-500/10' : 'hover:shadow-purple-500/20'} border border-transparent hover:border-purple-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-purple-600">{currentLang.expenseTracking}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-purple-500">{currentLang.expenseTracking}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.expenseTrackingDesc}</p>
               </motion.div>
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+              <motion.div
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-orange-500/10' : 'hover:shadow-orange-500/20'} border border-transparent hover:border-orange-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.analytics}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-orange-500">{currentLang.analytics}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.analyticsDesc}</p>
               </motion.div>
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+              <motion.div
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-orange-500/10' : 'hover:shadow-orange-500/20'} border border-transparent hover:border-orange-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.personalTracking}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-orange-500">{currentLang.personalTracking}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.personalTrackingDesc}</p>
               </motion.div>
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+              <motion.div
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-blue-500/10' : 'hover:shadow-blue-500/20'} border border-transparent hover:border-blue-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.security}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-blue-500">{currentLang.security}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.securityDesc}</p>
               </motion.div>
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+              <motion.div
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-green-500/10' : 'hover:shadow-green-500/20'} border border-transparent hover:border-green-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-teal-500 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-green-600">{currentLang.icloudSync}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-green-500">{currentLang.icloudSync}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.icloudSyncDesc}</p>
               </motion.div>
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+              <motion.div
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-purple-500/10' : 'hover:shadow-purple-500/20'} border border-transparent hover:border-purple-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.7 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-purple-600">{currentLang.goals}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-purple-500">{currentLang.goals}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.goalsDesc}</p>
               </motion.div>
-              <motion.div 
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+              <motion.div
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-indigo-500/10' : 'hover:shadow-indigo-500/20'} border border-transparent hover:border-indigo-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-indigo-600">{currentLang.scanning}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-indigo-500">{currentLang.scanning}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.scanningDesc}</p>
               </motion.div>
               <motion.div
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-amber-500/10' : 'hover:shadow-amber-500/20'} border border-transparent hover:border-amber-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.9 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-yellow-500 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-amber-600">{currentLang.timeCost}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-amber-500">{currentLang.timeCost}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.timeCostDesc}</p>
               </motion.div>
                             <motion.div
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-rose-500/10' : 'hover:shadow-rose-500/20'} border border-transparent hover:border-rose-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.1 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-rose-600">{currentLang.periodComparison}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-rose-500">{currentLang.periodComparison}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.periodComparisonDesc}</p>
               </motion.div>
               <motion.div
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
+                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-emerald-500/10' : 'hover:shadow-emerald-500/20'} border border-transparent hover:border-emerald-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.2 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-emerald-600">{currentLang.savingsGoals}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-emerald-500">{currentLang.savingsGoals}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.savingsGoalsDesc}</p>
               </motion.div>
 
@@ -828,8 +847,10 @@ export default function Home() {
                   &quot;{currentLang.testimonial1}&quot;
                 </p>
                 <div className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-600' : 'bg-blue-500'} flex items-center justify-center text-white font-semibold mr-3`}>
-                    {currentLang.testimonial1Author.charAt(0)}
+                  <div className={`w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 p-0.5 mr-3`}>
+                    <div className={`w-full h-full rounded-full ${isDark ? 'bg-gray-900' : 'bg-white'} flex items-center justify-center text-blue-500 font-semibold`}>
+                      {currentLang.testimonial1Author.charAt(0)}
+                    </div>
                   </div>
                   <div>
                     <p className="font-semibold">{currentLang.testimonial1Author}</p>
@@ -858,8 +879,10 @@ export default function Home() {
                   &quot;{currentLang.testimonial2}&quot;
                 </p>
                 <div className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-green-600' : 'bg-green-500'} flex items-center justify-center text-white font-semibold mr-3`}>
-                    {currentLang.testimonial2Author.charAt(0)}
+                  <div className={`w-11 h-11 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 p-0.5 mr-3`}>
+                    <div className={`w-full h-full rounded-full ${isDark ? 'bg-gray-900' : 'bg-white'} flex items-center justify-center text-green-500 font-semibold`}>
+                      {currentLang.testimonial2Author.charAt(0)}
+                    </div>
                   </div>
                   <div>
                     <p className="font-semibold">{currentLang.testimonial2Author}</p>
@@ -888,8 +911,10 @@ export default function Home() {
                   &quot;{currentLang.testimonial3}&quot;
                 </p>
                 <div className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-purple-600' : 'bg-purple-500'} flex items-center justify-center text-white font-semibold mr-3`}>
-                    {currentLang.testimonial3Author.charAt(0)}
+                  <div className={`w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-0.5 mr-3`}>
+                    <div className={`w-full h-full rounded-full ${isDark ? 'bg-gray-900' : 'bg-white'} flex items-center justify-center text-purple-500 font-semibold`}>
+                      {currentLang.testimonial3Author.charAt(0)}
+                    </div>
                   </div>
                   <div>
                     <p className="font-semibold">{currentLang.testimonial3Author}</p>
@@ -899,9 +924,9 @@ export default function Home() {
               </motion.div>
             </div>
           </motion.div>
-          
+
           {/* Pricing Section */}
-          <div id="pricing" className={`py-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+          <div id="pricing" className="py-20">
             <div className="text-center">
               <motion.h2 
                 className="text-3xl font-bold mb-8"
@@ -964,7 +989,7 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors mt-auto">
+                  <button className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 rounded-lg font-semibold hover:from-blue-500 hover:to-blue-600 transition-all duration-300 mt-auto hover:shadow-lg hover:shadow-blue-500/30">
                     {currentLang.comingSoon}
                   </button>
                 </motion.div>
@@ -983,7 +1008,7 @@ export default function Home() {
                   onClick={() => setSelectedPlan('annual')}
                 >
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-1 rounded-full text-xs font-semibold shadow-lg">
                       {currentLang.annualSavings}
                     </span>
                   </div>
@@ -997,16 +1022,16 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <button className="w-full bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors mt-auto">
+                  <button className="w-full bg-gradient-to-r from-orange-600 to-amber-500 text-white py-3 rounded-lg font-semibold hover:from-orange-500 hover:to-amber-600 transition-all duration-300 mt-auto hover:shadow-lg hover:shadow-orange-500/30">
                     {currentLang.comingSoon}
                   </button>
                 </motion.div>
 
                 {/* Lifetime Plan */}
-                <motion.div 
+                <motion.div
                   className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${
-                    selectedPlan === 'lifetime' 
-                      ? `border-purple-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}` 
+                    selectedPlan === 'lifetime'
+                      ? `border-purple-500 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
                       : `border-transparent ${isDark ? 'bg-gray-800 hover:border-purple-400' : 'bg-white hover:border-purple-300'}`
                   }`}
                   initial={{ opacity: 0, y: 50 }}
@@ -1016,7 +1041,7 @@ export default function Home() {
                   onClick={() => setSelectedPlan('lifetime')}
                 >
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    <span className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-4 py-1 rounded-full text-xs font-semibold shadow-lg">
                       {currentLang.lifetimeBest}
                     </span>
                   </div>
@@ -1030,38 +1055,39 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <button className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors mt-auto">
+                  <button className="w-full bg-gradient-to-r from-purple-600 to-violet-500 text-white py-3 rounded-lg font-semibold hover:from-purple-500 hover:to-violet-600 transition-all duration-300 mt-auto hover:shadow-lg hover:shadow-purple-500/30">
                     {currentLang.comingSoon}
                   </button>
                 </motion.div>
               </div>
             </div>
           </div>
-          
+
           {/* FAQ Section */}
-          <div id="faq" className={`py-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+          <div id="faq" className="py-20">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">{currentLang.faqTitle}</h2>
               <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{currentLang.faqSubtitle}</p>
             </div>
             <div className="max-w-3xl mx-auto space-y-6">
-              <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+              <div className={`p-6 rounded-lg border-l-4 border-blue-500 transition-all duration-300 hover:shadow-lg ${isDark ? 'bg-gray-900/80 hover:shadow-blue-500/10' : 'bg-gray-50 hover:shadow-blue-500/20'}`}>
                 <h3 className="text-lg font-semibold mb-2">{currentLang.faq1Question}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.faq1Answer}</p>
               </div>
-              <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+              <div className={`p-6 rounded-lg border-l-4 border-purple-500 transition-all duration-300 hover:shadow-lg ${isDark ? 'bg-gray-900/80 hover:shadow-purple-500/10' : 'bg-gray-50 hover:shadow-purple-500/20'}`}>
                 <h3 className="text-lg font-semibold mb-2">{currentLang.faq2Question}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.faq2Answer}</p>
               </div>
-              <div className={`p-6 rounded-lg ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+              <div className={`p-6 rounded-lg border-l-4 border-green-500 transition-all duration-300 hover:shadow-lg ${isDark ? 'bg-gray-900/80 hover:shadow-green-500/10' : 'bg-gray-50 hover:shadow-green-500/20'}`}>
                 <h3 className="text-lg font-semibold mb-2">{currentLang.faq3Question}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.faq3Answer}</p>
               </div>
             </div>
           </div>
-          
+
           {/* Waitlist Section */}
           <div id="waitlist" className="py-20 text-center">
+            <div>
             <motion.h2 
               className="text-3xl font-bold mb-4"
               initial={{ opacity: 0, y: 30 }}
@@ -1121,14 +1147,14 @@ export default function Home() {
                         placeholder={currentLang.emailPlaceholder}
                         required
                         disabled={isSubmitting}
-                        className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 ${
-                          submitStatus === 'error' 
+                        className={`w-full px-4 py-3 border rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:shadow-[0_0_20px_rgba(59,130,246,0.3)] ${
+                          submitStatus === 'error'
                             ? isDark ? 'bg-red-900/20 border-red-800 text-white placeholder-red-400' : 'bg-red-50 border-red-300 text-gray-900 placeholder-red-400'
                             : showValidation
                               ? isEmailValid
                                 ? isDark ? 'bg-green-900/20 border-green-700 text-white placeholder-gray-400' : 'bg-green-50 border-green-300 text-gray-900'
                                 : isDark ? 'bg-red-900/20 border-red-700 text-white placeholder-gray-400' : 'bg-red-50 border-red-300 text-gray-900'
-                              : isDark ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900'
+                              : isDark ? 'bg-gray-800/80 border-gray-600 text-white placeholder-gray-400' : 'bg-white/80 border-gray-300 text-gray-900'
                         } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                       />
                       {showValidation && (
@@ -1152,13 +1178,13 @@ export default function Home() {
                       )}
                     </div>
                   </div>
-                  <button 
+                  <button
                     type="submit"
                     disabled={isSubmitting || !email.trim() || (showValidation && !isEmailValid)}
-                    className={`px-6 py-3 rounded-lg font-semibold transition-colors self-start ${
+                    className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 self-start ${
                       isSubmitting || !email.trim() || (showValidation && !isEmailValid)
                         ? isDark ? 'bg-gray-700 text-gray-400 cursor-not-allowed' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                        : 'bg-blue-600 text-white hover:bg-blue-700'
+                        : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] hover:scale-105'
                     }`}
                   >
                     {isSubmitting ? currentLang.joining : currentLang.join}
@@ -1171,12 +1197,14 @@ export default function Home() {
                 )}
               </motion.form>
             )}
+            </div>
           </div>
 
-          {/* Footer */}
-          <Footer />
         </div>
       </div>
+
+      {/* Footer - Outside main container for full width */}
+      <Footer isDark={isDark} />
     </div>
   )
 }

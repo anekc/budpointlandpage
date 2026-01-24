@@ -27,6 +27,7 @@ const posts = [
       es: ['Presupuesto', 'Tips', 'Guía'],
       en: ['Budgeting', 'Tips', 'Guide'],
     },
+    color: 'blue',
   },
   {
     slug: 'why-budgeting-matters',
@@ -50,6 +51,7 @@ const posts = [
       es: ['Presupuesto', 'Finanzas', 'Datos'],
       en: ['Budgeting', 'Finance', 'Data'],
     },
+    color: 'purple',
   },
   {
     slug: 'welcome-to-budpoint',
@@ -73,6 +75,7 @@ const posts = [
       es: ['Anuncios', 'Budpoint'],
       en: ['Announcements', 'Budpoint'],
     },
+    color: 'green',
   },
   {
     slug: '5-tips-to-save-money',
@@ -96,6 +99,7 @@ const posts = [
       es: ['Tips', 'Finanzas'],
       en: ['Tips', 'Finance'],
     },
+    color: 'orange',
   },
 ]
 
@@ -112,12 +116,47 @@ const translations = {
   },
 }
 
+const colorClasses = {
+  blue: {
+    border: 'hover:border-blue-500/50',
+    shadow: 'hover:shadow-blue-500/10',
+    tag: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+    accent: 'border-l-blue-500',
+  },
+  purple: {
+    border: 'hover:border-purple-500/50',
+    shadow: 'hover:shadow-purple-500/10',
+    tag: 'bg-purple-500/10 text-purple-600 dark:text-purple-400',
+    accent: 'border-l-purple-500',
+  },
+  green: {
+    border: 'hover:border-green-500/50',
+    shadow: 'hover:shadow-green-500/10',
+    tag: 'bg-green-500/10 text-green-600 dark:text-green-400',
+    accent: 'border-l-green-500',
+  },
+  orange: {
+    border: 'hover:border-orange-500/50',
+    shadow: 'hover:shadow-orange-500/10',
+    tag: 'bg-orange-500/10 text-orange-600 dark:text-orange-400',
+    accent: 'border-l-orange-500',
+  },
+}
+
 export default function BlogPage() {
   const [language, setLanguage] = useState<'es' | 'en'>('es')
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     const browserLang = navigator.language.startsWith('es') ? 'es' : 'en'
     setLanguage(browserLang)
+
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    setIsDark(darkModeQuery.matches)
+
+    const handleChange = (e: MediaQueryListEvent) => setIsDark(e.matches)
+    darkModeQuery.addEventListener('change', handleChange)
+    return () => darkModeQuery.removeEventListener('change', handleChange)
   }, [])
 
   const t = translations[language]
@@ -126,47 +165,50 @@ export default function BlogPage() {
     <div>
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">{t.title}</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
+        <h1 className="text-4xl font-bold mb-4 text-gradient">{t.title}</h1>
+        <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
           {t.subtitle}
         </p>
       </div>
 
       {/* Posts Grid */}
-      <div className="space-y-8">
-        {posts.map((post) => (
-          <article
-            key={post.slug}
-            className="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
-          >
-            <Link href={`/blog/posts/${post.slug}`}>
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                <div className="flex-1">
-                  <h2 className="text-2xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">
-                    {post.title[language]}
-                  </h2>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
-                    {post.description[language]}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags[language].map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+      <div className="space-y-6">
+        {posts.map((post) => {
+          const colors = colorClasses[post.color as keyof typeof colorClasses]
+          return (
+            <article
+              key={post.slug}
+              className={`group p-6 rounded-xl border-l-4 ${colors.accent} ${isDark ? 'bg-gray-900/50' : 'bg-gray-50/80'} border border-transparent ${colors.border} transition-all duration-300 hover:shadow-xl ${isDark ? colors.shadow : colors.shadow}`}
+            >
+              <Link href={`/blog/posts/${post.slug}`}>
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                  <div className="flex-1">
+                    <h2 className={`text-2xl font-semibold mb-2 group-hover:text-blue-500 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      {post.title[language]}
+                    </h2>
+                    <p className={`mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {post.description[language]}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags[language].map((tag) => (
+                        <span
+                          key={tag}
+                          className={`px-3 py-1 text-sm rounded-full font-medium ${colors.tag}`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={`text-sm whitespace-nowrap ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                    <p>{post.date[language]}</p>
+                    <p>{post.readTime[language]} {t.readTime}</p>
                   </div>
                 </div>
-                <div className="text-sm text-gray-500 dark:text-gray-500 whitespace-nowrap">
-                  <p>{post.date[language]}</p>
-                  <p>{post.readTime[language]} {t.readTime}</p>
-                </div>
-              </div>
-            </Link>
-          </article>
-        ))}
+              </Link>
+            </article>
+          )
+        })}
       </div>
     </div>
   )
