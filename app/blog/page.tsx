@@ -2,9 +2,34 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useTheme } from '../components/ThemeContext'
 
 // Lista de posts con títulos en ambos idiomas
 const posts = [
+  {
+    slug: 'importance-of-emergency-fund',
+    title: {
+      es: 'Por Qué Necesitas un Fondo de Emergencia',
+      en: 'Why You Need an Emergency Fund',
+    },
+    description: {
+      es: 'Descubre qué es, cuánto ahorrar y las mejores opciones en México (Bancos vs Sofipos) para tu dinero en 2026.',
+      en: 'Discover what it is, how much to save, and the best High-Yield Savings Accounts to keep your money safe and growing.',
+    },
+    date: {
+      es: '24 de Enero, 2026',
+      en: 'January 24, 2026',
+    },
+    readTime: {
+      es: '6 min',
+      en: '6 min',
+    },
+    tags: {
+      es: ['Ahorro', 'Inversión', 'México'],
+      en: ['Savings', 'Emergency Fund', 'Tips'],
+    },
+    color: 'green',
+  },
   {
     slug: 'how-to-choose-budget-period',
     title: {
@@ -144,19 +169,12 @@ const colorClasses = {
 }
 
 export default function BlogPage() {
-  const [language, setLanguage] = useState<'es' | 'en'>('es')
-  const [isDark, setIsDark] = useState(false)
+  const [language, setLanguage] = useState<'es' | 'en'>('en')
+  const { isDark } = useTheme()
 
   useEffect(() => {
     const browserLang = navigator.language.startsWith('es') ? 'es' : 'en'
     setLanguage(browserLang)
-
-    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    setIsDark(darkModeQuery.matches)
-
-    const handleChange = (e: MediaQueryListEvent) => setIsDark(e.matches)
-    darkModeQuery.addEventListener('change', handleChange)
-    return () => darkModeQuery.removeEventListener('change', handleChange)
   }, [])
 
   const t = translations[language]
@@ -178,7 +196,7 @@ export default function BlogPage() {
           return (
             <article
               key={post.slug}
-              className={`group p-6 rounded-xl border-l-4 ${colors.accent} ${isDark ? 'bg-gray-900/50' : 'bg-gray-50/80'} border border-transparent ${colors.border} transition-all duration-300 hover:shadow-xl ${isDark ? colors.shadow : colors.shadow}`}
+              className={`group p-6 rounded-xl border-l-4 ${colors.accent} ${isDark ? 'bg-gray-900/50' : 'bg-white shadow-sm'} border border-transparent ${colors.border} transition-all duration-300 hover:shadow-xl ${isDark ? colors.shadow : colors.shadow}`}
             >
               <Link href={`/blog/posts/${post.slug}`}>
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">

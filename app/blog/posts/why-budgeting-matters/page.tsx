@@ -6,7 +6,7 @@ import ContentEn from './content-en.mdx'
 import Link from 'next/link'
 
 export default function BlogPost() {
-  const [language, setLanguage] = useState<'es' | 'en'>('es')
+  const [language, setLanguage] = useState<'es' | 'en'>('en')
 
   useEffect(() => {
     const browserLang = navigator.language.startsWith('es') ? 'es' : 'en'

@@ -1,14 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Footer from './components/Footer'
+import { useTheme } from './components/ThemeContext'
 
 export default function Home() {
-  const [isDark, setIsDark] = useState(false)
+  const { isDark, toggleTheme } = useTheme()
   const [language, setLanguage] = useState('en')
-  
+
   // Waitlist form state
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -18,24 +20,15 @@ export default function Home() {
   const [emailTouched, setEmailTouched] = useState(false)
   const [isEmailValid, setIsEmailValid] = useState(false)
   const [showValidation, setShowValidation] = useState(false)
-  
+
   // Pricing plan selection state
   const [selectedPlan, setSelectedPlan] = useState<'free' | 'pro' | 'annual' | 'lifetime'>('pro')
-  
-  
+
+
   useEffect(() => {
-    // Detect system dark mode preference
-    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    setIsDark(darkModeQuery.matches)
-    
     // Detect browser language
     const browserLang = navigator.language.startsWith('es') ? 'es' : 'en'
     setLanguage(browserLang)
-    
-    // Listen for system theme changes
-    const handleChange = (e: MediaQueryListEvent) => setIsDark(e.matches)
-    darkModeQuery.addEventListener('change', handleChange)
-    return () => darkModeQuery.removeEventListener('change', handleChange)
   }, [])
 
   // Debounced email validation
@@ -65,7 +58,7 @@ export default function Home() {
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) return false
-    
+
     // Lista de dominios de email permitidos (proveedores confiables)
     const allowedDomains = [
       'gmail.com',
@@ -85,7 +78,7 @@ export default function Home() {
       'yandex.com',
       'tutanota.com'
     ]
-    
+
     const domain = email.toLowerCase().split('@')[1]
     return allowedDomains.includes(domain)
   }
@@ -101,7 +94,7 @@ export default function Home() {
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateEmail(email)) {
       setSubmitStatus('error')
       return
@@ -110,13 +103,13 @@ export default function Home() {
     // Anti-spam protection: Rate limiting
     const now = Date.now()
     const timeSinceLastSubmit = now - lastSubmitTime
-    
+
     // Prevent submissions faster than 5 seconds apart
     if (timeSinceLastSubmit < 5000) {
       setSubmitStatus('error')
       return
     }
-    
+
     // Prevent more than 3 submissions per session
     if (submitCount >= 3) {
       setSubmitStatus('error')
@@ -189,10 +182,10 @@ export default function Home() {
       savingsGoalsDesc: "Set targets with deadlines, visualize progress, and link goals to specific accounts",
       pricing: "Simple Pricing",
       free: "Free",
-              freeFeatures: ["Up to 2 accounts", "5 smart tags", "2 people for splits", "3 budgets per period", "Widget system"],
+      freeFeatures: ["Up to 2 accounts", "5 smart tags", "2 people for splits", "3 budgets per period", "Widget system"],
       pro: "Pro",
       proPrice: "$4.99/month",
-              proFeatures: ["Unlimited accounts", "Unlimited tags", "Unlimited people", "Unlimited budgets", "Recurring transactions", "iCloud sync", "Collaborative features", "CSV export"],
+      proFeatures: ["Unlimited accounts", "Unlimited tags", "Unlimited people", "Unlimited budgets", "Recurring transactions", "iCloud sync", "Collaborative features", "CSV export"],
       annual: "Annual",
       annualPrice: "$29.99/year",
       annualSavings: "Save 50%",
@@ -217,7 +210,7 @@ export default function Home() {
       whyChooseDesc: "Join thousands of users who trust Budpoint to manage their finances",
       realTime: "Focus on YOUR Expenses",
       realTimeDesc: "Monitor only your personal spending. When someone asks you to buy something for them, it won't affect your budgets",
-      smartNotifications: "Smart Budget Categories", 
+      smartNotifications: "Smart Budget Categories",
       smartNotificationsDesc: "Dedicated budgets for untagged and unassigned expenses, plus starter rules to begin immediately",
       multiCurrency: "Real-Time Expense Sharing",
       multiCurrencyDesc: "Share costs with friends or partners instantly so everyone stays synchronized and balanced",
@@ -272,10 +265,10 @@ export default function Home() {
       savingsGoalsDesc: "Establece metas con fechas límite, visualiza el progreso y vincula objetivos a cuentas específicas",
       pricing: "Precios Simples",
       free: "Gratis",
-              freeFeatures: ["Hasta 2 cuentas", "5 etiquetas inteligentes", "2 personas para divisiones", "3 presupuestos por período", "Sistema de widgets"],
+      freeFeatures: ["Hasta 2 cuentas", "5 etiquetas inteligentes", "2 personas para divisiones", "3 presupuestos por período", "Sistema de widgets"],
       pro: "Pro",
       proPrice: "$4.99/mes",
-              proFeatures: ["Cuentas ilimitadas", "Etiquetas ilimitadas", "Personas ilimitadas", "Presupuestos ilimitados", "Transacciones recurrentes", "Sincronización iCloud", "Funciones colaborativas", "Exportación CSV"],
+      proFeatures: ["Cuentas ilimitadas", "Etiquetas ilimitadas", "Personas ilimitadas", "Presupuestos ilimitados", "Transacciones recurrentes", "Sincronización iCloud", "Funciones colaborativas", "Exportación CSV"],
       annual: "Anual",
       annualPrice: "$29.99/año",
       annualSavings: "Ahorra 50%",
@@ -358,26 +351,26 @@ export default function Home() {
       <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-black/70' : 'bg-white/70'} backdrop-blur-xl border-b ${isDark ? 'border-gray-800/30' : 'border-gray-200/50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
+            <Link href="/" className="flex items-center space-x-3 group">
               <Image
                 src="/logo.png"
                 alt="Budpoint Logo"
                 width={32}
                 height={32}
-                className="rounded-lg"
+                className="rounded-lg transition-shadow duration-300 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
               />
               <span className="text-xl font-bold">Budpoint</span>
-            </div>
+            </Link>
             <div className="flex items-center space-x-4">
-              <a
+              <Link
                 href="/blog"
                 className={`font-medium hover:text-blue-600 transition-colors ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
               >
                 Blog
-              </a>
+              </Link>
               {/* Theme Toggle Button */}
               <button
-                onClick={() => setIsDark(!isDark)}
+                onClick={toggleTheme}
                 className={`p-2 rounded-lg transition-all duration-300 ${isDark ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
                 aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
               >
@@ -400,7 +393,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
           <motion.div className="text-center py-20">
-            <motion.div 
+            <motion.div
               className="mb-8"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -422,7 +415,7 @@ export default function Home() {
             >
               {currentLang.title}
             </motion.h1>
-            <motion.p 
+            <motion.p
               className={`mt-6 text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -430,7 +423,7 @@ export default function Home() {
             >
               {currentLang.subtitle}
             </motion.p>
-            <motion.div 
+            <motion.div
               className="mt-10"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -454,7 +447,7 @@ export default function Home() {
           </div>
           <motion.div id="screenshots" className="pt-20 pb-10">
             <div className="text-center mb-16">
-              <motion.h2 
+              <motion.h2
                 className="text-3xl font-bold mb-4"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -463,7 +456,7 @@ export default function Home() {
               >
                 {currentLang.appPreview}
               </motion.h2>
-              <motion.p 
+              <motion.p
                 className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -473,14 +466,14 @@ export default function Home() {
                 {currentLang.appPreviewDesc}
               </motion.p>
             </div>
-            
+
             {/* Screenshots Container - RESPONSIVE GRID */}
             <div className="relative">
               {/* Mobile: Single column stack, Tablet: 2 columns, Desktop: 3 columns */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto px-4">
                 {screenshots.map((screenshot, index) => (
-                  <motion.div 
-                    key={screenshot.name} 
+                  <motion.div
+                    key={screenshot.name}
                     className="group mx-auto"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -496,33 +489,33 @@ export default function Home() {
                           <div className="relative p-2 md:p-2">
                             {/* Screen */}
                             <div className="relative overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-black">
-                              <Image 
+                              <Image
                                 src={`/screenshots/${isDark ? 'dark' : 'light'}/${language}/${screenshot.name}.png`}
                                 alt={`${screenshot.title[language as keyof typeof screenshot.title]} - ${screenshot.description[language as keyof typeof screenshot.description]}`}
-                                width={320} 
+                                width={320}
                                 height={694}
                                 className="w-full h-auto transition-opacity duration-300"
                                 priority={index === 0}
                               />
-                              
+
 
                             </div>
                           </div>
-                          
 
-                          
+
+
                           {/* Volume Buttons */}
                           <div className={`absolute left-0 top-16 md:top-20 w-1 h-8 md:h-10 ${isDark ? 'bg-gray-700' : 'bg-gray-600'} rounded-r-md`}></div>
                           <div className={`absolute left-0 top-28 md:top-32 w-1 h-6 md:h-8 ${isDark ? 'bg-gray-700' : 'bg-gray-600'} rounded-r-md`}></div>
-                          
+
                           {/* Power Button */}
                           <div className={`absolute right-0 top-20 md:top-24 w-1 h-12 md:h-14 ${isDark ? 'bg-gray-700' : 'bg-gray-600'} rounded-l-md`}></div>
-                          
+
                           {/* Home Indicator */}
                           <div className="absolute bottom-2 md:bottom-3 left-1/2 transform -translate-x-1/2 w-32 md:w-36 h-1 bg-white rounded-full opacity-60"></div>
                         </div>
                       </div>
-                      
+
                       {/* Screenshot label */}
                       <div className="mt-6 text-center">
                         <div className="flex flex-col justify-center">
@@ -536,14 +529,14 @@ export default function Home() {
                   </motion.div>
                 ))}
               </div>
-              
+
 
             </div>
           </motion.div>
-          
+
           {/* Features Section */}
           <motion.div id="features" className="pt-10 pb-20">
-            <motion.h2 
+            <motion.h2
               className="text-3xl font-bold text-center mb-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -703,7 +696,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 text-amber-500">{currentLang.timeCost}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.timeCostDesc}</p>
               </motion.div>
-                            <motion.div
+              <motion.div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-rose-500/10' : 'hover:shadow-rose-500/20'} border border-transparent hover:border-rose-500/30`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -736,10 +729,10 @@ export default function Home() {
 
             </div>
           </motion.div>
-          
+
           {/* Why Choose Budpoint Section */}
           <motion.div className="py-16">
-            <motion.h2 
+            <motion.h2
               className="text-3xl font-bold text-center mb-4"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -748,7 +741,7 @@ export default function Home() {
             >
               {currentLang.whyChoose}
             </motion.h2>
-            <motion.p 
+            <motion.p
               className={`text-lg text-center mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -758,7 +751,7 @@ export default function Home() {
               {currentLang.whyChooseDesc}
             </motion.p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <motion.div 
+              <motion.div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -773,7 +766,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.realTime}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.realTimeDesc}</p>
               </motion.div>
-              <motion.div 
+              <motion.div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -788,7 +781,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.smartNotifications}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.smartNotificationsDesc}</p>
               </motion.div>
-              <motion.div 
+              <motion.div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -805,10 +798,10 @@ export default function Home() {
               </motion.div>
             </div>
           </motion.div>
-          
+
           {/* Beta Testers Testimonials Section */}
           <motion.div className="py-20">
-            <motion.h2 
+            <motion.h2
               className="text-3xl font-bold text-center mb-4"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -817,7 +810,7 @@ export default function Home() {
             >
               {currentLang.betaTestersTitle}
             </motion.h2>
-            <motion.p 
+            <motion.p
               className={`text-lg text-center mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -827,7 +820,7 @@ export default function Home() {
               {currentLang.betaTestersSubtitle}
             </motion.p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <motion.div 
+              <motion.div
                 className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -858,8 +851,8 @@ export default function Home() {
                   </div>
                 </div>
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -890,8 +883,8 @@ export default function Home() {
                   </div>
                 </div>
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -928,7 +921,7 @@ export default function Home() {
           {/* Pricing Section */}
           <div id="pricing" className="py-20">
             <div className="text-center">
-              <motion.h2 
+              <motion.h2
                 className="text-3xl font-bold mb-8"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -939,12 +932,11 @@ export default function Home() {
               </motion.h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {/* Free Plan */}
-                <motion.div 
-                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${
-                    selectedPlan === 'free' 
-                      ? `${isDark ? 'border-gray-400 bg-gray-800 shadow-xl scale-105' : 'border-gray-500 bg-white shadow-xl scale-105'}` 
-                      : `${isDark ? 'border-transparent bg-gray-800 hover:border-gray-600' : 'border-transparent bg-white hover:border-gray-300'}`
-                  }`}
+                <motion.div
+                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${selectedPlan === 'free'
+                    ? `${isDark ? 'border-gray-400 bg-gray-800 shadow-xl scale-105' : 'border-gray-500 bg-white shadow-xl scale-105'}`
+                    : `${isDark ? 'border-transparent bg-gray-800 hover:border-gray-600' : 'border-transparent bg-white hover:border-gray-300'}`
+                    }`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
@@ -967,12 +959,11 @@ export default function Home() {
                 </motion.div>
 
                 {/* Pro Monthly Plan */}
-                <motion.div 
-                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${
-                    selectedPlan === 'pro' 
-                      ? `border-blue-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}` 
-                      : `border-transparent ${isDark ? 'bg-gray-800 hover:border-blue-400' : 'bg-white hover:border-blue-300'}`
-                  }`}
+                <motion.div
+                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${selectedPlan === 'pro'
+                    ? `border-blue-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
+                    : `border-transparent ${isDark ? 'bg-gray-800 hover:border-blue-400' : 'bg-white hover:border-blue-300'}`
+                    }`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -995,12 +986,11 @@ export default function Home() {
                 </motion.div>
 
                 {/* Pro Annual Plan */}
-                <motion.div 
-                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${
-                    selectedPlan === 'annual' 
-                      ? `border-orange-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}` 
-                      : `border-transparent ${isDark ? 'bg-gray-800 hover:border-orange-400' : 'bg-white hover:border-orange-300'}`
-                  }`}
+                <motion.div
+                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${selectedPlan === 'annual'
+                    ? `border-orange-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
+                    : `border-transparent ${isDark ? 'bg-gray-800 hover:border-orange-400' : 'bg-white hover:border-orange-300'}`
+                    }`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
@@ -1029,11 +1019,10 @@ export default function Home() {
 
                 {/* Lifetime Plan */}
                 <motion.div
-                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${
-                    selectedPlan === 'lifetime'
-                      ? `border-purple-500 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
-                      : `border-transparent ${isDark ? 'bg-gray-800 hover:border-purple-400' : 'bg-white hover:border-purple-300'}`
-                  }`}
+                  className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${selectedPlan === 'lifetime'
+                    ? `border-purple-500 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
+                    : `border-transparent ${isDark ? 'bg-gray-800 hover:border-purple-400' : 'bg-white hover:border-purple-300'}`
+                    }`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
@@ -1088,115 +1077,113 @@ export default function Home() {
           {/* Waitlist Section */}
           <div id="waitlist" className="py-20 text-center">
             <div>
-            <motion.h2 
-              className="text-3xl font-bold mb-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              {currentLang.waitlistTitle}
-            </motion.h2>
-            <motion.p 
-              className={`text-lg mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              {currentLang.waitlistSubtitle}
-            </motion.p>
-            
-            {submitStatus === 'success' ? (
-              <motion.div 
-                className="max-w-md mx-auto"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className={`p-6 rounded-lg ${isDark ? 'bg-green-900/20 border border-green-800' : 'bg-green-50 border border-green-200'}`}>
-                  <div className="text-4xl mb-4">✅</div>
-                  <p className={`text-lg font-medium ${isDark ? 'text-green-400' : 'text-green-800'}`}>
-                    {currentLang.successMessage}
-                  </p>
-                  <button 
-                    onClick={() => setSubmitStatus('idle')}
-                    className={`mt-4 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isDark ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-                  >
-                    {currentLang.tryAgain}
-                  </button>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.form 
-                onSubmit={handleWaitlistSubmit} 
-                className="max-w-md mx-auto"
+              <motion.h2
+                className="text-3xl font-bold mb-4"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="flex gap-4 items-start">
-                  <div className="flex-1">
-                    <div className="h-20"> {/* Fixed height container */}
-                      <input 
-                        type="email" 
-                        value={email}
-                        onChange={handleEmailChange}
-                        onBlur={() => setEmailTouched(true)}
-                        placeholder={currentLang.emailPlaceholder}
-                        required
-                        disabled={isSubmitting}
-                        className={`w-full px-4 py-3 border rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:shadow-[0_0_20px_rgba(59,130,246,0.3)] ${
-                          submitStatus === 'error'
+                {currentLang.waitlistTitle}
+              </motion.h2>
+              <motion.p
+                className={`text-lg mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                {currentLang.waitlistSubtitle}
+              </motion.p>
+
+              {submitStatus === 'success' ? (
+                <motion.div
+                  className="max-w-md mx-auto"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className={`p-6 rounded-lg ${isDark ? 'bg-green-900/20 border border-green-800' : 'bg-green-50 border border-green-200'}`}>
+                    <div className="text-4xl mb-4">✅</div>
+                    <p className={`text-lg font-medium ${isDark ? 'text-green-400' : 'text-green-800'}`}>
+                      {currentLang.successMessage}
+                    </p>
+                    <button
+                      onClick={() => setSubmitStatus('idle')}
+                      className={`mt-4 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isDark ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+                    >
+                      {currentLang.tryAgain}
+                    </button>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.form
+                  onSubmit={handleWaitlistSubmit}
+                  className="max-w-md mx-auto"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="flex gap-4 items-start">
+                    <div className="flex-1">
+                      <div className="h-20"> {/* Fixed height container */}
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={handleEmailChange}
+                          onBlur={() => setEmailTouched(true)}
+                          placeholder={currentLang.emailPlaceholder}
+                          required
+                          disabled={isSubmitting}
+                          className={`w-full px-4 py-3 border rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:shadow-[0_0_20px_rgba(59,130,246,0.3)] ${submitStatus === 'error'
                             ? isDark ? 'bg-red-900/20 border-red-800 text-white placeholder-red-400' : 'bg-red-50 border-red-300 text-gray-900 placeholder-red-400'
                             : showValidation
                               ? isEmailValid
                                 ? isDark ? 'bg-green-900/20 border-green-700 text-white placeholder-gray-400' : 'bg-green-50 border-green-300 text-gray-900'
                                 : isDark ? 'bg-red-900/20 border-red-700 text-white placeholder-gray-400' : 'bg-red-50 border-red-300 text-gray-900'
                               : isDark ? 'bg-gray-800/80 border-gray-600 text-white placeholder-gray-400' : 'bg-white/80 border-gray-300 text-gray-900'
-                        } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                      />
-                      {showValidation && (
-                        <div className="mt-2 flex items-center text-sm">
-                          {isEmailValid ? (
-                            <>
-                              <span className="text-green-500 mr-2">✓</span>
-                              <span className={isDark ? 'text-green-400' : 'text-green-600'}>
-                                {currentLang.emailValid}
-                              </span>
-                            </>
-                          ) : (
-                            <>
-                              <span className="text-red-500 mr-2">✗</span>
-                              <span className={isDark ? 'text-red-400' : 'text-red-600'}>
-                                {currentLang.emailInvalid}
-                              </span>
-                            </>
-                          )}
-                        </div>
-                      )}
+                            } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        />
+                        {showValidation && (
+                          <div className="mt-2 flex items-center text-sm">
+                            {isEmailValid ? (
+                              <>
+                                <span className="text-green-500 mr-2">✓</span>
+                                <span className={isDark ? 'text-green-400' : 'text-green-600'}>
+                                  {currentLang.emailValid}
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                <span className="text-red-500 mr-2">✗</span>
+                                <span className={isDark ? 'text-red-400' : 'text-red-600'}>
+                                  {currentLang.emailInvalid}
+                                </span>
+                              </>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting || !email.trim() || (showValidation && !isEmailValid)}
-                    className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 self-start ${
-                      isSubmitting || !email.trim() || (showValidation && !isEmailValid)
+                    <button
+                      type="submit"
+                      disabled={isSubmitting || !email.trim() || (showValidation && !isEmailValid)}
+                      className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 self-start ${isSubmitting || !email.trim() || (showValidation && !isEmailValid)
                         ? isDark ? 'bg-gray-700 text-gray-400 cursor-not-allowed' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                         : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] hover:scale-105'
-                    }`}
-                  >
-                    {isSubmitting ? currentLang.joining : currentLang.join}
-                  </button>
-                </div>
-                {submitStatus === 'error' && (
-                  <p className={`mt-3 text-sm ${isDark ? 'text-red-400' : 'text-red-600'}`}>
-                    {currentLang.errorMessage}
-                  </p>
-                )}
-              </motion.form>
-            )}
+                        }`}
+                    >
+                      {isSubmitting ? currentLang.joining : currentLang.join}
+                    </button>
+                  </div>
+                  {submitStatus === 'error' && (
+                    <p className={`mt-3 text-sm ${isDark ? 'text-red-400' : 'text-red-600'}`}>
+                      {currentLang.errorMessage}
+                    </p>
+                  )}
+                </motion.form>
+              )}
             </div>
           </div>
 
