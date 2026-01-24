@@ -24,11 +24,46 @@ export default function Home() {
   // Pricing plan selection state
   const [selectedPlan, setSelectedPlan] = useState<'free' | 'pro' | 'annual' | 'lifetime'>('pro')
 
+  // Section navigation state
+  const [activeSection, setActiveSection] = useState('hero')
+
 
   useEffect(() => {
     // Detect browser language
     const browserLang = navigator.language.startsWith('es') ? 'es' : 'en'
     setLanguage(browserLang)
+  }, [])
+
+  // Section navigation data
+  const sections = [
+    { id: 'hero', label: { en: 'Home', es: 'Inicio' } },
+    { id: 'screenshots', label: { en: 'Preview', es: 'Vista Previa' } },
+    { id: 'features', label: { en: 'Features', es: 'Características' } },
+    { id: 'why-choose', label: { en: 'Why Us', es: 'Por Qué' } },
+    { id: 'testimonials', label: { en: 'Reviews', es: 'Opiniones' } },
+    { id: 'pricing', label: { en: 'Pricing', es: 'Precios' } },
+    { id: 'faq', label: { en: 'FAQ', es: 'FAQ' } },
+    { id: 'waitlist', label: { en: 'Join', es: 'Únete' } },
+  ]
+
+  // Scroll tracking for active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sectionIds = sections.map(s => s.id)
+      const scrollPosition = window.scrollY + window.innerHeight / 3
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sectionIds[i])
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sectionIds[i])
+          break
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Initial check
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   // Debounced email validation
@@ -390,9 +425,60 @@ export default function Home() {
       </nav>
 
       <div className="pt-16">
+        {/* Floating Section Navigation Dots - Desktop (right side) */}
+        <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:flex flex-col gap-3">
+          {sections.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => {
+                const el = document.getElementById(section.id)
+                if (el) el.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="group relative flex items-center justify-end"
+              aria-label={section.label[language as keyof typeof section.label]}
+            >
+              {/* Label tooltip */}
+              <span className={`absolute right-6 px-3 py-1 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900 shadow-lg'}`}>
+                {section.label[language as keyof typeof section.label]}
+              </span>
+              {/* Dot */}
+              <span className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                activeSection === section.id
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-125 shadow-lg shadow-blue-500/50'
+                  : isDark
+                    ? 'bg-gray-600 hover:bg-gray-400'
+                    : 'bg-gray-300 hover:bg-gray-500'
+              }`} />
+            </button>
+          ))}
+        </div>
+
+        {/* Floating Section Navigation - Mobile (bottom bar) */}
+        <div className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 lg:hidden flex items-center gap-2 px-4 py-3 rounded-full backdrop-blur-xl ${isDark ? 'bg-gray-900/80 border border-gray-700' : 'bg-white/80 border border-gray-200 shadow-lg'}`}>
+          {sections.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => {
+                const el = document.getElementById(section.id)
+                if (el) el.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="relative p-1"
+              aria-label={section.label[language as keyof typeof section.label]}
+            >
+              <span className={`block w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                activeSection === section.id
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-125'
+                  : isDark
+                    ? 'bg-gray-600'
+                    : 'bg-gray-300'
+              }`} />
+            </button>
+          ))}
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
-          <motion.div className="text-center py-20">
+          <motion.div id="hero" className="text-center py-20">
             <motion.div
               className="mb-8"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -731,7 +817,7 @@ export default function Home() {
           </motion.div>
 
           {/* Why Choose Budpoint Section */}
-          <motion.div className="py-16">
+          <motion.div id="why-choose" className="py-16">
             <motion.h2
               className="text-3xl font-bold text-center mb-4"
               initial={{ opacity: 0 }}
@@ -800,7 +886,7 @@ export default function Home() {
           </motion.div>
 
           {/* Beta Testers Testimonials Section */}
-          <motion.div className="py-20">
+          <motion.div id="testimonials" className="py-20">
             <motion.h2
               className="text-3xl font-bold text-center mb-4"
               initial={{ opacity: 0 }}
