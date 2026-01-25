@@ -536,15 +536,8 @@ export default function Home() {
 
             {/* App Preview Section - RESPONSIVE */}
             {isSafari ? (
-              <div
-                className="absolute left-0 right-0 h-[2500px] pointer-events-none overflow-hidden"
-                style={{
-                  top: '0',
-                  background: isDark
-                    ? 'radial-gradient(circle at 25% 500px, rgba(59, 130, 246, 0.15) 0, transparent 500px), radial-gradient(circle at 75% 600px, rgba(168, 85, 247, 0.15) 0, transparent 500px)'
-                    : 'radial-gradient(circle at 25% 500px, rgba(59, 130, 246, 0.25) 0, transparent 500px), radial-gradient(circle at 75% 600px, rgba(168, 85, 247, 0.20) 0, transparent 500px)'
-                }}
-              />
+              // Safari optimization: No background blobs for maximum performance
+              null
             ) : (
               <div className="absolute left-0 right-0 h-[2500px] pointer-events-none overflow-hidden" style={{ top: '0' }}>
                 {/* Main blobs - only in screenshots area */}

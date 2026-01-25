@@ -79,8 +79,13 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased preload`}
       >
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.addEventListener("DOMContentLoaded", function() { document.body.classList.remove("preload"); });`
+          }}
+        />
         <Providers>
           {children}
         </Providers>

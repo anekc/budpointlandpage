@@ -25,14 +25,8 @@ export default function BlogLayout({
       {/* Subtle gradient background */}
       {/* Subtle gradient background */}
       {isSafari ? (
-        <div
-          className="absolute top-0 left-0 right-0 h-[600px] pointer-events-none overflow-hidden"
-          style={{
-            background: isDark
-              ? 'radial-gradient(circle at 25% 0%, rgba(59, 130, 246, 0.15) 0, transparent 400px), radial-gradient(circle at 75% 100px, rgba(168, 85, 247, 0.15) 0, transparent 400px)'
-              : 'radial-gradient(circle at 25% 0%, rgba(59, 130, 246, 0.25) 0, transparent 400px), radial-gradient(circle at 75% 100px, rgba(168, 85, 247, 0.20) 0, transparent 400px)'
-          }}
-        />
+        // Safari optimization: No background blobs
+        null
       ) : (
         <div className={`absolute top-0 left-0 right-0 h-[600px] pointer-events-none overflow-hidden ${isDark ? 'opacity-20' : 'opacity-15'}`}>
           <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-blue-400 rounded-full filter blur-[150px]"></div>
