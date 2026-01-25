@@ -88,7 +88,7 @@ export default function RootLayout({
               (function() {
                 document.body.classList.remove("preload");
                 var ua = navigator.userAgent.toLowerCase();
-                if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1 && ua.indexOf('crios') === -1) {
+                if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1 && ua.indexOf('crios') === -1 && ua.indexOf('fxios') === -1 && ua.indexOf('edgios') === -1) {
                   document.documentElement.classList.add('safari-browser');
                 }
               })();
