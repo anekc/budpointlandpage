@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import Footer from './components/Footer'
 import { useTheme } from './components/ThemeContext'
 
+
 export default function Home() {
   const { isDark, toggleTheme } = useTheme()
   const [language, setLanguage] = useState('en')
@@ -381,7 +382,8 @@ export default function Home() {
   ]
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+    <>
+      <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
       {/* Fixed Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-black/70' : 'bg-white/70'} backdrop-blur-xl border-b ${isDark ? 'border-gray-800/30' : 'border-gray-200/50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -621,23 +623,13 @@ export default function Home() {
           </motion.div>
 
           {/* Features Section */}
-          <motion.div id="features" className="pt-10 pb-20">
-            <motion.h2
-              className="text-3xl font-bold text-center mb-12"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+          <div id="features" className="pt-10 pb-20">
+            <h2 className="text-3xl font-bold text-center mb-12">
               {currentLang.features}
-            </motion.h2>
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <motion.div
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-green-500/10' : 'hover:shadow-green-500/20'} border border-transparent hover:border-green-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -646,13 +638,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-green-500">{currentLang.multiAccount}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.multiAccountDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-blue-500/10' : 'hover:shadow-blue-500/20'} border border-transparent hover:border-blue-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -661,13 +649,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-blue-500">{currentLang.smartBudgeting}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.smartBudgetingDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-purple-500/10' : 'hover:shadow-purple-500/20'} border border-transparent hover:border-purple-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -676,13 +660,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-purple-500">{currentLang.expenseTracking}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.expenseTrackingDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-orange-500/10' : 'hover:shadow-orange-500/20'} border border-transparent hover:border-orange-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -691,13 +671,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-500">{currentLang.analytics}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.analyticsDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-orange-500/10' : 'hover:shadow-orange-500/20'} border border-transparent hover:border-orange-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -706,13 +682,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-500">{currentLang.personalTracking}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.personalTrackingDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-blue-500/10' : 'hover:shadow-blue-500/20'} border border-transparent hover:border-blue-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -721,13 +693,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-blue-500">{currentLang.security}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.securityDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-green-500/10' : 'hover:shadow-green-500/20'} border border-transparent hover:border-green-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-teal-500 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -736,13 +704,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-green-500">{currentLang.icloudSync}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.icloudSyncDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-purple-500/10' : 'hover:shadow-purple-500/20'} border border-transparent hover:border-purple-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -751,13 +715,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-purple-500">{currentLang.goals}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.goalsDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-indigo-500/10' : 'hover:shadow-indigo-500/20'} border border-transparent hover:border-indigo-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -766,13 +726,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-indigo-500">{currentLang.scanning}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.scanningDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-amber-500/10' : 'hover:shadow-amber-500/20'} border border-transparent hover:border-amber-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.9 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-yellow-500 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -781,13 +737,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-amber-500">{currentLang.timeCost}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.timeCostDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-rose-500/10' : 'hover:shadow-rose-500/20'} border border-transparent hover:border-rose-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 1.1 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -796,13 +748,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-rose-500">{currentLang.periodComparison}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.periodComparisonDesc}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-emerald-500/10' : 'hover:shadow-emerald-500/20'} border border-transparent hover:border-emerald-500/30`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-                viewport={{ once: true }}
               >
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 shadow-lg">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -811,39 +759,21 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-emerald-500">{currentLang.savingsGoals}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.savingsGoalsDesc}</p>
-              </motion.div>
+              </div>
 
             </div>
-          </motion.div>
+          </div>
 
           {/* Why Choose Budpoint Section */}
-          <motion.div id="why-choose" className="py-16">
-            <motion.h2
-              className="text-3xl font-bold text-center mb-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+          <div id="why-choose" className="py-16">
+            <h2 className="text-3xl font-bold text-center mb-4">
               {currentLang.whyChoose}
-            </motion.h2>
-            <motion.p
-              className={`text-lg text-center mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
+            </h2>
+            <p className={`text-lg text-center mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
               {currentLang.whyChooseDesc}
-            </motion.p>
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <motion.div
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
+              <div className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
                 <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                   <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -851,14 +781,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.realTime}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.realTimeDesc}</p>
-              </motion.div>
-              <motion.div
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
+              </div>
+              <div className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
                 <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                   <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
@@ -866,14 +790,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.smartNotifications}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.smartNotificationsDesc}</p>
-              </motion.div>
-              <motion.div
-                className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                viewport={{ once: true }}
-              >
+              </div>
+              <div className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
                 <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                   <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -881,38 +799,20 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-green-600">{currentLang.multiCurrency}</h3>
                 <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.multiCurrencyDesc}</p>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Beta Testers Testimonials Section */}
-          <motion.div id="testimonials" className="py-20">
-            <motion.h2
-              className="text-3xl font-bold text-center mb-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+          <div id="testimonials" className="py-20">
+            <h2 className="text-3xl font-bold text-center mb-4">
               {currentLang.betaTestersTitle}
-            </motion.h2>
-            <motion.p
-              className={`text-lg text-center mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
+            </h2>
+            <p className={`text-lg text-center mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
               {currentLang.betaTestersSubtitle}
-            </motion.p>
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <motion.div
-                className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
-              >
+              <div className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
                 <div className="flex items-center mb-4">
                   <div className="flex text-yellow-400">
                     {[...Array(5)].map((_, i) => (
@@ -936,15 +836,9 @@ export default function Home() {
                     <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{currentLang.testimonial1Role}</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
+              <div className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
                 <div className="flex items-center mb-4">
                   <div className="flex text-yellow-400">
                     {[...Array(5)].map((_, i) => (
@@ -968,15 +862,9 @@ export default function Home() {
                     <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{currentLang.testimonial2Role}</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
+              <div className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
                 <div className="flex items-center mb-4">
                   <div className="flex text-yellow-400">
                     {[...Array(5)].map((_, i) => (
@@ -1000,33 +888,23 @@ export default function Home() {
                     <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{currentLang.testimonial3Role}</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Pricing Section */}
           <div id="pricing" className="py-20">
             <div className="text-center">
-              <motion.h2
-                className="text-3xl font-bold mb-8"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
+              <h2 className="text-3xl font-bold mb-8">
                 {currentLang.pricing}
-              </motion.h2>
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {/* Free Plan */}
-                <motion.div
+                <div
                   className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${selectedPlan === 'free'
                     ? `${isDark ? 'border-gray-400 bg-gray-800 shadow-xl scale-105' : 'border-gray-500 bg-white shadow-xl scale-105'}`
                     : `${isDark ? 'border-transparent bg-gray-800 hover:border-gray-600' : 'border-transparent bg-white hover:border-gray-300'}`
                     }`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  viewport={{ once: true }}
                   onClick={() => setSelectedPlan('free')}
                 >
                   <h3 className="text-xl font-bold mb-4">{currentLang.free}</h3>
@@ -1042,18 +920,14 @@ export default function Home() {
                   <button className={`w-full py-3 rounded-lg font-semibold mt-auto ${isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-800'}`}>
                     {currentLang.comingSoon}
                   </button>
-                </motion.div>
+                </div>
 
                 {/* Pro Monthly Plan */}
-                <motion.div
+                <div
                   className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${selectedPlan === 'pro'
                     ? `border-blue-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
                     : `border-transparent ${isDark ? 'bg-gray-800 hover:border-blue-400' : 'bg-white hover:border-blue-300'}`
                     }`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true }}
                   onClick={() => setSelectedPlan('pro')}
                 >
                   <h3 className="text-xl font-bold mb-4 text-blue-600">{currentLang.pro}</h3>
@@ -1069,18 +943,14 @@ export default function Home() {
                   <button className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 rounded-lg font-semibold hover:from-blue-500 hover:to-blue-600 transition-all duration-300 mt-auto hover:shadow-lg hover:shadow-blue-500/30">
                     {currentLang.comingSoon}
                   </button>
-                </motion.div>
+                </div>
 
                 {/* Pro Annual Plan */}
-                <motion.div
+                <div
                   className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${selectedPlan === 'annual'
                     ? `border-orange-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
                     : `border-transparent ${isDark ? 'bg-gray-800 hover:border-orange-400' : 'bg-white hover:border-orange-300'}`
                     }`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: true }}
                   onClick={() => setSelectedPlan('annual')}
                 >
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -1101,18 +971,14 @@ export default function Home() {
                   <button className="w-full bg-gradient-to-r from-orange-600 to-amber-500 text-white py-3 rounded-lg font-semibold hover:from-orange-500 hover:to-amber-600 transition-all duration-300 mt-auto hover:shadow-lg hover:shadow-orange-500/30">
                     {currentLang.comingSoon}
                   </button>
-                </motion.div>
+                </div>
 
                 {/* Lifetime Plan */}
-                <motion.div
+                <div
                   className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${selectedPlan === 'lifetime'
                     ? `border-purple-500 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
                     : `border-transparent ${isDark ? 'bg-gray-800 hover:border-purple-400' : 'bg-white hover:border-purple-300'}`
                     }`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
                   onClick={() => setSelectedPlan('lifetime')}
                 >
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -1133,7 +999,7 @@ export default function Home() {
                   <button className="w-full bg-gradient-to-r from-purple-600 to-violet-500 text-white py-3 rounded-lg font-semibold hover:from-purple-500 hover:to-violet-600 transition-all duration-300 mt-auto hover:shadow-lg hover:shadow-purple-500/30">
                     {currentLang.comingSoon}
                   </button>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -1163,32 +1029,15 @@ export default function Home() {
           {/* Waitlist Section */}
           <div id="waitlist" className="py-20 text-center">
             <div>
-              <motion.h2
-                className="text-3xl font-bold mb-4"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
+              <h2 className="text-3xl font-bold mb-4">
                 {currentLang.waitlistTitle}
-              </motion.h2>
-              <motion.p
-                className={`text-lg mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
+              </h2>
+              <p className={`text-lg mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                 {currentLang.waitlistSubtitle}
-              </motion.p>
+              </p>
 
               {submitStatus === 'success' ? (
-                <motion.div
-                  className="max-w-md mx-auto"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <div className="max-w-md mx-auto">
                   <div className={`p-6 rounded-lg ${isDark ? 'bg-green-900/20 border border-green-800' : 'bg-green-50 border border-green-200'}`}>
                     <div className="text-4xl mb-4">✅</div>
                     <p className={`text-lg font-medium ${isDark ? 'text-green-400' : 'text-green-800'}`}>
@@ -1201,15 +1050,11 @@ export default function Home() {
                       {currentLang.tryAgain}
                     </button>
                   </div>
-                </motion.div>
+                </div>
               ) : (
-                <motion.form
+                <form
                   onSubmit={handleWaitlistSubmit}
                   className="max-w-md mx-auto"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
                 >
                   <div className="flex gap-4 items-start">
                     <div className="flex-1">
@@ -1268,7 +1113,7 @@ export default function Home() {
                       {currentLang.errorMessage}
                     </p>
                   )}
-                </motion.form>
+                </form>
               )}
             </div>
           </div>
@@ -1277,7 +1122,8 @@ export default function Home() {
       </div>
 
       {/* Footer - Outside main container for full width */}
-      <Footer isDark={isDark} />
-    </div>
+        <Footer isDark={isDark} />
+      </div>
+    </>
   )
 }
