@@ -13,7 +13,7 @@
 }
 
 /* Extreme Safari Optimization: Disable heavy animations */
-body.safari-browser .text-gradient {
+html.safari-browser .text-gradient {
   animation: none !important;
   background: #3b82f6 !important;
   -webkit-text-fill-color: initial !important;
@@ -21,37 +21,37 @@ body.safari-browser .text-gradient {
   background-clip: border-box !important;
 }
 
-body.safari-browser .pulse-glow {
+html.safari-browser .pulse-glow {
   animation: none !important;
   box-shadow: none !important;
 }
 
-body.safari-browser .shimmer::after {
+html.safari-browser .shimmer::after {
   animation: none !important;
   display: none !important;
 }
 
-body.safari-browser .card-3d:hover {
+html.safari-browser .card-3d:hover {
   transform: none !important;
 }
 
-body.safari-browser .rotate-3d {
+html.safari-browser .rotate-3d {
   transform: none !important;
 }
 
 /* Hide elements specifically on Safari */
-body.safari-browser .safari-hide {
+html.safari-browser .safari-hide {
   display: none !important;
 }
 
 /* Force solid navbar on Safari */
-html.dark body.safari-browser nav {
+html.safari-browser.dark nav {
   background-color: rgba(0, 0, 0, 1) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-html:not(.dark) body.safari-browser nav {
+html.safari-browser:not(.dark) nav {
   background-color: rgba(255, 255, 255, 1) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
