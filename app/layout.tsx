@@ -84,7 +84,15 @@ export default function RootLayout({
       >
         <script
           dangerouslySetInnerHTML={{
-            __html: `document.addEventListener("DOMContentLoaded", function() { document.body.classList.remove("preload"); });`
+            __html: `
+              (function() {
+                document.body.classList.remove("preload");
+                var ua = navigator.userAgent.toLowerCase();
+                if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
+                  document.documentElement.classList.add('safari-browser');
+                }
+              })();
+            `
           }}
         />
         <Providers>
