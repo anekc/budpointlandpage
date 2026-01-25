@@ -12,6 +12,33 @@
   transition: none !important;
 }
 
+/* Extreme Safari Optimization: Disable heavy animations */
+body.safari-browser .text-gradient {
+  animation: none !important;
+  background: #3b82f6 !important;
+  -webkit-text-fill-color: initial !important;
+  color: #3b82f6 !important;
+  background-clip: border-box !important;
+}
+
+body.safari-browser .pulse-glow {
+  animation: none !important;
+  box-shadow: none !important;
+}
+
+body.safari-browser .shimmer::after {
+  animation: none !important;
+  display: none !important;
+}
+
+body.safari-browser .card-3d:hover {
+  transform: none !important;
+}
+
+body.safari-browser .rotate-3d {
+  transform: none !important;
+}
+
 /* Scroll offset for fixed navbar */
 [id] {
   scroll-margin-top: 80px;
@@ -20,12 +47,15 @@
 
 /* Hide scrollbar for screenshots carousel */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
+  display: none;
+  /* Chrome, Safari and Opera */
 }
 
 /* ===== Premium Design Utilities ===== */
@@ -43,8 +73,15 @@
 }
 
 @keyframes gradient-shift {
-  0%, 100% { background-position: 0% center; }
-  50% { background-position: 100% center; }
+
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
+  }
 }
 
 /* Shimmer effect for badges */
@@ -60,13 +97,18 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   animation: shimmer 2s infinite;
 }
 
 @keyframes shimmer {
-  0% { left: -100%; }
-  100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
 }
 
 /* Glow effects */
@@ -84,8 +126,15 @@
 
 /* Pulsing glow animation */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
-  50% { box-shadow: 0 0 35px rgba(139, 92, 246, 0.6); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(139, 92, 246, 0.6);
+  }
 }
 
 .pulse-glow {

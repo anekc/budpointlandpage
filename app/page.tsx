@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, MotionConfig } from 'framer-motion'
 import Footer from './components/Footer'
 import { useTheme } from './components/ThemeContext'
 import { useIsSafari } from './components/useIsSafari'
@@ -392,10 +392,10 @@ export default function Home() {
   ]
 
   return (
-    <>
+    <MotionConfig transition={isSafari ? { duration: 0 } : undefined}>
       <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
         {/* Fixed Navigation */}
-        <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-black/70' : 'bg-white/70'} backdrop-blur-xl border-b ${isDark ? 'border-gray-800/30' : 'border-gray-200/50'}`}>
+        <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? (isSafari ? 'bg-black' : 'bg-black/70') : (isSafari ? 'bg-white' : 'bg-white/70')} ${isSafari ? '' : 'backdrop-blur-xl'} border-b ${isDark ? 'border-gray-800/30' : 'border-gray-200/50'}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Link href="/" className="flex items-center space-x-3 group">
@@ -1136,6 +1136,6 @@ export default function Home() {
         {/* Footer - Outside main container for full width */}
         <Footer isDark={isDark} />
       </div>
-    </>
+    </MotionConfig>
   )
 }
