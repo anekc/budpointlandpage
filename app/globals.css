@@ -15,8 +15,8 @@
 /* Extreme Safari Optimization: Disable heavy animations */
 html.safari-browser .text-gradient {
   animation: none !important;
-  background: #3b82f6 !important;
-  -webkit-text-fill-color: initial !important;
+  background: none !important;
+  -webkit-text-fill-color: #3b82f6 !important;
   color: #3b82f6 !important;
   background-clip: border-box !important;
 }
