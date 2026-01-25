@@ -26,6 +26,14 @@ export default function Home() {
   const isSafari = useIsSafari()
   const [language, setLanguage] = useState('en')
 
+  useEffect(() => {
+    // Detect browser language
+    if (typeof navigator !== 'undefined') {
+      const browserLang = navigator.language.startsWith('es') ? 'es' : 'en'
+      setLanguage(browserLang)
+    }
+  }, [])
+
   // Waitlist form state
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -67,7 +75,7 @@ export default function Home() {
     })
 
     return () => observer.disconnect()
-  }, [sections])
+  }, [])
 
   // Debounced email validation
   useEffect(() => {
