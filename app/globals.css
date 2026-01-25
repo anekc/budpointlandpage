@@ -16,8 +16,8 @@
 html.safari-browser .text-gradient {
   animation: none !important;
   background: none !important;
-  -webkit-text-fill-color: #3b82f6 !important;
-  color: #3b82f6 !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: currentColor !important;
   background-clip: border-box !important;
 }
 
