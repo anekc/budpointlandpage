@@ -1129,6 +1129,6 @@ export default function Home() {
         {/* Footer - Outside main container for full width */}
         <Footer isDark={isDark} />
       </div>
-    </MotionConfig >
+    </>
   )
 }
