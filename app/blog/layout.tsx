@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useTheme } from '../components/ThemeContext'
+import { useIsSafari } from '../components/useIsSafari'
 
 export default function BlogLayout({
   children,
@@ -11,6 +12,7 @@ export default function BlogLayout({
   children: React.ReactNode
 }) {
   const { isDark, toggleTheme } = useTheme()
+  const isSafari = useIsSafari()
   const [language, setLanguage] = useState('en')
 
   useEffect(() => {
@@ -21,10 +23,22 @@ export default function BlogLayout({
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'dark bg-black text-white' : 'bg-white text-gray-900'}`}>
       {/* Subtle gradient background */}
-      <div className={`absolute top-0 left-0 right-0 h-[600px] pointer-events-none overflow-hidden ${isDark ? 'opacity-20' : 'opacity-15'}`}>
-        <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-blue-400 rounded-full filter blur-[150px]"></div>
-        <div className="absolute top-20 right-1/4 w-[300px] h-[300px] bg-purple-400 rounded-full filter blur-[150px]"></div>
-      </div>
+      {/* Subtle gradient background */}
+      {isSafari ? (
+        <div
+          className="absolute top-0 left-0 right-0 h-[600px] pointer-events-none overflow-hidden"
+          style={{
+            background: isDark
+              ? 'radial-gradient(circle at 25% 0%, rgba(59, 130, 246, 0.15) 0, transparent 400px), radial-gradient(circle at 75% 100px, rgba(168, 85, 247, 0.15) 0, transparent 400px)'
+              : 'radial-gradient(circle at 25% 0%, rgba(59, 130, 246, 0.25) 0, transparent 400px), radial-gradient(circle at 75% 100px, rgba(168, 85, 247, 0.20) 0, transparent 400px)'
+          }}
+        />
+      ) : (
+        <div className={`absolute top-0 left-0 right-0 h-[600px] pointer-events-none overflow-hidden ${isDark ? 'opacity-20' : 'opacity-15'}`}>
+          <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-blue-400 rounded-full filter blur-[150px]"></div>
+          <div className="absolute top-20 right-1/4 w-[300px] h-[300px] bg-purple-400 rounded-full filter blur-[150px]"></div>
+        </div>
+      )}
 
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-black/70' : 'bg-white/70'} backdrop-blur-xl border-b ${isDark ? 'border-gray-800/30' : 'border-gray-200/50'}`}>
