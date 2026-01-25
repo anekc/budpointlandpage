@@ -3,10 +3,9 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, MotionConfig } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Footer from './components/Footer'
 import { useTheme } from './components/ThemeContext'
-import { useIsSafari } from './components/useIsSafari'
 
 
 // Section navigation data
@@ -23,7 +22,6 @@ const sections = [
 
 export default function Home() {
   const { isDark, toggleTheme } = useTheme()
-  const isSafari = useIsSafari()
   const [language, setLanguage] = useState('en')
 
   useEffect(() => {
@@ -392,10 +390,10 @@ export default function Home() {
   ]
 
   return (
-    <MotionConfig transition={isSafari ? { duration: 0 } : undefined}>
+    <>
       <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
         {/* Fixed Navigation */}
-        <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? (isSafari ? 'bg-black' : 'bg-black/70') : (isSafari ? 'bg-white' : 'bg-white/70')} ${isSafari ? '' : 'backdrop-blur-xl'} border-b ${isDark ? 'border-gray-800/30' : 'border-gray-200/50'}`}>
+        <nav className={`fixed top-0 left-0 right-0 z-50 ${isDark ? 'bg-black/70' : 'bg-white/70'} backdrop-blur-xl border-b ${isDark ? 'border-gray-800/30' : 'border-gray-200/50'}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Link href="/" className="flex items-center space-x-3 group">
@@ -535,16 +533,11 @@ export default function Home() {
             </motion.div>
 
             {/* App Preview Section - RESPONSIVE */}
-            {isSafari ? (
-              // Safari optimization: No background blobs for maximum performance
-              null
-            ) : (
-              <div className="absolute left-0 right-0 h-[2500px] pointer-events-none overflow-hidden" style={{ top: '0' }}>
-                {/* Main blobs - only in screenshots area */}
-                <div className={`absolute top-[500px] left-1/4 w-[600px] h-[600px] bg-blue-500 rounded-full filter blur-[200px] ${isDark ? 'opacity-20' : 'opacity-40'}`}></div>
-                <div className={`absolute top-[600px] right-1/4 w-[500px] h-[500px] bg-purple-500 rounded-full filter blur-[200px] ${isDark ? 'opacity-20' : 'opacity-35'}`}></div>
-              </div>
-            )}
+            <div className="absolute left-0 right-0 h-[2500px] pointer-events-none overflow-hidden safari-hide" style={{ top: '0' }}>
+              {/* Main blobs - only in screenshots area */}
+              <div className={`absolute top-[500px] left-1/4 w-[600px] h-[600px] bg-blue-500 rounded-full filter blur-[200px] ${isDark ? 'opacity-20' : 'opacity-40'}`}></div>
+              <div className={`absolute top-[600px] right-1/4 w-[500px] h-[500px] bg-purple-500 rounded-full filter blur-[200px] ${isDark ? 'opacity-20' : 'opacity-35'}`}></div>
+            </div>
             <motion.div id="screenshots" className="pt-20 pb-10">
               <div className="text-center mb-16">
                 <motion.h2
@@ -1136,6 +1129,6 @@ export default function Home() {
         {/* Footer - Outside main container for full width */}
         <Footer isDark={isDark} />
       </div>
-    </MotionConfig>
+    </MotionConfig >
   )
 }
