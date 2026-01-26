@@ -274,7 +274,7 @@ export default function Home() {
       faq1Question: "When will Budpoint be available?",
       faq1Answer: "Budpoint is coming soon to iOS. Join our waitlist to be notified when it launches!",
       faq2Question: "Is there a free version?",
-      faq2Answer: "Yes! Budpoint offers a generous free tier with 2 accounts, 5 tags, and 2 people for splits.",
+      faq2Answer: "Yes! Budpoint offers a free tier with 2 accounts, 5 tags, and 2 people for splits.",
       faq3Question: "Can I share expenses with friends?",
       faq3Answer: "Absolutely! Pro users can share expenses in real-time with friends and partners seamlessly."
     },
@@ -357,7 +357,7 @@ export default function Home() {
       faq1Question: "¿Cuándo estará disponible Budpoint?",
       faq1Answer: "Budpoint llegará pronto a iOS. ¡Únete a nuestra lista de espera para ser notificado cuando se lance!",
       faq2Question: "¿Hay una versión gratuita?",
-      faq2Answer: "¡Sí! Budpoint ofrece un generoso plan gratuito con 2 cuentas, 5 etiquetas y 2 personas para divisiones.",
+      faq2Answer: "¡Sí! Budpoint ofrece un plan gratuito con 2 cuentas, 5 etiquetas y 2 personas para divisiones.",
       faq3Question: "¿Puedo compartir gastos con amigos?",
       faq3Answer: "¡Por supuesto! Los usuarios Pro pueden compartir gastos en tiempo real con amigos y parejas sin problema."
     }
