@@ -214,8 +214,8 @@ export default function Home() {
       icloudSyncDesc: "Log income, expenses, and transfers with 150+ icons across 10 categories for effortless organization",
       goals: "iOS Home Screen Widgets",
       goalsDesc: "Small and medium widgets displaying budget summaries, quick actions, and direct links to app features",
-      scanning: "iCloud Sync (Pro)",
-      scanningDesc: "Bidirectional sync with conflict resolution, battery optimization, and complete backup across all devices",
+      scanning: "Secure iCloud Sync (Pro)",
+      scanningDesc: "Your data is fully encrypted in iCloud. We have zero access to your information, ensuring maximum security.",
       personalTracking: "Collaborative Features (Pro)",
       personalTrackingDesc: "Connect with friends, share entries instantly, and view individual spending with person-specific reports",
       timeCost: "Time Cost Calculator (Pro)",
@@ -260,13 +260,13 @@ export default function Home() {
       multiCurrencyDesc: "Share costs with friends or partners instantly so everyone stays synchronized and balanced",
       betaTestersTitle: "What Beta Testers Say",
       betaTestersSubtitle: "Real feedback from early users who've been testing Budpoint",
-      testimonial1: "Controlling my budget is now super easy! I love how everything is organized and I can see exactly where my money goes.",
+      testimonial1: "The interface is simple and I adapted quickly. Thanks to that, I've been able to keep tracking my expenses for much longer.",
       testimonial1Author: "Sarah M.",
       testimonial1Role: "Beta Tester",
-      testimonial2: "Before Budpoint, keeping track of expenses was a disaster because everything was mixed together. Now everything is perfectly organized!",
+      testimonial2: "Organizing shared expenses is so much easier now. We keep everything up to date effortlessly without having to do manual math.",
       testimonial2Author: "Mike R.",
       testimonial2Role: "Early User",
-      testimonial3: "The analytics always give me confidence about how much I can spend. I feel calm following a budget for the first time.",
+      testimonial3: "It helps me reach the end of the month without surprises. Just by seeing the bar colors, I know if I need to slow down my spending.",
       testimonial3Author: "Jessica L.",
       testimonial3Role: "Beta Tester",
       faqTitle: "Frequently Asked Questions",
@@ -297,8 +297,8 @@ export default function Home() {
       icloudSyncDesc: "Registra ingresos, gastos y transferencias con 150+ iconos en 10 categorías para organización sin esfuerzo",
       goals: "Widgets de iOS",
       goalsDesc: "Widgets pequeños y medianos con resúmenes de presupuesto, acciones rápidas y enlaces directos a la app",
-      scanning: "Sincronización iCloud (Pro)",
-      scanningDesc: "Sincronización bidireccional con resolución de conflictos, optimización de batería y respaldo completo",
+      scanning: "Sincronización iCloud Segura (Pro)",
+      scanningDesc: "Tu información está completamente cifrada en iCloud. No tenemos acceso a tus datos, garantizando máxima seguridad.",
       personalTracking: "Funciones Colaborativas (Pro)",
       personalTrackingDesc: "Conéctate con amigos, comparte entradas al instante y ve gastos individuales con reportes por persona",
       timeCost: "Calculadora de Costo en Tiempo (Pro)",
@@ -343,13 +343,13 @@ export default function Home() {
       multiCurrencyDesc: "Comparte costos con amigos o pareja al instante para que todos estén sincronizados y balanceados",
       betaTestersTitle: "Lo que Dicen los Beta Testers",
       betaTestersSubtitle: "Comentarios reales de usuarios tempranos que han estado probando Budpoint",
-      testimonial1: "¡Controlar mi presupuesto ahora es súper fácil! Me encanta cómo todo está organizado y puedo ver exactamente a dónde va mi dinero.",
+      testimonial1: "La interfaz es sencilla y no me costó nada adaptarme. Gracias a eso he podido mantener el registro de mis gastos por mucho más tiempo.",
       testimonial1Author: "Sarah M.",
       testimonial1Role: "Beta Tester",
-      testimonial2: "Antes de Budpoint, hacer cuentas era un desastre porque estaba todo junto. ¡Ahora todo está perfectamente organizado!",
+      testimonial2: "Organizarnos con los gastos compartidos ahora es mucho más fácil. Mantenemos todo al día sin tener que hacer cuentas manuales.",
       testimonial2Author: "Mike R.",
       testimonial2Role: "Usuario Temprano",
-      testimonial3: "Los análisis siempre me dan certeza de cuánto puedo gastar. Me siento tranquila siguiendo un presupuesto por primera vez.",
+      testimonial3: "Me ayuda a llegar a fin de mes sin sustos. Solo con ver los colores de las barras ya sé si tengo que frenar un poco el gasto.",
       testimonial3Author: "Jessica L.",
       testimonial3Role: "Beta Tester",
       faqTitle: "Preguntas Frecuentes",
@@ -416,7 +416,7 @@ export default function Home() {
                 {/* Theme Toggle Button */}
                 <button
                   onClick={toggleTheme}
-                  className={`p-2 rounded-lg transition-all duration-300 ${isDark ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+                  className={`p-2 rounded-lg transition-all duration-300 ${isDark ? 'hover:bg-gray-800 text-yellow-400' : 'hover:bg-gray-100 text-gray-700'}`}
                   aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                 >
                   {isDark ? (
