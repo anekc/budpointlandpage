@@ -7,6 +7,30 @@ import { useTheme } from '../components/ThemeContext'
 // Lista de posts con títulos en ambos idiomas
 const posts = [
   {
+    slug: 'danger-of-invisibility',
+    title: {
+      es: 'El Peligro de la Invisibilidad',
+      en: 'The Danger of Invisibility',
+    },
+    description: {
+      es: 'Por qué la automatización financiera está arruinando tus ahorros y cómo el registro manual puede cambiar tus hábitos.',
+      en: 'Why financial automation is ruining your savings and how manual tracking can change your habits.',
+    },
+    date: {
+      es: '31 de Enero, 2026',
+      en: 'January 31, 2026',
+    },
+    readTime: {
+      es: '5 min',
+      en: '5 min',
+    },
+    tags: {
+      es: ['Psicología', 'Ahorro', 'Hábitos'],
+      en: ['Psychology', 'Savings', 'Habits'],
+    },
+    color: 'purple',
+  },
+  {
     slug: 'importance-of-emergency-fund',
     title: {
       es: 'Por Qué Necesitas un Fondo de Emergencia',
