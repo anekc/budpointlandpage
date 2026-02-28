@@ -325,11 +325,6 @@ export default function Home() {
       description: { en: 'Multi-account overview', es: 'Vista general de cuentas' }
     },
     {
-      name: 'dashboard2',
-      title: { en: 'Analytics Dashboard', es: 'Panel de Análisis' },
-      description: { en: 'Expense distribution & recurring transactions', es: 'Distribución de gastos y transacciones recurrentes' }
-    },
-    {
       name: 'transactions',
       title: { en: 'Transactions', es: 'Transacciones' },
       description: { en: 'Expense tracking', es: 'Seguimiento de gastos' }
@@ -338,6 +333,11 @@ export default function Home() {
       name: 'budgets',
       title: { en: 'Budgets', es: 'Presupuestos' },
       description: { en: 'Smart budgeting', es: 'Presupuestos inteligentes' }
+    },
+    {
+      name: 'Shared',
+      title: { en: 'Shared Transactions', es: 'Transacciones Compartidas' },
+      description: { en: 'Share expenses with friends', es: 'Comparte gastos con amigos' }
     }
   ]
 
@@ -462,7 +462,7 @@ export default function Home() {
                             {/* Screen */}
                             <div className="relative overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-black">
                               <Image 
-                                src={`/screenshots/${isDark ? 'dark' : 'light'}/${screenshot.name}.png`}
+                                src={`/screenshots/${isDark ? 'dark' : 'light'}/${language}/${screenshot.name}.png`}
                                 alt={`${screenshot.title[language as keyof typeof screenshot.title]} - ${screenshot.description[language as keyof typeof screenshot.description]}`}
                                 width={320} 
                                 height={694}
