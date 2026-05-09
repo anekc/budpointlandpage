@@ -41,6 +41,7 @@ export default function Footer({ isDark: isDarkProp }: FooterProps) {
       faq: "FAQ",
       contact: "Contact",
       joinWaitlist: "Join Waitlist",
+      supportPage: "Support Center",
       legal: "Legal",
       privacy: "Privacy Policy",
       terms: "Terms of Service",
@@ -58,6 +59,7 @@ export default function Footer({ isDark: isDarkProp }: FooterProps) {
       faq: "Preguntas Frecuentes",
       contact: "Contacto",
       joinWaitlist: "Lista de Espera",
+      supportPage: "Centro de Soporte",
       legal: "Legal",
       privacy: "Política de Privacidad",
       terms: "Términos de Servicio",
@@ -100,9 +102,10 @@ export default function Footer({ isDark: isDarkProp }: FooterProps) {
           <div className="space-y-4">
             <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>{currentLang.support}</h3>
             <ul className={`space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              <li><Link href="#faq" className={`${isDark ? 'hover:text-white' : 'hover:text-gray-900'} transition-colors`}>{currentLang.faq}</Link></li>
+              <li><Link href="/support" className={`${isDark ? 'hover:text-white' : 'hover:text-gray-900'} transition-colors`}>{currentLang.supportPage}</Link></li>
+              <li><Link href="/#faq" className={`${isDark ? 'hover:text-white' : 'hover:text-gray-900'} transition-colors`}>{currentLang.faq}</Link></li>
               <li><a href="mailto:support@budpoint.app" className={`${isDark ? 'hover:text-white' : 'hover:text-gray-900'} transition-colors`}>{currentLang.contact}</a></li>
-              <li><Link href="#waitlist" className={`${isDark ? 'hover:text-white' : 'hover:text-gray-900'} transition-colors`}>{currentLang.joinWaitlist}</Link></li>
+              <li><Link href="/#waitlist" className={`${isDark ? 'hover:text-white' : 'hover:text-gray-900'} transition-colors`}>{currentLang.joinWaitlist}</Link></li>
             </ul>
           </div>
 
