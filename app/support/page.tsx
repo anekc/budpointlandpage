@@ -51,7 +51,7 @@ export default function SupportPage() {
               <div>
                 <h3 className={`text-xl font-medium mb-2 ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>How do I restore my Pro purchase?</h3>
                 <p className={`leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  If you got a new device or reinstalled the app, you can restore your Pro purchase by going to the Settings tab in the app, tapping on the Pro section, and selecting "Restore Purchases".
+                  If you got a new device or reinstalled the app, you can restore your Pro purchase by going to the Settings tab in the app, tapping on the Pro section, and selecting &quot;Restore Purchases&quot;.
                 </p>
               </div>
 
@@ -74,7 +74,7 @@ export default function SupportPage() {
           <section className="mb-8">
             <h2 className={`text-2xl font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>Contact Us</h2>
             <p className={`leading-relaxed mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-              If you couldn't find the answer to your question, or if you want to report a bug or suggest a new feature, please don't hesitate to reach out to us.
+              If you couldn&apos;t find the answer to your question, or if you want to report a bug or suggest a new feature, please don&apos;t hesitate to reach out to us.
             </p>
             <p className={`leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
               Email us at:{' '}
