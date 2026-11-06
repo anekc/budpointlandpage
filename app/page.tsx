@@ -37,7 +37,7 @@ const copy = {
         label: 'Transactions',
         title: 'Log it once. Or don’t log it at all.',
         body: 'Pay with Apple Pay and the purchase lands in Budpoint on its own, waiting for you to confirm it. Bank email alerts work too.',
-        points: ['Income, expenses and transfers', 'Recurring entries that create themselves', 'Mark a purchase as “not mine” so it never touches your budget'],
+        points: ['Income, expenses and transfers', 'Recurring entries that create themselves', 'Bought something for someone else? Give them 100% of the split and it stays out of your balance'],
       },
       {
         label: 'Budgets & goals',
@@ -108,7 +108,7 @@ const copy = {
         label: 'Movimientos',
         title: 'Registra tus gastos sin escribir nada.',
         body: 'Pagas con Apple Pay y la compra aparece sola en Budpoint; tú solo la confirmas. Si tu banco te manda un correo por cada cargo, también sirve.',
-        points: ['Ingresos, gastos y transferencias', 'Pagos recurrentes que se registran solos', '¿Compraste algo para alguien más? Márcalo y no cuenta en tu presupuesto'],
+        points: ['Ingresos, gastos y transferencias', 'Pagos recurrentes que se registran solos', '¿Compraste algo para alguien más? Asígnale el 100% y no cuenta en tu balance'],
       },
       {
         label: 'Presupuestos y metas',
