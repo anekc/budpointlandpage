@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLanguage } from './components/LanguageContext'
 import { AccentButton, SiteFooter, SiteHeader, TESTFLIGHT_URL } from './components/SiteChrome'
@@ -194,6 +194,21 @@ export default function Home() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'err'>('idle')
   const c = copy[lang]
 
+  // Mobile Safari restores the old scroll offset on reload, but the animated hero
+  // changes height while loading, so it lands mid-page. Always start at the top
+  // unless the link points at a section.
+  useEffect(() => {
+    history.scrollRestoration = 'manual'
+    if (!location.hash) window.scrollTo(0, 0)
+  }, [])
+
+  // Scroll to the chapters without leaving #features in the URL, so a later
+  // reload or shared link opens at the hero
+  const toFeatures = (e: React.MouseEvent) => {
+    e.preventDefault()
+    document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -233,7 +248,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.18} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
             <AccentButton href={TESTFLIGHT_URL}>{c.hero.cta}</AccentButton>
-            <a href="#features" className="group inline-flex items-center gap-1.5 text-[15px] font-medium">
+            <a href="#features" onClick={toFeatures} className="group inline-flex items-center gap-1.5 text-[15px] font-medium">
               {c.hero.secondary}
               <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </a>
