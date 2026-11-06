@@ -1,0 +1,82 @@
+/* Nocturno tokens — mirror NocturnoTheme.swift in the iOS app */
+.nb {
+  --bg: #F4F5F7;
+  --card: #FFFFFF;
+  --stroke: #E6E8EC;
+  --track: #ECEEF1;
+  --text: #0D0E12;
+  --muted: #5F6573;
+  --accent: #C8F25A;
+  --on-accent: #0D0E12;
+  --accent-text: #4D6B00;
+  --income: #1E7A4F;
+  --income-bg: #E3F4EA;
+  --expense: #C2410C;
+  --expense-bg: #FCE9E1;
+  --c1: #C8F25A;
+  --c2: #7AA2FF;
+  --c3: #FF9C7A;
+  --c4: #B79CFF;
+  --c5: #5FD4D0;
+  --cta-bg: #0D0E12;
+  --shadow: 0 1px 2px rgba(13, 14, 18, 0.04), 0 12px 32px -12px rgba(13, 14, 18, 0.12);
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01";
+}
+
+html.dark .nb {
+  --bg: #0D0E12;
+  --card: #17191F;
+  --stroke: #23262E;
+  --track: #23262E;
+  --text: #F2F3F5;
+  --muted: #9BA1AD;
+  --accent-text: #C8F25A;
+  --income: #7FD3A8;
+  --income-bg: #1B2A20;
+  --expense: #FF9C7A;
+  --expense-bg: #2C1D18;
+  --cta-bg: #17191F;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -16px rgba(0, 0, 0, 0.6);
+}
+
+.nb ::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.nb-card {
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: 20px;
+}
+
+.nb-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nb-num {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Faint dot grid, same texture the app uses behind charts */
+.nb-dots {
+  background-image: radial-gradient(var(--stroke) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+.nb details > summary {
+  list-style: none;
+}
+
+.nb details > summary::-webkit-details-marker {
+  display: none;
+}
