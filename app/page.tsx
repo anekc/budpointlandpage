@@ -54,12 +54,11 @@ const copy = {
     ],
     moreTitle: 'And the details that make it stick.',
     more: [
-      { t: 'Apple Pay automation', d: 'One Shortcut, set up once. Every tap-to-pay purchase is captured for you.', i: 'bolt' },
+      { t: 'Put Shortcuts to work', d: 'Apple Pay purchases and your bank’s email alerts can log themselves. Set it up once and you’re done.', i: 'bolt' },
       { t: 'Card reconciliation', d: 'Know exactly how much to pay on each card, and who still owes you.', i: 'scale' },
       { t: 'CSV import with drafts', d: 'Bring your history from a spreadsheet. Review each row before it’s saved.', i: 'table' },
       { t: 'iCloud backup & restore', d: 'New phone? Sign in and everything comes back. We never see your data.', i: 'cloud' },
-      { t: 'Home Screen widgets', d: 'Your budget and a quick-add button without opening the app.', i: 'grid' },
-      { t: 'Face ID lock', d: 'Your numbers stay yours, even if someone borrows your phone.', i: 'lock' },
+      { t: 'Widgets', d: 'Useful info right on your Home Screen, and a shortcut straight into the app when you need to log something.', i: 'grid' },
     ],
     pricingTitle: 'Simple pricing.',
     pricingBody: 'Start free. Upgrade when you need more accounts, more people or iCloud sync. During the beta, you can try Pro without paying.',
@@ -125,12 +124,11 @@ const copy = {
     ],
     moreTitle: 'Los detalles que hacen la diferencia.',
     more: [
-      { t: 'Apple Pay en automático', d: 'Configuras un Atajo una sola vez y cada compra con Apple Pay se registra sola.', i: 'bolt' },
+      { t: 'Aprovecha los Atajos', d: 'Tus compras con Apple Pay y los correos de tu banco pueden registrarse solos. Lo configuras una vez y listo.', i: 'bolt' },
       { t: 'Cuadre de tarjetas', d: 'Sabrás cuánto pagar de cada tarjeta y quién te sigue debiendo.', i: 'scale' },
       { t: 'Importa tu historial', d: 'Sube un CSV desde tu hoja de cálculo y revisa cada movimiento antes de guardarlo.', i: 'table' },
       { t: 'Respaldo en iCloud', d: '¿Cambiaste de iPhone? Inicias sesión y todo vuelve a su lugar. Nosotros nunca vemos tu información.', i: 'cloud' },
-      { t: 'Widgets', d: 'Consulta tu presupuesto y agrega un gasto sin abrir la app.', i: 'grid' },
-      { t: 'Bloqueo con Face ID', d: 'Aunque le prestes tu iPhone a alguien, tus finanzas se quedan contigo.', i: 'lock' },
+      { t: 'Widgets', d: 'Lo importante a la vista en tu pantalla de inicio, y un acceso directo a la app cuando necesites registrar algo.', i: 'grid' },
     ],
     pricingTitle: 'Precios claros.',
     pricingBody: 'Empieza gratis. Cuando necesites más cuentas, más personas o sincronizar con iCloud, pásate a Pro. Durante la beta, pruébalo sin pagar nada.',
@@ -167,7 +165,6 @@ const icons: Record<string, string> = {
   table: 'M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Zm0 5h18M9 10v11',
   cloud: 'M7 18a4 4 0 0 1-.9-7.9A5 5 0 0 1 15.9 8 4.5 4.5 0 0 1 17 18H7Zm5-7v5m0 0-2-2m2 2 2-2',
   grid: 'M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm12.5 0v7M13 16.5h7',
-  lock: 'M6 11h12v10H6V11Zm2 0V8a4 4 0 1 1 8 0v3m-4 4v2',
 }
 
 function Reveal({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) {
