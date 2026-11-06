@@ -43,12 +43,9 @@ export const metadata: Metadata = {
     follow: true,
   },
   other: {
-    // Mobile status bar theming
-    'theme-color': '#ffffff',
+    // Status bar colors are the theme-color metas in <head>, kept in sync by ThemeContext
     'color-scheme': 'light dark',
-    // iOS Safari specific
     'apple-mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-status-bar-style': 'default',
     // Android Chrome specific
     'mobile-web-app-capable': 'yes',
   },

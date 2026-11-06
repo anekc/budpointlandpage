@@ -62,6 +62,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         } else {
             document.documentElement.classList.remove('dark')
         }
+
+        // Status bar follows the chosen theme, not just the system setting
+        document.querySelectorAll('meta[name="theme-color"]').forEach(meta => {
+            meta.setAttribute('content', isDark ? '#0D0E12' : '#F4F5F7')
+        })
     }, [isDark, isInitialized])
 
     // Prevent flash by not rendering children until mounted? 

@@ -1,4 +1,9 @@
 /* Nocturno tokens — mirror NocturnoTheme.swift in the iOS app */
+
+/* Safari tints the status bar and overscroll area from the page background */
+html { background: #F4F5F7; }
+html.dark { background: #0D0E12; }
+
 .nb {
   --bg: #F4F5F7;
   --card: #FFFFFF;
