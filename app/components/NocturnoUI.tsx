@@ -17,6 +17,19 @@ function useReveal<T extends Element>() {
   return [ref, inView] as const
 }
 
+/** Today on the visitor's device, so the mock cards always show the current month.
+ *  Starts from the build date on the server and switches to the real date after mount. */
+function useToday() {
+  const [today, setToday] = useState(() => new Date())
+  useEffect(() => setToday(new Date()), [])
+  return today
+}
+
+function monthName(date: Date, lang: Lang, style: 'short' | 'long') {
+  const name = date.toLocaleDateString(lang === 'es' ? 'es-MX' : 'en-US', { month: style }).replace('.', '')
+  return style === 'short' ? name[0].toUpperCase() + name.slice(1) : name
+}
+
 function useCountUp(target: number, active: boolean, duration = 1.4) {
   const reduce = useReducedMotion()
   const [value, setValue] = useState(reduce ? target : 0)
@@ -77,19 +90,28 @@ function Bar({ pct, active, color = 'var(--accent)', height = 8, delay = 0 }: {
 
 export function PeriodCard({ lang }: { lang: Lang }) {
   const [ref, inView] = useReveal<HTMLDivElement>()
-  const day = 18
-  const total = 30
+  const today = useToday()
+  const day = today.getDate()
+  const total = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
+  const month = monthName(today, lang, 'short')
+  const left = total - day
   return (
     <div ref={ref} className="nb-card p-5" style={{ boxShadow: 'var(--shadow)' }}>
       <div className="nb-label">{lang === 'es' ? 'Periodo actual' : 'Current period'}</div>
       <div className="mt-2 flex items-center gap-2 text-[28px] font-medium tracking-tight">
-        1 Nov – 30 Nov
+        1 {month} – {total} {month}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" className="opacity-60" aria-hidden><path d="m6 9 6 6 6-6" /></svg>
       </div>
       <div className="mt-4"><Bar pct={(day / total) * 100} active={inView} /></div>
       <div className="mt-2 flex justify-between text-sm" style={{ color: 'var(--muted)' }}>
         <span>{lang === 'es' ? `Día ${day} de ${total}` : `Day ${day} of ${total}`}</span>
-        <span>{lang === 'es' ? `Quedan ${total - day} días` : `${total - day} days left`}</span>
+        <span>
+          {left === 0
+            ? (lang === 'es' ? 'Último día' : 'Last day')
+            : lang === 'es'
+              ? `${left === 1 ? 'Queda 1 día' : `Quedan ${left} días`}`
+              : `${left} ${left === 1 ? 'day' : 'days'} left`}
+        </span>
       </div>
     </div>
   )
@@ -283,8 +305,8 @@ const sharedCopy = {
 }
 
 const sharedItems = [
-  { from: 'Mariana', title: { en: 'Friday dinner', es: 'Cena del viernes' }, amount: 450, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 21:40', es: 'Hoy a las 21:40' }, pending: true },
-  { from: 'Diego', title: { en: 'November rent', es: 'Renta de noviembre' }, amount: 3250, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 09:15', es: 'Ayer a las 09:15' }, pending: false },
+  { from: 'Mariana', title: { en: () => 'Friday dinner', es: () => 'Cena del viernes' }, amount: 450, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 21:40', es: 'Hoy a las 21:40' }, pending: true },
+  { from: 'Diego', title: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` }, amount: 3250, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 09:15', es: 'Ayer a las 09:15' }, pending: false },
 ]
 
 function StatusPill({ accepted, lang }: { accepted: boolean; lang: Lang }) {
@@ -312,6 +334,7 @@ export function SharedCard({ lang }: { lang: Lang }) {
   const [accepted, setAccepted] = useState(false)
   const reduce = useReducedMotion()
   const t = sharedCopy[lang]
+  const month = monthName(useToday(), lang, 'long')
 
   // The pending split gets reviewed a moment after the card scrolls into view
   useEffect(() => {
@@ -373,7 +396,7 @@ export function SharedCard({ lang }: { lang: Lang }) {
               <div className="text-lg font-semibold">{t.from}: {item.from}</div>
               <StatusPill accepted={isAccepted} lang={lang} />
             </div>
-            <div className="mt-2 text-lg">{item.title[lang]}</div>
+            <div className="mt-2 text-lg">{item.title[lang](month)}</div>
             <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2">
               <span className="text-sm" style={{ color: 'var(--muted)' }}>{t.share}:</span>
               <span className="nb-num text-2xl font-medium">{money.format(item.amount)} MXN</span>
