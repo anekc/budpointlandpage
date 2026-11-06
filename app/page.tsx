@@ -246,7 +246,7 @@ export default function Home() {
             <PeriodCard lang={lang} />
             <ApplePayBanner lang={lang} />
           </Reveal>
-          <Reveal delay={0.3} className="relative z-0 mt-3 sm:ml-10 sm:-mr-6"><BalanceCard lang={lang} /></Reveal>
+          <Reveal delay={0.3} className="relative z-0 mt-3"><BalanceCard lang={lang} /></Reveal>
         </div>
       </section>
 
