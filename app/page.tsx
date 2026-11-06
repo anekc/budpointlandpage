@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLanguage } from './components/LanguageContext'
 import { AccentButton, SiteFooter, SiteHeader, TESTFLIGHT_URL } from './components/SiteChrome'
-import { DashboardShowcase } from './components/DashboardShowcase'
 import {
   AccountSplitsCard,
   ApplePayBanner,
@@ -32,7 +31,7 @@ const copy = {
         label: 'Dashboard',
         title: 'The whole month on one screen.',
         body: 'See which day of the period you’re on, how much is left, and which account the money is coming out of. No digging through menus.',
-        points: ['Your month starts on the day you choose, like payday', 'Spending split by account and by person', 'Every account with its live balance'],
+        points: ['Your month starts on the day you choose, like payday', 'Spending split by account and by person', 'Every account with its live balance', 'Seven widgets: show the ones you use, in your order'],
       },
       {
         label: 'Transactions',
@@ -53,9 +52,6 @@ const copy = {
         points: ['Split by fixed amounts or percentages', 'Pending and accepted at a glance', 'Settle up straight from your card balances'],
       },
     ],
-    dashLabel: 'Your Dashboard',
-    dashTitle: 'Seven widgets. Show the ones you use.',
-    dashBody: 'Turn each widget on or off and drag them into the order that works for you. Your Dashboard ends up showing only what matters to you.',
     moreTitle: 'And the details that make it stick.',
     more: [
       { t: 'Apple Pay automation', d: 'One Shortcut, set up once. Every tap-to-pay purchase is captured for you.', i: 'bolt' },
@@ -106,7 +102,7 @@ const copy = {
         label: 'Dashboard',
         title: 'Tu mes completo, de un vistazo.',
         body: 'En qué día del periodo vas, cuánto te queda y de qué cuenta está saliendo el dinero. Sin perderte entre menús.',
-        points: ['Tu mes empieza el día que tú elijas, como el día de pago', 'Cuánto gastaste por cuenta y por persona', 'El saldo de cada cuenta, siempre al día'],
+        points: ['Tu mes empieza el día que tú elijas, como el día de pago', 'Cuánto gastaste por cuenta y por persona', 'El saldo de cada cuenta, siempre al día', 'Siete widgets: deja los que uses, en el orden que quieras'],
       },
       {
         label: 'Movimientos',
@@ -127,9 +123,6 @@ const copy = {
         points: ['Divide por monto o por porcentaje', 'Ve qué está pendiente y qué ya aceptaron', 'Salda cuentas desde el saldo de tus tarjetas'],
       },
     ],
-    dashLabel: 'Tu Dashboard',
-    dashTitle: 'Siete widgets. Deja solo los que usas.',
-    dashBody: 'Prende o apaga cada widget y acomódalos en el orden que más te sirva. Tu Dashboard termina mostrando solo lo que a ti te importa.',
     moreTitle: 'Los detalles que hacen la diferencia.',
     more: [
       { t: 'Apple Pay en automático', d: 'Configuras un Atajo una sola vez y cada compra con Apple Pay se registra sola.', i: 'bolt' },
@@ -303,18 +296,6 @@ export default function Home() {
             </div>
           )
         })}
-      </section>
-
-      {/* Dashboard widgets */}
-      <section className="py-20 lg:py-28" style={{ borderTop: '1px solid var(--stroke)' }}>
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal>
-            <div className="nb-label">{c.dashLabel}</div>
-            <h2 className="mt-4 max-w-2xl text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-[44px]">{c.dashTitle}</h2>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>{c.dashBody}</p>
-          </Reveal>
-          <Reveal delay={0.1} className="mt-12"><DashboardShowcase lang={lang} /></Reveal>
-        </div>
       </section>
 
       {/* More */}
