@@ -21,7 +21,7 @@ const copy = {
     hero: {
       eyebrow: 'Personal finance for iPhone',
       title: ['Know where your money went.', 'Before the month ends.'],
-      body: 'Budpoint keeps your accounts, budgets and the expenses you share with other people in one place, and keeps what’s yours apart from what isn’t.',
+      body: 'Your accounts, budgets and shared expenses in one place. Split an expense with someone and only your share hits your balance; your overall totals still show the full amount.',
       cta: 'Try the beta',
       secondary: 'See how it works',
       meta: 'Free beta on TestFlight · Pro from $4.99/mo · Spanish & English',
@@ -92,7 +92,7 @@ const copy = {
     hero: {
       eyebrow: 'Tus finanzas en tu iPhone',
       title: ['Descubre en qué se te va el dinero,', 'antes de que se acabe el mes.'],
-      body: 'Tus cuentas, tus presupuestos y los gastos que compartes, todo en un mismo lugar. Y lo que no es tuyo no se mezcla con lo tuyo.',
+      body: 'Tus cuentas, tus presupuestos y los gastos que compartes, todo en un mismo lugar. Si divides un gasto con alguien, tu balance solo refleja tu parte; en los totales generales sigues viendo el cargo completo.',
       cta: 'Prueba la beta',
       secondary: 'Mira cómo funciona',
       meta: 'Beta gratis en TestFlight · Pro desde $4.99 al mes · En español e inglés',
