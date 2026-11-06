@@ -156,12 +156,13 @@ export function BalanceCard({ lang }: { lang: Lang }) {
 type Tag = { label: Record<Lang, string>; kind: 'account' | 'category' }
 
 const txns: {
-  name: Record<Lang, string>
+  name: Record<Lang, string | ((month: string) => string)>
   tags: Tag[]
   amount: Money
   color: string
   icon: string
   split?: { who: Record<Lang, string>; amount: Money }[]
+  sharedBy?: string
 }[] = [
   {
     name: { en: 'Groceries', es: 'Súper' },
@@ -183,6 +184,13 @@ const txns: {
       { who: { en: 'Mariana', es: 'Mariana' }, amount: { es: 450, en: 38.5 } },
     ],
   },
+  // Diego's rent, once accepted from Shared: it lands here as your share only
+  {
+    name: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` },
+    tags: [{ label: { en: 'Debit', es: 'Débito' }, kind: 'account' }, { label: { en: 'Home', es: 'Hogar' }, kind: 'category' }],
+    amount: { es: -3250, en: -975 }, color: 'var(--c3)', icon: 'home',
+    sharedBy: 'Diego',
+  },
 ]
 
 const tagStyle = {
@@ -197,6 +205,7 @@ function TxIcon({ kind, color }: { kind: string; color: string }) {
     cart: 'M3 4h2l2.4 11h10.2L20 7H6.3M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z',
     up: 'M12 19V5m0 0-6 6m6-6 6 6',
     down: 'M12 5v14m0 0-6-6m6 6 6-6',
+    home: 'M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5',
   }
   return (
     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl" style={{ background: `color-mix(in srgb, ${color} 18%, transparent)`, color }}>
@@ -207,6 +216,7 @@ function TxIcon({ kind, color }: { kind: string; color: string }) {
 
 export function TransactionsCard({ lang }: { lang: Lang }) {
   const [ref, inView] = useReveal<HTMLDivElement>()
+  const month = monthName(useToday(), lang, 'long')
   return (
     <div ref={ref} className="nb-card overflow-hidden" style={{ boxShadow: 'var(--shadow)' }}>
       <div className="nb-label px-5 pt-4 pb-2">{lang === 'es' ? 'Hoy' : 'Today'}</div>
@@ -225,7 +235,7 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
             <TxIcon kind={t.icon} color={t.color} />
             <div className="min-w-0 flex-1">
               <div className="flex items-baseline justify-between gap-3">
-                <div className="truncate font-medium">{t.name[lang]}</div>
+                <div className="truncate font-medium">{(n => (typeof n === 'function' ? n(month) : n))(t.name[lang])}</div>
                 <div className="nb-num font-medium whitespace-nowrap" style={{ color: value > 0 ? 'var(--income)' : 'var(--text)' }}>
                   {value > 0 ? '+' : '−'}{money.format(total)}
                   <span className="ml-1 text-[10px]" style={{ color: 'var(--muted)' }}>{currency(lang)}</span>
@@ -236,6 +246,15 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
                   <span key={j} className="rounded-md px-1.5 py-0.5 text-xs font-medium" style={tagStyle[tag.kind]}>{tag.label[lang]}</span>
                 ))}
               </div>
+              {t.sharedBy && (
+                <div className="mt-3 pt-2.5 text-[13px]" style={{ borderTop: '1px dashed var(--stroke)' }}>
+                  <div className="font-medium">{lang === 'es' ? 'Compartido por' : 'Shared by'}</div>
+                  <div className="mt-1 flex items-center gap-1.5" style={{ color: 'var(--muted)' }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d={PERSON} /></svg>
+                    {t.sharedBy}
+                  </div>
+                </div>
+              )}
               {t.split && (
                 <div className="mt-3 pt-2.5 text-[13px]" style={{ borderTop: '1px dashed var(--stroke)' }}>
                   <div className="font-medium">{lang === 'es' ? 'División del gasto' : 'Split'}</div>
@@ -364,14 +383,14 @@ export function BudgetCard({ lang }: { lang: Lang }) {
 /* ---------- Shared expenses (mirrors the app's "Compartidas" screen) ---------- */
 
 const sharedCopy = {
-  en: { pending: 'Pending', accepted: 'Accepted', received: 'Received', sent: 'Sent', from: 'From', share: 'Your share', review: 'Review', acceptedOne: 'Accepted', pendingOne: 'Pending' },
-  es: { pending: 'Pendientes', accepted: 'Aceptadas', received: 'Recibidas', sent: 'Enviadas', from: 'De', share: 'Tu parte', review: 'Revisar', acceptedOne: 'Aceptada', pendingOne: 'Pendiente' },
+  en: { pending: 'Pending', accepted: 'Accepted', received: 'Received', sent: 'Sent', from: 'From', to: 'To', yourShare: 'Your share', theirShare: 'Their share', receivedAt: 'Received', sentAt: 'Sent', acceptedOne: 'Accepted', pendingOne: 'Pending' },
+  es: { pending: 'Pendientes', accepted: 'Aceptadas', received: 'Recibidas', sent: 'Enviadas', from: 'De', to: 'Para', yourShare: 'Tu parte', theirShare: 'Su parte', receivedAt: 'Recibida', sentAt: 'Enviada', acceptedOne: 'Aceptada', pendingOne: 'Pendiente' },
 }
 
-const sharedItems = [
-  { from: 'Mariana', title: { en: () => 'Friday dinner', es: () => 'Cena del viernes' }, amount: { es: 450, en: 38.5 }, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 9:40 PM', es: 'Hoy a las 21:40' }, pending: true },
-  { from: 'Diego', title: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` }, amount: { es: 3250, en: 975 }, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 9:15 AM', es: 'Ayer a las 09:15' }, pending: false },
-]
+// You paid the Friday dinner from the transactions card and sent Mariana her half;
+// Diego paid the rent and sent you yours.
+const sentItem = { who: 'Mariana', title: { en: () => 'Friday dinner', es: () => 'Cena del viernes' }, amount: { es: 450, en: 38.5 }, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 9:40 PM', es: 'Hoy a las 21:40' } }
+const receivedItem = { who: 'Diego', title: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` }, amount: { es: 3250, en: 975 }, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 9:15 AM', es: 'Ayer a las 09:15' } }
 
 function StatusPill({ accepted, lang }: { accepted: boolean; lang: Lang }) {
   const t = sharedCopy[lang]
@@ -395,21 +414,32 @@ const TRAY_OUT = 'M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4M8 14h2l1 2h2l1-2h2M1
 
 export function SharedCard({ lang }: { lang: Lang }) {
   const [ref, inView] = useReveal<HTMLDivElement>()
-  const [accepted, setAccepted] = useState(false)
   const reduce = useReducedMotion()
+  const [accepted, setAccepted] = useState(!!reduce)
+  const [tab, setTab] = useState<'sent' | 'received'>('sent')
+  const touched = useRef(false)
   const t = sharedCopy[lang]
   const month = monthName(useToday(), lang, 'long')
 
-  // The pending split gets reviewed a moment after the card scrolls into view
+  // Mariana accepts her half a moment after the card scrolls into view; then the
+  // tabs take turns on their own until the visitor taps one
   useEffect(() => {
     if (!inView || reduce) return
-    const id = setTimeout(() => setAccepted(true), 2200)
-    return () => clearTimeout(id)
+    const accept = setTimeout(() => setAccepted(true), 2200)
+    let cycle: ReturnType<typeof setInterval> | undefined
+    const start = setTimeout(() => {
+      const flip = () => { if (!touched.current) setTab(cur => (cur === 'sent' ? 'received' : 'sent')) }
+      flip()
+      cycle = setInterval(flip, 4500)
+    }, 5200)
+    return () => { clearTimeout(accept); clearTimeout(start); clearInterval(cycle) }
   }, [inView, reduce])
 
-  const [dinner, rent] = sharedItems.map(item => item.amount[lang])
-  const pendingTotal = accepted ? 0 : dinner
-  const acceptedTotal = accepted ? rent + dinner : rent
+  const sent = tab === 'sent'
+  const item = sent ? sentItem : receivedItem
+  const isAccepted = sent ? accepted : true
+  const pendingTotal = sent && !accepted ? sentItem.amount[lang] : 0
+  const acceptedTotal = sent ? (accepted ? sentItem.amount[lang] : 0) : receivedItem.amount[lang]
 
   return (
     <div ref={ref} className="space-y-3">
@@ -431,53 +461,45 @@ export function SharedCard({ lang }: { lang: Lang }) {
       </div>
 
       <div className="grid grid-cols-2 overflow-hidden rounded-2xl" style={{ background: 'var(--card)', border: '1px solid var(--stroke)' }}>
-        {[
-          { label: `${t.received} (${sharedItems.length})`, icon: TRAY_IN, active: true },
-          { label: `${t.sent} (0)`, icon: TRAY_OUT, active: false },
-        ].map(tab => (
-          <div
-            key={tab.label}
-            className="flex items-center justify-center gap-2 py-3 text-[17px] font-medium"
-            style={tab.active ? { background: 'var(--accent)', color: 'var(--on-accent)', borderRadius: 14 } : undefined}
+        {([
+          { id: 'received', label: `${t.received} (1)`, icon: TRAY_IN },
+          { id: 'sent', label: `${t.sent} (1)`, icon: TRAY_OUT },
+        ] as const).map(tb => (
+          <button
+            key={tb.id}
+            type="button"
+            onClick={() => { touched.current = true; setTab(tb.id) }}
+            className="flex cursor-pointer items-center justify-center gap-2 py-3 text-[17px] font-medium transition-colors"
+            style={tab === tb.id ? { background: 'var(--accent)', color: 'var(--on-accent)', borderRadius: 14 } : undefined}
           >
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d={tab.icon} /></svg>
-            {tab.label}
-          </div>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d={tb.icon} /></svg>
+            {tb.label}
+          </button>
         ))}
       </div>
 
-      {sharedItems.map((item, i) => {
-        const isAccepted = !item.pending || accepted
-        return (
-          <motion.div
-            key={item.from}
-            className="nb-card p-5"
-            style={{ boxShadow: 'var(--shadow)' }}
-            initial={{ opacity: 0, y: 8 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.15 + i * 0.12 }}
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div className="text-lg font-semibold">{t.from}: {item.from}</div>
-              <StatusPill accepted={isAccepted} lang={lang} />
-            </div>
-            <div className="mt-2 text-lg">{item.title[lang](month)}</div>
-            <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2">
-              <span className="text-sm" style={{ color: 'var(--muted)' }}>{t.share}:</span>
-              <span className="nb-num text-2xl font-medium">{money.format(item.amount[lang])} {currency(lang)}</span>
-              <span className="text-sm" style={{ color: 'var(--muted)' }}>· {item.tag[lang]}</span>
-            </div>
-            <div className="mt-1.5 text-sm" style={{ color: 'var(--muted)' }}>
-              {lang === 'es' ? 'Recibida' : 'Received'}: {item.time[lang]}
-            </div>
-            {!isAccepted && (
-              <div className="mt-3 flex justify-end">
-                <span className="rounded-xl px-4 py-2 text-[15px] font-semibold" style={{ background: 'var(--accent)', color: 'var(--on-accent)' }}>{t.review}</span>
-              </div>
-            )}
-          </motion.div>
-        )
-      })}
+      <motion.div
+        key={tab}
+        className="nb-card p-5"
+        style={{ boxShadow: 'var(--shadow)' }}
+        initial={{ opacity: 0, y: 8 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div className="text-lg font-semibold">{sent ? t.to : t.from}: {item.who}</div>
+          <StatusPill accepted={isAccepted} lang={lang} />
+        </div>
+        <div className="mt-2 text-lg">{item.title[lang](month)}</div>
+        <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2">
+          <span className="text-sm" style={{ color: 'var(--muted)' }}>{sent ? t.theirShare : t.yourShare}:</span>
+          <span className="nb-num text-2xl font-medium">{money.format(item.amount[lang])} {currency(lang)}</span>
+          <span className="text-sm" style={{ color: 'var(--muted)' }}>· {item.tag[lang]}</span>
+        </div>
+        <div className="mt-1.5 text-sm" style={{ color: 'var(--muted)' }}>
+          {sent ? t.sentAt : t.receivedAt}: {item.time[lang]}
+        </div>
+      </motion.div>
     </div>
   )
 }
