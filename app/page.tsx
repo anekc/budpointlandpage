@@ -24,7 +24,7 @@ const copy = {
       body: 'Your accounts, budgets and shared expenses in one place. Log the whole check without wrecking your budget.',
       cta: 'Try the beta',
       secondary: 'See how it works',
-      meta: 'Free beta on TestFlight · Pro from $4.99/mo · Spanish & English',
+      meta: 'Free beta on TestFlight · Try Pro without paying a cent · Spanish & English',
     },
     chapters: [
       {
@@ -62,7 +62,7 @@ const copy = {
       { t: 'Face ID lock', d: 'Your numbers stay yours, even if someone borrows your phone.', i: 'lock' },
     ],
     pricingTitle: 'Simple pricing.',
-    pricingBody: 'Start free. Upgrade when you need more accounts, more people or iCloud sync.',
+    pricingBody: 'Start free. Upgrade when you need more accounts, more people or iCloud sync. During the beta, you can try Pro without paying.',
     plans: [
       { name: 'Free', price: '$0', per: '', note: 'Forever', features: ['2 accounts', '5 tags', '2 people for splits', '3 budgets per period', 'Widgets'] },
       { name: 'Monthly', price: '$4.99', per: '/mo', note: '7-day free trial', features: ['Everything unlimited', 'iCloud sync & restore', 'Shared expenses', 'Recurring entries', 'CSV & PDF export'] },
@@ -95,7 +95,7 @@ const copy = {
       body: 'Tus cuentas, tus presupuestos y los gastos que compartes, todo en un mismo lugar. Registra el gasto de todos sin que tu balance lo resienta.',
       cta: 'Prueba la beta',
       secondary: 'Mira cómo funciona',
-      meta: 'Beta gratis en TestFlight · Pro desde $4.99 al mes · En español e inglés',
+      meta: 'Beta gratis en TestFlight · Prueba Pro sin pagar un peso · En español e inglés',
     },
     chapters: [
       {
@@ -133,7 +133,7 @@ const copy = {
       { t: 'Bloqueo con Face ID', d: 'Aunque le prestes tu iPhone a alguien, tus finanzas se quedan contigo.', i: 'lock' },
     ],
     pricingTitle: 'Precios claros.',
-    pricingBody: 'Empieza gratis. Cuando necesites más cuentas, más personas o sincronizar con iCloud, pásate a Pro.',
+    pricingBody: 'Empieza gratis. Cuando necesites más cuentas, más personas o sincronizar con iCloud, pásate a Pro. Durante la beta, pruébalo sin pagar nada.',
     plans: [
       { name: 'Gratis', price: '$0', per: '', note: 'Siempre gratis', features: ['2 cuentas', '5 etiquetas', '2 personas para dividir gastos', '3 presupuestos por periodo', 'Widgets'] },
       { name: 'Mensual', price: '$4.99', per: '/mes', note: '7 días gratis para probar', features: ['Todo sin límites', 'Sincronización y respaldo en iCloud', 'Gastos compartidos', 'Pagos recurrentes', 'Exporta a CSV y PDF'] },
