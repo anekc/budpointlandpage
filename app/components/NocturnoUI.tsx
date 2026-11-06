@@ -165,11 +165,6 @@ const txns: {
   sharedBy?: string
 }[] = [
   {
-    name: { en: 'Groceries', es: 'Súper' },
-    tags: [{ label: { en: 'Debit', es: 'Débito' }, kind: 'account' }, { label: { en: 'Food', es: 'Comida' }, kind: 'category' }],
-    amount: { es: -1284.5, en: -142.86 }, color: 'var(--c3)', icon: 'cart',
-  },
-  {
     name: { en: 'Paycheck', es: 'Nómina' },
     tags: [{ label: { en: 'Recurring', es: 'Recurrente' }, kind: 'category' }, { label: { en: 'Biweekly', es: 'Quincenal' }, kind: 'category' }],
     amount: { es: 21000, en: 2800 }, color: 'var(--c1)', icon: 'up',
@@ -218,7 +213,6 @@ const PERSON = 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0H5Z'
 
 function TxIcon({ kind, color }: { kind: string; color: string }) {
   const paths: Record<string, string> = {
-    cart: 'M3 4h2l2.4 11h10.2L20 7H6.3M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z',
     up: 'M12 19V5m0 0-6 6m6-6 6 6',
     down: 'M12 5v14m0 0-6-6m6 6 6-6',
     home: 'M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5',
