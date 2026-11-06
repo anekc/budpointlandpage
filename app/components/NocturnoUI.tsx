@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { animate, motion, useInView, useReducedMotion } from 'framer-motion'
 
-export type Lang = 'en' | 'es'
+import type { Lang } from './LanguageContext'
+
+export type { Lang }
 
 const EASE = [0.22, 1, 0.36, 1] as const
 

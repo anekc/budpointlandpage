@@ -1,16 +1,16 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import { useState } from 'react'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useTheme } from './components/ThemeContext'
+import { useLanguage } from './components/LanguageContext'
+import { AccentButton, SiteFooter, SiteHeader } from './components/SiteChrome'
 import {
   AccountSplitsCard,
   ApplePayToast,
   BalanceCard,
   BudgetCard,
-  type Lang,
   PeriodCard,
   SharedCard,
   TransactionsCard,
@@ -20,7 +20,6 @@ const EASE = [0.22, 1, 0.36, 1] as const
 
 const copy = {
   en: {
-    nav: { features: 'Features', pricing: 'Pricing', faq: 'FAQ', blog: 'Blog', cta: 'Join the list' },
     hero: {
       eyebrow: 'Personal finance for iPhone',
       title: ['Know where your money went.', 'Before the month ends.'],
@@ -88,10 +87,8 @@ const copy = {
     joining: 'Joining…',
     ok: 'You’re on the list. We’ll be in touch.',
     err: 'That email didn’t work. Try again in a few seconds.',
-    footer: { privacy: 'Privacy', terms: 'Terms', support: 'Support' },
   },
   es: {
-    nav: { features: 'Funciones', pricing: 'Precios', faq: 'Preguntas', blog: 'Blog', cta: 'Avísame' },
     hero: {
       eyebrow: 'Tus finanzas en tu iPhone',
       title: ['Descubre en qué se te va el dinero,', 'antes de que se acabe el mes.'],
@@ -159,7 +156,6 @@ const copy = {
     joining: 'Enviando…',
     ok: '¡Listo! Ya estás en la lista. Pronto te escribimos.',
     err: 'No pudimos registrar ese correo. Inténtalo otra vez en unos segundos.',
-    footer: { privacy: 'Privacidad', terms: 'Términos', support: 'Soporte' },
   },
 }
 
@@ -187,41 +183,16 @@ function Reveal({ children, delay = 0, className }: { children: React.ReactNode;
   )
 }
 
-function AccentButton({ children, href, onClick, type, disabled }: {
-  children: React.ReactNode
-  href?: string
-  onClick?: () => void
-  type?: 'submit'
-  disabled?: boolean
-}) {
-  const cls = 'inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[15px] font-semibold transition-transform active:scale-[0.97] hover:brightness-[1.04] disabled:opacity-60'
-  const style = { background: 'var(--accent)', color: 'var(--on-accent)' }
-  if (href) return <a href={href} className={cls} style={style}>{children}</a>
-  return <button type={type ?? 'button'} onClick={onClick} disabled={disabled} className={cls} style={style}>{children}</button>
-}
-
 const chapterCards = [AccountSplitsCard, TransactionsCard, BudgetCard, SharedCard]
 const chapterCompanions = [PeriodCard, BalanceCard, null, null]
 const screenFiles = ['dashboard', 'transactions', 'budgets', 'Shared']
 
 export default function Home() {
-  const { isDark, toggleTheme } = useTheme()
-  const [lang, setLang] = useState<Lang>('en')
+  const { isDark } = useTheme()
+  const { lang } = useLanguage()
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'err'>('idle')
   const c = copy[lang]
-
-  useEffect(() => {
-    const saved = localStorage.getItem('budpoint-lang')
-    if (saved === 'en' || saved === 'es') setLang(saved)
-    else if (navigator.language.startsWith('es')) setLang('es')
-  }, [])
-
-  const switchLang = () => {
-    const next = lang === 'en' ? 'es' : 'en'
-    setLang(next)
-    try { localStorage.setItem('budpoint-lang', next) } catch {}
-  }
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -245,34 +216,7 @@ export default function Home() {
 
   return (
     <div className="nb min-h-screen overflow-x-clip">
-      {/* Nav */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl" style={{ background: 'color-mix(in srgb, var(--bg) 82%, transparent)', borderBottom: '1px solid var(--stroke)' }}>
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <Link href="/" className="flex items-center gap-2.5">
-            <Image src="/logo.png" alt="" width={28} height={28} className="rounded-[8px]" />
-            <span className="text-lg font-semibold tracking-tight">Budpoint</span>
-          </Link>
-          <nav className="hidden items-center gap-7 text-[15px] md:flex" style={{ color: 'var(--muted)' }}>
-            <a href="#features" className="hover:text-[var(--text)]">{c.nav.features}</a>
-            <a href="#pricing" className="hover:text-[var(--text)]">{c.nav.pricing}</a>
-            <a href="#faq" className="hover:text-[var(--text)]">{c.nav.faq}</a>
-            <Link href="/blog" className="hover:text-[var(--text)]">{c.nav.blog}</Link>
-          </nav>
-          <div className="flex items-center gap-1.5">
-            <button onClick={switchLang} className="h-9 rounded-full px-3 text-sm font-medium hover:bg-[var(--track)]" aria-label="Change language">
-              {lang === 'en' ? 'ES' : 'EN'}
-            </button>
-            <button onClick={toggleTheme} className="grid h-9 w-9 place-items-center rounded-full hover:bg-[var(--track)]" aria-label={isDark ? 'Light mode' : 'Dark mode'}>
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
-                {isDark
-                  ? <path d="M12 3v2m0 14v2M5.6 5.6l1.4 1.4m10 10 1.4 1.4M3 12h2m14 0h2M5.6 18.4 7 17M17 7l1.4-1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
-                  : <path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z" />}
-              </svg>
-            </button>
-            <span className="ml-1 hidden sm:block"><AccentButton href="#join">{c.nav.cta}</AccentButton></span>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       <section className="mx-auto grid max-w-6xl items-center gap-14 px-4 pt-14 pb-20 sm:px-6 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pb-28">
@@ -476,21 +420,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* Footer */}
-      <footer style={{ borderTop: '1px solid var(--stroke)' }}>
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6" style={{ color: 'var(--muted)' }}>
-          <div className="flex items-center gap-2.5">
-            <Image src="/logo.png" alt="" width={22} height={22} className="rounded-[6px]" />
-            <span>© {new Date().getFullYear()} Budpoint</span>
-          </div>
-          <div className="flex gap-6">
-            <Link href="/blog" className="hover:text-[var(--text)]">{c.nav.blog}</Link>
-            <Link href="/support" className="hover:text-[var(--text)]">{c.footer.support}</Link>
-            <Link href="/privacy" className="hover:text-[var(--text)]">{c.footer.privacy}</Link>
-            <Link href="/terms" className="hover:text-[var(--text)]">{c.footer.terms}</Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }

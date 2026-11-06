@@ -80,3 +80,140 @@ html.dark .nb {
 .nb details > summary::-webkit-details-marker {
   display: none;
 }
+
+/* Long-form text: legal pages, support and blog posts */
+.nb-prose {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.nb-prose > * + *,
+.nb-prose section > * + * {
+  margin-top: 0.9rem;
+}
+
+.nb-prose h2 {
+  color: var(--text);
+  font-size: 1.6rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-top: 2.6rem;
+}
+
+.nb-prose h3 {
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 2rem;
+}
+
+.nb-prose h2 + *,
+.nb-prose h3 + * {
+  margin-top: 0.6rem;
+}
+
+.nb-prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.nb-prose a {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.nb-prose ul,
+.nb-prose ol {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.nb-prose ul > li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.nb-prose ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.nb-prose ol {
+  list-style: decimal;
+  padding-left: 1.4rem;
+}
+
+.nb-prose ol > li::marker {
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.nb-prose blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.25rem 0 0.25rem 1rem;
+  color: var(--text);
+}
+
+.nb-prose hr {
+  border: 0;
+  border-top: 1px solid var(--stroke);
+  margin: 2.5rem 0;
+}
+
+.nb-prose code {
+  background: var(--track);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+  font-size: 0.9em;
+}
+
+.nb-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.nb-prose th,
+.nb-prose td {
+  border-bottom: 1px solid var(--stroke);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.nb-prose th {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.nb-prose img {
+  border-radius: 16px;
+  border: 1px solid var(--stroke);
+}
+
+/* Blog post title comes from the MDX h1 */
+.nb-article h1 {
+  color: var(--text);
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.5rem;
+}
+
+.nb-article h1 + p {
+  color: var(--text);
+  font-size: 1.15rem;
+}
