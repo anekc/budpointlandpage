@@ -275,50 +275,121 @@ export function BudgetCard({ lang }: { lang: Lang }) {
   )
 }
 
-/* ---------- Shared expense ---------- */
+/* ---------- Shared expenses (mirrors the app's "Compartidas" screen) ---------- */
+
+const sharedCopy = {
+  en: { pending: 'Pending', accepted: 'Accepted', received: 'Received', sent: 'Sent', from: 'From', share: 'Your share', review: 'Review', acceptedOne: 'Accepted', pendingOne: 'Pending' },
+  es: { pending: 'Pendientes', accepted: 'Aceptadas', received: 'Recibidas', sent: 'Enviadas', from: 'De', share: 'Tu parte', review: 'Revisar', acceptedOne: 'Aceptada', pendingOne: 'Pendiente' },
+}
+
+const sharedItems = [
+  { from: 'Mariana', title: { en: 'Friday dinner', es: 'Cena del viernes' }, amount: 450, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 21:40', es: 'Hoy a las 21:40' }, pending: true },
+  { from: 'Diego', title: { en: 'November rent', es: 'Renta de noviembre' }, amount: 3250, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 09:15', es: 'Ayer a las 09:15' }, pending: false },
+]
+
+function StatusPill({ accepted, lang }: { accepted: boolean; lang: Lang }) {
+  const t = sharedCopy[lang]
+  return (
+    <motion.span
+      key={accepted ? 'a' : 'p'}
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      className="rounded-full px-3 py-1 text-sm font-medium"
+      style={accepted
+        ? { background: 'var(--income-bg)', color: 'var(--income)' }
+        : { background: 'var(--expense-bg)', color: 'var(--expense)' }}
+    >
+      {accepted ? t.acceptedOne : t.pendingOne}
+    </motion.span>
+  )
+}
+
+const TRAY_IN = 'M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4M8 14h2l1 2h2l1-2h2M12 3v8m0 0-3-3m3 3 3-3'
+const TRAY_OUT = 'M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4M8 14h2l1 2h2l1-2h2M12 11V3m0 0L9 6m3-3 3 3'
 
 export function SharedCard({ lang }: { lang: Lang }) {
   const [ref, inView] = useReveal<HTMLDivElement>()
   const [accepted, setAccepted] = useState(false)
   const reduce = useReducedMotion()
+  const t = sharedCopy[lang]
 
+  // The pending split gets reviewed a moment after the card scrolls into view
   useEffect(() => {
     if (!inView || reduce) return
-    const id = setTimeout(() => setAccepted(true), 1800)
+    const id = setTimeout(() => setAccepted(true), 2200)
     return () => clearTimeout(id)
   }, [inView, reduce])
 
+  const pendingTotal = accepted ? 0 : 450
+  const acceptedTotal = accepted ? 3700 : 3250
+
   return (
-    <div ref={ref} className="nb-card p-5" style={{ boxShadow: 'var(--shadow)' }}>
-      <div className="flex items-center justify-between gap-3">
-        <div className="font-medium">{lang === 'es' ? 'De' : 'From'}: <span className="nb-num">BUD-7WK3E8</span></div>
-        <motion.span
-          key={accepted ? 'a' : 'p'}
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="rounded-full px-2.5 py-1 text-xs font-medium"
-          style={accepted
-            ? { background: 'var(--income-bg)', color: 'var(--income)' }
-            : { background: 'var(--expense-bg)', color: 'var(--expense)' }}
-        >
-          {accepted ? (lang === 'es' ? 'Aceptado' : 'Accepted') : (lang === 'es' ? 'Pendiente' : 'Pending')}
-        </motion.span>
-      </div>
-      <div className="mt-4 flex items-baseline gap-2">
-        <span className="text-sm" style={{ color: 'var(--muted)' }}>{lang === 'es' ? 'Tu parte' : 'Your share'}</span>
-        <Amount value={450} active={inView} size={26} />
-        <span className="text-sm" style={{ color: 'var(--muted)' }}>· {lang === 'es' ? 'Cena del viernes' : 'Friday dinner'}</span>
-      </div>
-      <div className="mt-4 flex items-center gap-2">
-        {['A', 'M', 'L'].map((n, i) => (
-          <span key={n} className="-ml-1 first:ml-0 grid h-8 w-8 place-items-center rounded-full border-2 text-xs font-semibold" style={{ borderColor: 'var(--card)', background: [`var(--c2)`, `var(--c4)`, `var(--c5)`][i], color: '#0D0E12' }}>{n}</span>
+    <div ref={ref} className="space-y-3">
+      <div className="nb-card grid grid-cols-2 p-5 text-center" style={{ boxShadow: 'var(--shadow)' }}>
+        {[
+          { label: t.pending, value: pendingTotal, color: 'var(--expense)', icon: 'M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z' },
+          { label: t.accepted, value: acceptedTotal, color: 'var(--income)', icon: 'm8.5 12 2.5 2.5L16 9.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z' },
+        ].map(col => (
+          <div key={col.label}>
+            <div className="flex items-center justify-center gap-2 text-[15px]" style={{ color: 'var(--muted)' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={col.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d={col.icon} /></svg>
+              {col.label}
+            </div>
+            <motion.div key={col.value} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="nb-num mt-1.5 text-2xl font-medium" style={{ color: col.color }}>
+              ${money.format(col.value)}
+            </motion.div>
+          </div>
         ))}
-        <span className="ml-1 text-sm" style={{ color: 'var(--muted)' }}>{lang === 'es' ? '$1,350 entre 3' : '$1,350 split 3 ways'}</span>
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        <button className="rounded-full py-2.5 text-sm font-semibold" style={{ background: 'var(--track)' }} tabIndex={-1}>{lang === 'es' ? 'Rechazar' : 'Decline'}</button>
-        <button className="rounded-full py-2.5 text-sm font-semibold" style={{ background: 'var(--accent)', color: 'var(--on-accent)' }} tabIndex={-1}>{lang === 'es' ? 'Aceptar' : 'Accept'}</button>
+
+      <div className="grid grid-cols-2 overflow-hidden rounded-2xl" style={{ background: 'var(--card)', border: '1px solid var(--stroke)' }}>
+        {[
+          { label: `${t.received} (${sharedItems.length})`, icon: TRAY_IN, active: true },
+          { label: `${t.sent} (0)`, icon: TRAY_OUT, active: false },
+        ].map(tab => (
+          <div
+            key={tab.label}
+            className="flex items-center justify-center gap-2 py-3 text-[17px] font-medium"
+            style={tab.active ? { background: 'var(--accent)', color: 'var(--on-accent)', borderRadius: 14 } : undefined}
+          >
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d={tab.icon} /></svg>
+            {tab.label}
+          </div>
+        ))}
       </div>
+
+      {sharedItems.map((item, i) => {
+        const isAccepted = !item.pending || accepted
+        return (
+          <motion.div
+            key={item.from}
+            className="nb-card p-5"
+            style={{ boxShadow: 'var(--shadow)' }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease: EASE, delay: 0.15 + i * 0.12 }}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div className="text-lg font-semibold">{t.from}: {item.from}</div>
+              <StatusPill accepted={isAccepted} lang={lang} />
+            </div>
+            <div className="mt-2 text-lg">{item.title[lang]}</div>
+            <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2">
+              <span className="text-sm" style={{ color: 'var(--muted)' }}>{t.share}:</span>
+              <span className="nb-num text-2xl font-medium">{money.format(item.amount)} MXN</span>
+              <span className="text-sm" style={{ color: 'var(--muted)' }}>· {item.tag[lang]}</span>
+            </div>
+            <div className="mt-1.5 text-sm" style={{ color: 'var(--muted)' }}>
+              {lang === 'es' ? 'Recibida' : 'Received'}: {item.time[lang]}
+            </div>
+            {!isAccepted && (
+              <div className="mt-3 flex justify-end">
+                <span className="rounded-xl px-4 py-2 text-[15px] font-semibold" style={{ background: 'var(--accent)', color: 'var(--on-accent)' }}>{t.review}</span>
+              </div>
+            )}
+          </motion.div>
+        )
+      })}
     </div>
   )
 }
