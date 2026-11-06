@@ -1,9 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
-import { useTheme } from './components/ThemeContext'
 import { useLanguage } from './components/LanguageContext'
 import { AccentButton, SiteFooter, SiteHeader } from './components/SiteChrome'
 import {
@@ -63,8 +61,6 @@ const copy = {
       { t: 'Home Screen widgets', d: 'Your budget and a quick-add button without opening the app.', i: 'grid' },
       { t: 'Face ID lock', d: 'Your numbers stay yours, even if someone borrows your phone.', i: 'lock' },
     ],
-    screensTitle: 'Light or dark, it follows your iPhone.',
-    screens: ['Dashboard', 'Transactions', 'Budgets', 'Shared'],
     pricingTitle: 'Simple pricing.',
     pricingBody: 'Start free. Upgrade when you need more accounts, more people or iCloud sync.',
     plans: [
@@ -132,8 +128,6 @@ const copy = {
       { t: 'Widgets', d: 'Consulta tu presupuesto y agrega un gasto sin abrir la app.', i: 'grid' },
       { t: 'Bloqueo con Face ID', d: 'Aunque le prestes tu iPhone a alguien, tus finanzas se quedan contigo.', i: 'lock' },
     ],
-    screensTitle: 'Modo claro u oscuro, igual que tu iPhone.',
-    screens: ['Dashboard', 'Movimientos', 'Presupuestos', 'Compartidos'],
     pricingTitle: 'Precios claros.',
     pricingBody: 'Empieza gratis. Cuando necesites más cuentas, más personas o sincronizar con iCloud, pásate a Pro.',
     plans: [
@@ -185,10 +179,8 @@ function Reveal({ children, delay = 0, className }: { children: React.ReactNode;
 
 const chapterCards = [AccountSplitsCard, TransactionsCard, BudgetCard, SharedCard]
 const chapterCompanions = [PeriodCard, BalanceCard, null, null]
-const screenFiles = ['dashboard', 'transactions', 'budgets', 'Shared']
 
 export default function Home() {
-  const { isDark } = useTheme()
   const { lang } = useLanguage()
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'err'>('idle')
@@ -300,29 +292,6 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Screens */}
-      <section className="py-20 lg:py-28" style={{ borderTop: '1px solid var(--stroke)' }}>
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal><h2 className="max-w-xl text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-[44px]">{c.screensTitle}</h2></Reveal>
-        </div>
-        <div className="mx-auto mt-12 flex max-w-6xl snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 sm:px-6 lg:grid lg:grid-cols-4 lg:overflow-visible">
-          {screenFiles.map((f, i) => (
-            <Reveal key={f} delay={i * 0.08} className="w-[62vw] max-w-[260px] shrink-0 snap-center lg:w-auto lg:max-w-none">
-              <div className="overflow-hidden rounded-[32px] p-1.5" style={{ background: 'var(--card)', border: '1px solid var(--stroke)', boxShadow: 'var(--shadow)' }}>
-                <Image
-                  src={`/screenshots/${isDark ? 'dark' : 'light'}/en/${f}.png`}
-                  alt={c.screens[i]}
-                  width={1206}
-                  height={2622}
-                  className="h-auto w-full rounded-[26px]"
-                />
-              </div>
-              <div className="mt-3 text-center text-sm" style={{ color: 'var(--muted)' }}>{c.screens[i]}</div>
-            </Reveal>
-          ))}
         </div>
       </section>
 
