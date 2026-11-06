@@ -31,7 +31,7 @@ const copy = {
         label: 'Dashboard',
         title: 'The whole month on one screen.',
         body: 'See which day of the period you’re on, how much is left, and which account the money is coming out of. No digging through menus.',
-        points: ['Custom periods that match your paycheck', 'Spending split by account and by person', 'Every account with its live balance'],
+        points: ['Your month starts on the day you choose, like payday', 'Spending split by account and by person', 'Every account with its live balance'],
       },
       {
         label: 'Transactions',
@@ -102,7 +102,7 @@ const copy = {
         label: 'Dashboard',
         title: 'Tu mes completo, de un vistazo.',
         body: 'En qué día del periodo vas, cuánto te queda y de qué cuenta está saliendo el dinero. Sin perderte entre menús.',
-        points: ['Periodos que se ajustan a tu quincena', 'Cuánto gastaste por cuenta y por persona', 'El saldo de cada cuenta, siempre al día'],
+        points: ['Tu mes empieza el día que tú elijas, como el día de pago', 'Cuánto gastaste por cuenta y por persona', 'El saldo de cada cuenta, siempre al día'],
       },
       {
         label: 'Movimientos',
