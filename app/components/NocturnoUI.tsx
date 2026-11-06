@@ -155,7 +155,7 @@ export function BalanceCard({ lang }: { lang: Lang }) {
 
 const txns = [
   { name: { en: 'Groceries', es: 'Súper' }, tags: [{ en: 'Debit', es: 'Débito' }, { en: 'Food', es: 'Comida' }], amount: { es: -1284.5, en: -142.86 }, color: 'var(--c3)', icon: 'cart' },
-  { name: { en: 'Paycheck', es: 'Nómina' }, tags: [{ en: 'Payroll', es: 'Nómina' }], amount: { es: 21000, en: 2800 }, color: 'var(--c1)', icon: 'up' },
+  { name: { en: 'Paycheck', es: 'Nómina' }, tags: [{ en: 'Recurring', es: 'Recurrente' }, { en: 'Biweekly', es: 'Quincenal' }], amount: { es: 21000, en: 2800 }, color: 'var(--c1)', icon: 'up' },
   { name: { en: 'Gas — for Dad', es: 'Gasolina — de papá' }, tags: [{ en: 'Excluded', es: 'Excluido' }], amount: { es: -850, en: -48.2 }, color: 'var(--c2)', icon: 'fuel', excluded: true },
 ]
 
