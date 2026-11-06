@@ -11,10 +11,19 @@ const EASE = [0.22, 1, 0.36, 1] as const
 
 const money = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
-/** Sample amounts are written in pesos; English visitors see them as dollars at a
- *  tenth of the size, so a month of spending looks realistic in either currency. */
-const amt = (pesos: number, lang: Lang) => (lang === 'es' ? pesos : pesos / 10)
+/** Sample amounts per market: Spanish shows a month in Mexico in pesos, English a
+ *  month in the US in dollars. Each set adds up (accounts = expenses, etc.). */
+type Money = Record<Lang, number>
 const currency = (lang: Lang) => (lang === 'es' ? 'MXN' : 'USD')
+const sample = {
+  balance: { es: 24860.4, en: 3315.63 },
+  income: { es: 42000, en: 5600 },
+  expenses: { es: 17139.6, en: 2284.37 },
+  spent: { es: 9612, en: 1281.6 },
+  budget: { es: 15000, en: 2000 },
+  cafe: { es: 89, en: 6.75 },
+  twoPurchases: { es: 214.5, en: 19.15 },
+} satisfies Record<string, Money>
 
 function useReveal<T extends Element>() {
   const ref = useRef<T>(null)
@@ -129,15 +138,15 @@ export function BalanceCard({ lang }: { lang: Lang }) {
   return (
     <div ref={ref} className="nb-card p-5" style={{ boxShadow: 'var(--shadow)' }}>
       <div className="nb-label">{lang === 'es' ? 'Balance del periodo' : 'Period balance'}</div>
-      <div className="mt-2"><Amount value={amt(24860.4, lang)} active={inView} size={40} /></div>
+      <div className="mt-2"><Amount value={sample.balance[lang]} active={inView} size={40} /></div>
       <div className="mt-4 grid grid-cols-2 gap-3">
         <div className="rounded-2xl p-3.5" style={{ background: 'var(--income-bg)' }}>
           <div className="text-sm font-medium" style={{ color: 'var(--income)' }}>↑ {lang === 'es' ? 'Ingresos' : 'Income'}</div>
-          <div className="mt-1"><Amount value={amt(42000, lang)} active={inView} size={19} /></div>
+          <div className="mt-1"><Amount value={sample.income[lang]} active={inView} size={19} /></div>
         </div>
         <div className="rounded-2xl p-3.5" style={{ background: 'var(--expense-bg)' }}>
           <div className="text-sm font-medium" style={{ color: 'var(--expense)' }}>↓ {lang === 'es' ? 'Gastos' : 'Expenses'}</div>
-          <div className="mt-1"><Amount value={amt(17139.6, lang)} active={inView} size={19} /></div>
+          <div className="mt-1"><Amount value={sample.expenses[lang]} active={inView} size={19} /></div>
         </div>
       </div>
     </div>
@@ -147,9 +156,9 @@ export function BalanceCard({ lang }: { lang: Lang }) {
 /* ---------- Transactions list ---------- */
 
 const txns = [
-  { name: { en: 'Groceries', es: 'Súper' }, tags: [{ en: 'Debit', es: 'Débito' }, { en: 'Food', es: 'Comida' }], amount: -1284.5, color: 'var(--c3)', icon: 'cart' },
-  { name: { en: 'Paycheck', es: 'Nómina' }, tags: [{ en: 'Payroll', es: 'Nómina' }], amount: 21000, color: 'var(--c1)', icon: 'up' },
-  { name: { en: 'Gas — for Dad', es: 'Gasolina — de papá' }, tags: [{ en: 'Excluded', es: 'Excluido' }], amount: -850, color: 'var(--c2)', icon: 'fuel', excluded: true },
+  { name: { en: 'Groceries', es: 'Súper' }, tags: [{ en: 'Debit', es: 'Débito' }, { en: 'Food', es: 'Comida' }], amount: { es: -1284.5, en: -142.86 }, color: 'var(--c3)', icon: 'cart' },
+  { name: { en: 'Paycheck', es: 'Nómina' }, tags: [{ en: 'Payroll', es: 'Nómina' }], amount: { es: 21000, en: 2800 }, color: 'var(--c1)', icon: 'up' },
+  { name: { en: 'Gas — for Dad', es: 'Gasolina — de papá' }, tags: [{ en: 'Excluded', es: 'Excluido' }], amount: { es: -850, en: -48.2 }, color: 'var(--c2)', icon: 'fuel', excluded: true },
 ]
 
 function TxIcon({ kind, color }: { kind: string; color: string }) {
@@ -188,8 +197,8 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
               ))}
             </div>
           </div>
-          <div className="nb-num font-medium whitespace-nowrap" style={{ color: t.amount > 0 ? 'var(--income)' : 'var(--text)' }}>
-            {t.amount > 0 ? '+' : '−'}{money.format(amt(Math.abs(t.amount), lang))}
+          <div className="nb-num font-medium whitespace-nowrap" style={{ color: t.amount[lang] > 0 ? 'var(--income)' : 'var(--text)' }}>
+            {t.amount[lang] > 0 ? '+' : '−'}{money.format(Math.abs(t.amount[lang]))}
           </div>
         </motion.div>
       ))}
@@ -200,17 +209,17 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
 /* ---------- Spending by account ---------- */
 
 const accounts = [
-  { name: { en: 'Debit', es: 'Débito' }, value: 6240, color: 'var(--c1)' },
-  { name: { en: 'Gold card', es: 'Tarjeta oro' }, value: 5180, color: 'var(--c2)' },
-  { name: { en: 'Cash', es: 'Efectivo' }, value: 3410, color: 'var(--c3)' },
-  { name: { en: 'Shared card', es: 'Tarjeta compartida' }, value: 2309.6, color: 'var(--c4)' },
+  { name: { en: 'Debit', es: 'Débito' }, value: { es: 6240, en: 832 }, color: 'var(--c1)' },
+  { name: { en: 'Gold card', es: 'Tarjeta oro' }, value: { es: 5180, en: 690.4 }, color: 'var(--c2)' },
+  { name: { en: 'Cash', es: 'Efectivo' }, value: { es: 3410, en: 455 }, color: 'var(--c3)' },
+  { name: { en: 'Shared card', es: 'Tarjeta compartida' }, value: { es: 2309.6, en: 306.97 }, color: 'var(--c4)' },
 ]
 
 export function AccountSplitsCard({ lang }: { lang: Lang }) {
   const [ref, inView] = useReveal<HTMLDivElement>()
   const reduce = useReducedMotion()
-  const total = accounts.reduce((s, a) => s + a.value, 0)
-  const max = Math.max(...accounts.map(a => a.value))
+  const total = accounts.reduce((s, a) => s + a.value[lang], 0)
+  const max = Math.max(...accounts.map(a => a.value[lang]))
   return (
     <div ref={ref} className="nb-card p-5" style={{ boxShadow: 'var(--shadow)' }}>
       <div className="flex items-center justify-between gap-3">
@@ -224,9 +233,9 @@ export function AccountSplitsCard({ lang }: { lang: Lang }) {
           <div key={i}>
             <div className="flex justify-between text-sm">
               <span>{a.name[lang]}</span>
-              <span className="nb-num" style={{ color: 'var(--muted)' }}>{money.format(amt(a.value, lang))}</span>
+              <span className="nb-num" style={{ color: 'var(--muted)' }}>{money.format(a.value[lang])}</span>
             </div>
-            <div className="mt-1.5"><Bar pct={(a.value / max) * 100} active={inView} color={a.color} height={6} delay={i * 0.08} /></div>
+            <div className="mt-1.5"><Bar pct={(a.value[lang] / max) * 100} active={inView} color={a.color} height={6} delay={i * 0.08} /></div>
           </div>
         ))}
       </div>
@@ -235,8 +244,8 @@ export function AccountSplitsCard({ lang }: { lang: Lang }) {
           <motion.div
             key={i}
             style={{ background: a.color }}
-            initial={{ flexGrow: reduce ? a.value : 0.0001 }}
-            animate={{ flexGrow: inView || reduce ? a.value : 0.0001 }}
+            initial={{ flexGrow: reduce ? a.value[lang] : 0.0001 }}
+            animate={{ flexGrow: inView || reduce ? a.value[lang] : 0.0001 }}
             transition={{ duration: 1.2, ease: EASE, delay: 0.3 }}
           />
         ))}
@@ -245,7 +254,7 @@ export function AccountSplitsCard({ lang }: { lang: Lang }) {
         {accounts.map((a, i) => (
           <span key={i} className="nb-num flex items-center gap-1.5">
             <span className="h-2 w-2 rounded-full" style={{ background: a.color }} />
-            {Math.round((a.value / total) * 100)}%
+            {Math.round((a.value[lang] / total) * 100)}%
           </span>
         ))}
       </div>
@@ -258,8 +267,8 @@ export function AccountSplitsCard({ lang }: { lang: Lang }) {
 export function BudgetCard({ lang }: { lang: Lang }) {
   const [ref, inView] = useReveal<HTMLDivElement>()
   const reduce = useReducedMotion()
-  const spent = amt(9612, lang)
-  const budget = amt(15000, lang)
+  const spent = sample.spent[lang]
+  const budget = sample.budget[lang]
   const pct = spent / budget
   const shownPct = useCountUp(Math.round(pct * 100), inView)
   const r = 44
@@ -310,8 +319,8 @@ const sharedCopy = {
 }
 
 const sharedItems = [
-  { from: 'Mariana', title: { en: () => 'Friday dinner', es: () => 'Cena del viernes' }, amount: 450, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 21:40', es: 'Hoy a las 21:40' }, pending: true },
-  { from: 'Diego', title: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` }, amount: 3250, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 09:15', es: 'Ayer a las 09:15' }, pending: false },
+  { from: 'Mariana', title: { en: () => 'Friday dinner', es: () => 'Cena del viernes' }, amount: { es: 450, en: 38.5 }, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 9:40 PM', es: 'Hoy a las 21:40' }, pending: true },
+  { from: 'Diego', title: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` }, amount: { es: 3250, en: 975 }, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 9:15 AM', es: 'Ayer a las 09:15' }, pending: false },
 ]
 
 function StatusPill({ accepted, lang }: { accepted: boolean; lang: Lang }) {
@@ -348,8 +357,9 @@ export function SharedCard({ lang }: { lang: Lang }) {
     return () => clearTimeout(id)
   }, [inView, reduce])
 
-  const pendingTotal = accepted ? 0 : 450
-  const acceptedTotal = accepted ? 3700 : 3250
+  const [dinner, rent] = sharedItems.map(item => item.amount[lang])
+  const pendingTotal = accepted ? 0 : dinner
+  const acceptedTotal = accepted ? rent + dinner : rent
 
   return (
     <div ref={ref} className="space-y-3">
@@ -364,7 +374,7 @@ export function SharedCard({ lang }: { lang: Lang }) {
               {col.label}
             </div>
             <motion.div key={col.value} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="nb-num mt-1.5 text-2xl font-medium" style={{ color: col.color }}>
-              ${money.format(amt(col.value, lang))}
+              ${money.format(col.value)}
             </motion.div>
           </div>
         ))}
@@ -404,7 +414,7 @@ export function SharedCard({ lang }: { lang: Lang }) {
             <div className="mt-2 text-lg">{item.title[lang](month)}</div>
             <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2">
               <span className="text-sm" style={{ color: 'var(--muted)' }}>{t.share}:</span>
-              <span className="nb-num text-2xl font-medium">{money.format(amt(item.amount, lang))} {currency(lang)}</span>
+              <span className="nb-num text-2xl font-medium">{money.format(item.amount[lang])} {currency(lang)}</span>
               <span className="text-sm" style={{ color: 'var(--muted)' }}>· {item.tag[lang]}</span>
             </div>
             <div className="mt-1.5 text-sm" style={{ color: 'var(--muted)' }}>
@@ -441,8 +451,8 @@ export function ApplePayBanner({ lang, delay = 0.9 }: { lang: Lang; delay?: numb
     return () => clearTimeout(id)
   }, [reduce, delay])
 
-  const cafe = `Café Olmo · $${money.format(amt(89, lang))}`
-  const subtitle = count === 1 ? cafe : `${lang === 'es' ? 'Oxxo' : 'Corner Mart'} ${t.and} Café Olmo · $${money.format(amt(214.5, lang))}`
+  const cafe = `Café Olmo · $${money.format(sample.cafe[lang])}`
+  const subtitle = count === 1 ? cafe : `${lang === 'es' ? 'Oxxo' : 'Corner Mart'} ${t.and} Café Olmo · $${money.format(sample.twoPurchases[lang])}`
 
   return (
     <motion.div
