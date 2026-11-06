@@ -24,7 +24,7 @@ const copy = {
       body: 'Your accounts, budgets and shared expenses in one place. Log the whole check without wrecking your budget.',
       cta: 'Try the beta',
       secondary: 'See how it works',
-      meta: 'Free beta on TestFlight · Try Pro without paying a cent · Spanish & English',
+      meta: 'Free beta on TestFlight · Try Pro without paying a cent',
     },
     chapters: [
       {
@@ -95,7 +95,7 @@ const copy = {
       body: 'Tus cuentas, tus presupuestos y los gastos que compartes, todo en un mismo lugar. Registra el gasto de todos sin que tu balance lo resienta.',
       cta: 'Prueba la beta',
       secondary: 'Mira cómo funciona',
-      meta: 'Beta gratis en TestFlight · Prueba Pro sin pagar un peso · En español e inglés',
+      meta: 'Beta gratis en TestFlight · Prueba Pro sin pagar un peso',
     },
     chapters: [
       {
