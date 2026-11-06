@@ -153,17 +153,50 @@ export function BalanceCard({ lang }: { lang: Lang }) {
 
 /* ---------- Transactions list ---------- */
 
-const txns = [
-  { name: { en: 'Groceries', es: 'Súper' }, tags: [{ en: 'Debit', es: 'Débito' }, { en: 'Food', es: 'Comida' }], amount: { es: -1284.5, en: -142.86 }, color: 'var(--c3)', icon: 'cart' },
-  { name: { en: 'Paycheck', es: 'Nómina' }, tags: [{ en: 'Recurring', es: 'Recurrente' }, { en: 'Biweekly', es: 'Quincenal' }], amount: { es: 21000, en: 2800 }, color: 'var(--c1)', icon: 'up' },
-  { name: { en: 'Gas — for Dad', es: 'Gasolina — de papá' }, tags: [{ en: 'Excluded', es: 'Excluido' }], amount: { es: -850, en: -48.2 }, color: 'var(--c2)', icon: 'fuel', excluded: true },
+type Tag = { label: Record<Lang, string>; kind: 'account' | 'category' }
+
+const txns: {
+  name: Record<Lang, string>
+  tags: Tag[]
+  amount: Money
+  color: string
+  icon: string
+  split?: { who: Record<Lang, string>; amount: Money }[]
+}[] = [
+  {
+    name: { en: 'Groceries', es: 'Súper' },
+    tags: [{ label: { en: 'Debit', es: 'Débito' }, kind: 'account' }, { label: { en: 'Food', es: 'Comida' }, kind: 'category' }],
+    amount: { es: -1284.5, en: -142.86 }, color: 'var(--c3)', icon: 'cart',
+  },
+  {
+    name: { en: 'Paycheck', es: 'Nómina' },
+    tags: [{ label: { en: 'Recurring', es: 'Recurrente' }, kind: 'category' }, { label: { en: 'Biweekly', es: 'Quincenal' }, kind: 'category' }],
+    amount: { es: 21000, en: 2800 }, color: 'var(--c1)', icon: 'up',
+  },
+  // Shared expense: the full charge is listed, but only your half counts in your balance
+  {
+    name: { en: 'Friday dinner', es: 'Cena del viernes' },
+    tags: [{ label: { en: 'Gold card', es: 'Tarjeta oro' }, kind: 'account' }, { label: { en: 'Restaurants', es: 'Restaurantes' }, kind: 'category' }],
+    amount: { es: -900, en: -77 }, color: 'var(--c3)', icon: 'down',
+    split: [
+      { who: { en: 'You', es: 'Tú' }, amount: { es: 450, en: 38.5 } },
+      { who: { en: 'Mariana', es: 'Mariana' }, amount: { es: 450, en: 38.5 } },
+    ],
+  },
 ]
+
+const tagStyle = {
+  account: { background: 'color-mix(in srgb, var(--c2) 16%, transparent)', color: 'color-mix(in srgb, var(--c2) 70%, var(--text))' },
+  category: { background: 'var(--income-bg)', color: 'var(--income)' },
+}
+
+const PERSON = 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0H5Z'
 
 function TxIcon({ kind, color }: { kind: string; color: string }) {
   const paths: Record<string, string> = {
     cart: 'M3 4h2l2.4 11h10.2L20 7H6.3M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z',
     up: 'M12 19V5m0 0-6 6m6-6 6 6',
-    fuel: 'M4 20V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v14M3 20h12M14 10h2a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V9l-3-3M7 8h4',
+    down: 'M12 5v14m0 0-6-6m6 6 6-6',
   }
   return (
     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl" style={{ background: `color-mix(in srgb, ${color} 18%, transparent)`, color }}>
@@ -177,29 +210,47 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
   return (
     <div ref={ref} className="nb-card overflow-hidden" style={{ boxShadow: 'var(--shadow)' }}>
       <div className="nb-label px-5 pt-4 pb-2">{lang === 'es' ? 'Hoy' : 'Today'}</div>
-      {txns.map((t, i) => (
-        <motion.div
-          key={i}
-          className="flex items-center gap-3 px-5 py-3.5"
-          style={{ borderTop: i ? '1px solid var(--stroke)' : undefined, opacity: t.excluded ? 0.75 : 1 }}
-          initial={{ opacity: 0, y: 8 }}
-          animate={inView ? { opacity: t.excluded ? 0.75 : 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.15 + i * 0.12 }}
-        >
-          <TxIcon kind={t.icon} color={t.color} />
-          <div className="min-w-0 flex-1">
-            <div className="truncate font-medium">{t.name[lang]}</div>
-            <div className="mt-1 flex gap-1.5">
-              {t.tags.map((tag, j) => (
-                <span key={j} className="rounded-md px-1.5 py-0.5 text-xs font-medium" style={{ background: 'var(--track)', color: 'var(--muted)' }}>{tag[lang]}</span>
-              ))}
+      {txns.map((t, i) => {
+        const value = t.amount[lang]
+        const total = Math.abs(value)
+        return (
+          <motion.div
+            key={i}
+            className="flex items-start gap-3 px-5 py-3.5"
+            style={{ borderTop: i ? '1px solid var(--stroke)' : undefined }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease: EASE, delay: 0.15 + i * 0.12 }}
+          >
+            <TxIcon kind={t.icon} color={t.color} />
+            <div className="min-w-0 flex-1">
+              <div className="flex items-baseline justify-between gap-3">
+                <div className="truncate font-medium">{t.name[lang]}</div>
+                <div className="nb-num font-medium whitespace-nowrap" style={{ color: value > 0 ? 'var(--income)' : 'var(--text)' }}>
+                  {value > 0 ? '+' : '−'}{money.format(total)}
+                  <span className="ml-1 text-[10px]" style={{ color: 'var(--muted)' }}>{currency(lang)}</span>
+                </div>
+              </div>
+              <div className="mt-1 flex flex-wrap gap-1.5">
+                {t.tags.map((tag, j) => (
+                  <span key={j} className="rounded-md px-1.5 py-0.5 text-xs font-medium" style={tagStyle[tag.kind]}>{tag.label[lang]}</span>
+                ))}
+              </div>
+              {t.split && (
+                <div className="mt-3 pt-2.5 text-[13px]" style={{ borderTop: '1px dashed var(--stroke)' }}>
+                  <div className="font-medium">{lang === 'es' ? 'División del gasto' : 'Split'}</div>
+                  {t.split.map(part => (
+                    <div key={part.who.en} className="nb-num mt-1 flex items-center gap-1.5" style={{ color: 'var(--muted)' }}>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d={PERSON} /></svg>
+                      {part.who[lang]}: {money.format(part.amount[lang])} {currency(lang)} ({Math.round((part.amount[lang] / total) * 100)}%)
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-          <div className="nb-num font-medium whitespace-nowrap" style={{ color: t.amount[lang] > 0 ? 'var(--income)' : 'var(--text)' }}>
-            {t.amount[lang] > 0 ? '+' : '−'}{money.format(Math.abs(t.amount[lang]))}
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        )
+      })}
     </div>
   )
 }
