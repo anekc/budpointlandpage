@@ -231,8 +231,8 @@ export default function Home() {
       proPrice: "$4.99/month",
       proFeatures: ["Unlimited accounts", "Unlimited tags", "Unlimited people", "Unlimited budgets", "Recurring transactions", "iCloud sync", "Collaborative features", "CSV export"],
       annual: "Annual",
-      annualPrice: "$29.99/year",
-      annualSavings: "Save 50%",
+      annualPrice: "$39.99/year",
+      annualSavings: "Save 33%",
       lifetime: "Lifetime",
       lifetimePrice: "$79.99",
       lifetimeBest: "Best Value",
@@ -314,8 +314,8 @@ export default function Home() {
       proPrice: "$4.99/mes",
       proFeatures: ["Cuentas ilimitadas", "Etiquetas ilimitadas", "Personas ilimitadas", "Presupuestos ilimitados", "Transacciones recurrentes", "Sincronización iCloud", "Funciones colaborativas", "Exportación CSV"],
       annual: "Anual",
-      annualPrice: "$29.99/año",
-      annualSavings: "Ahorra 50%",
+      annualPrice: "$39.99/año",
+      annualSavings: "Ahorra 33%",
       lifetime: "De por vida",
       lifetimePrice: "$79.99",
       lifetimeBest: "Mejor valor",
@@ -389,6 +389,21 @@ export default function Home() {
     }
   ]
 
+  const featureItems = [
+    { title: currentLang.multiAccount, desc: currentLang.multiAccountDesc, path: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4' },
+    { title: currentLang.smartBudgeting, desc: currentLang.smartBudgetingDesc, path: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' },
+    { title: currentLang.expenseTracking, desc: currentLang.expenseTrackingDesc, path: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' },
+    { title: currentLang.analytics, desc: currentLang.analyticsDesc, path: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6' },
+    { title: currentLang.personalTracking, desc: currentLang.personalTrackingDesc, path: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
+    { title: currentLang.security, desc: currentLang.securityDesc, path: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
+    { title: currentLang.icloudSync, desc: currentLang.icloudSyncDesc, path: 'M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10' },
+    { title: currentLang.goals, desc: currentLang.goalsDesc, path: 'M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z' },
+    { title: currentLang.scanning, desc: currentLang.scanningDesc, path: 'M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12' },
+    { title: currentLang.timeCost, desc: currentLang.timeCostDesc, path: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+    { title: currentLang.periodComparison, desc: currentLang.periodComparisonDesc, path: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' },
+    { title: currentLang.savingsGoals, desc: currentLang.savingsGoalsDesc, path: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z' },
+  ]
+
   return (
     <>
       <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
@@ -402,14 +417,14 @@ export default function Home() {
                   alt="Budpoint Logo"
                   width={32}
                   height={32}
-                  className="rounded-lg transition-shadow duration-300 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                  className="rounded-lg"
                 />
-                <span className="text-xl font-bold">Budpoint</span>
+                <span className="text-xl font-semibold">Budpoint</span>
               </Link>
               <div className="flex items-center space-x-4">
                 <Link
                   href="/blog"
-                  className={`font-medium hover:text-blue-600 transition-colors ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
+                  className={`font-medium transition-opacity hover:opacity-70 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
                 >
                   Blog
                 </Link>
@@ -452,8 +467,8 @@ export default function Home() {
                   {section.label[language as keyof typeof section.label]}
                 </span>
                 {/* Dot */}
-                <span className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSection === section.id
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-125 shadow-lg shadow-blue-500/50'
+                <span className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeSection === section.id
+                  ? isDark ? 'bg-white scale-125' : 'bg-black scale-125'
                   : isDark
                     ? 'bg-gray-600 hover:bg-gray-400'
                     : 'bg-gray-300 hover:bg-gray-500'
@@ -474,8 +489,8 @@ export default function Home() {
                 className="relative p-1"
                 aria-label={section.label[language as keyof typeof section.label]}
               >
-                <span className={`block w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeSection === section.id
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-125'
+                <span className={`block w-2 h-2 rounded-full transition-all duration-300 ${activeSection === section.id
+                  ? isDark ? 'bg-white scale-125' : 'bg-black scale-125'
                   : isDark
                     ? 'bg-gray-600'
                     : 'bg-gray-300'
@@ -498,11 +513,11 @@ export default function Home() {
                   alt="Budpoint App Icon"
                   width={120}
                   height={120}
-                  className="mx-auto rounded-3xl shadow-2xl hover:shadow-[0_0_40px_rgba(59,130,246,0.4)] transition-shadow duration-300"
+                  className="mx-auto rounded-3xl shadow-xl"
                 />
               </motion.div>
               <motion.h1
-                className="text-4xl font-bold sm:text-6xl mb-6 text-gradient"
+                className={`text-4xl font-semibold sm:text-6xl mb-6 tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -525,23 +540,17 @@ export default function Home() {
               >
                 <button
                   onClick={scrollToWaitlist}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl text-lg font-semibold hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"
+                  className={`px-8 py-3 rounded-lg text-lg font-medium transition-opacity hover:opacity-80 ${isDark ? 'bg-white text-black' : 'bg-black text-white'}`}
                 >
                   {currentLang.joinWaitlist}
                 </button>
               </motion.div>
             </motion.div>
 
-            {/* App Preview Section - RESPONSIVE */}
-            <div className="absolute left-0 right-0 h-[2500px] pointer-events-none overflow-hidden safari-hide" style={{ top: '0' }}>
-              {/* Main blobs - only in screenshots area */}
-              <div className={`absolute top-[500px] left-1/4 w-[600px] h-[600px] bg-blue-500 rounded-full filter blur-[200px] ${isDark ? 'opacity-20' : 'opacity-40'}`}></div>
-              <div className={`absolute top-[600px] right-1/4 w-[500px] h-[500px] bg-purple-500 rounded-full filter blur-[200px] ${isDark ? 'opacity-20' : 'opacity-35'}`}></div>
-            </div>
             <motion.div id="screenshots" className="pt-20 pb-10">
               <div className="text-center mb-16">
                 <motion.h2
-                  className="text-3xl font-bold mb-4"
+                  className="text-3xl font-semibold mb-4"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
@@ -577,7 +586,7 @@ export default function Home() {
                         {/* iPhone Simulation - Realistic */}
                         <div className="relative max-w-[280px] md:max-w-[320px] lg:max-w-[350px] mx-auto">
                           {/* iPhone Frame */}
-                          <div className={`relative rounded-[2rem] md:rounded-[2.5rem] ${isDark ? 'bg-gray-900' : 'bg-gray-800'} shadow-2xl transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(99,102,241,0.4)]`}>
+                          <div className={`relative rounded-[2rem] md:rounded-[2.5rem] ${isDark ? 'bg-gray-900' : 'bg-gray-800'} shadow-xl`}>
                             {/* Screen Container */}
                             <div className="relative p-2 md:p-2">
                               {/* Screen */}
@@ -629,382 +638,134 @@ export default function Home() {
 
             {/* Features Section */}
             <div id="features" className="pt-10 pb-20">
-              <h2 className="text-3xl font-bold text-center mb-12">
+              <h2 className="text-3xl font-semibold text-center mb-12">
                 {currentLang.features}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-green-500/10' : 'hover:shadow-green-500/20'} border border-transparent hover:border-green-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px overflow-hidden rounded-xl border" style={{ borderColor: isDark ? 'rgb(255 255 255 / 10%)' : 'rgb(0 0 0 / 10%)' }}>
+                {featureItems.map((item) => (
+                  <div
+                    key={item.title}
+                    className={`p-8 ${isDark ? 'bg-black' : 'bg-white'}`}
+                  >
+                    <div className={`w-10 h-10 mb-5 flex items-center justify-center rounded-lg ${isDark ? 'bg-white/10' : 'bg-black/5'}`}>
+                      <svg className={isDark ? 'w-5 h-5 text-white' : 'w-5 h-5 text-black'} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d={item.path} />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-medium mb-2">{item.title}</h3>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{item.desc}</p>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-green-500">{currentLang.multiAccount}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.multiAccountDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-blue-500/10' : 'hover:shadow-blue-500/20'} border border-transparent hover:border-blue-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-blue-500">{currentLang.smartBudgeting}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.smartBudgetingDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-purple-500/10' : 'hover:shadow-purple-500/20'} border border-transparent hover:border-purple-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-purple-500">{currentLang.expenseTracking}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.expenseTrackingDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-orange-500/10' : 'hover:shadow-orange-500/20'} border border-transparent hover:border-orange-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-orange-500">{currentLang.analytics}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.analyticsDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-orange-500/10' : 'hover:shadow-orange-500/20'} border border-transparent hover:border-orange-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-orange-500">{currentLang.personalTracking}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.personalTrackingDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-blue-500/10' : 'hover:shadow-blue-500/20'} border border-transparent hover:border-blue-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-blue-500">{currentLang.security}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.securityDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-green-500/10' : 'hover:shadow-green-500/20'} border border-transparent hover:border-green-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-teal-500 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-green-500">{currentLang.icloudSync}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.icloudSyncDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-purple-500/10' : 'hover:shadow-purple-500/20'} border border-transparent hover:border-purple-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-purple-500">{currentLang.goals}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.goalsDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-indigo-500/10' : 'hover:shadow-indigo-500/20'} border border-transparent hover:border-indigo-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-indigo-500">{currentLang.scanning}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.scanningDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-amber-500/10' : 'hover:shadow-amber-500/20'} border border-transparent hover:border-amber-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-yellow-500 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-amber-500">{currentLang.timeCost}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.timeCostDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-rose-500/10' : 'hover:shadow-rose-500/20'} border border-transparent hover:border-rose-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-rose-500">{currentLang.periodComparison}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.periodComparisonDesc}</p>
-                </div>
-                <div
-                  className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900/80' : 'bg-gray-50'} hover:scale-105 transition-all duration-300 hover:shadow-xl ${isDark ? 'hover:shadow-emerald-500/10' : 'hover:shadow-emerald-500/20'} border border-transparent hover:border-emerald-500/30`}
-                >
-                  <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-emerald-500">{currentLang.savingsGoals}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.savingsGoalsDesc}</p>
-                </div>
-
+                ))}
               </div>
             </div>
 
             {/* Why Choose Budpoint Section */}
             <div id="why-choose" className="py-16">
-              <h2 className="text-3xl font-bold text-center mb-4">
+              <h2 className="text-3xl font-semibold text-center mb-4">
                 {currentLang.whyChoose}
               </h2>
               <p className={`text-lg text-center mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
                 {currentLang.whyChooseDesc}
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <div className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
-                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-4xl mx-auto">
+                {[
+                  { title: currentLang.realTime, desc: currentLang.realTimeDesc, path: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
+                  { title: currentLang.smartNotifications, desc: currentLang.smartNotificationsDesc, path: 'M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z' },
+                  { title: currentLang.multiCurrency, desc: currentLang.multiCurrencyDesc, path: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' },
+                ].map((item) => (
+                  <div key={item.title} className="text-center">
+                    <div className="w-10 h-10 mx-auto mb-4 flex items-center justify-center">
+                      <svg className={isDark ? 'w-7 h-7 text-white' : 'w-7 h-7 text-black'} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d={item.path} />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-medium mb-2">{item.title}</h3>
+                    <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>{item.desc}</p>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-blue-600">{currentLang.realTime}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.realTimeDesc}</p>
-                </div>
-                <div className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
-                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-orange-600">{currentLang.smartNotifications}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.smartNotificationsDesc}</p>
-                </div>
-                <div className={`text-center p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
-                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-green-600">{currentLang.multiCurrency}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.multiCurrencyDesc}</p>
-                </div>
+                ))}
               </div>
             </div>
 
             {/* Beta Testers Testimonials Section */}
             <div id="testimonials" className="py-20">
-              <h2 className="text-3xl font-bold text-center mb-4">
+              <h2 className="text-3xl font-semibold text-center mb-4">
                 {currentLang.betaTestersTitle}
               </h2>
               <p className={`text-lg text-center mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
                 {currentLang.betaTestersSubtitle}
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
-                  <div className="flex items-center mb-4">
-                    <div className="flex text-yellow-400">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-px overflow-hidden rounded-xl border max-w-6xl mx-auto" style={{ borderColor: isDark ? 'rgb(255 255 255 / 10%)' : 'rgb(0 0 0 / 10%)' }}>
+                {[
+                  { quote: currentLang.testimonial1, author: currentLang.testimonial1Author, role: currentLang.testimonial1Role },
+                  { quote: currentLang.testimonial2, author: currentLang.testimonial2Author, role: currentLang.testimonial2Role },
+                  { quote: currentLang.testimonial3, author: currentLang.testimonial3Author, role: currentLang.testimonial3Role },
+                ].map((item) => (
+                  <div key={item.author} className={`p-8 ${isDark ? 'bg-black' : 'bg-white'}`}>
+                    <div className={`flex mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
                       {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
                       ))}
                     </div>
-                  </div>
-                  <p className={`mb-4 italic ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                    &quot;{currentLang.testimonial1}&quot;
-                  </p>
-                  <div className="flex items-center">
-                    <div className={`w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 p-0.5 mr-3`}>
-                      <div className={`w-full h-full rounded-full ${isDark ? 'bg-gray-900' : 'bg-white'} flex items-center justify-center text-blue-500 font-semibold`}>
-                        {currentLang.testimonial1Author.charAt(0)}
+                    <p className={`mb-6 text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                      &quot;{item.quote}&quot;
+                    </p>
+                    <div className="flex items-center">
+                      <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium mr-3 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-black'}`}>
+                        {item.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">{item.author}</p>
+                        <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>{item.role}</p>
                       </div>
                     </div>
-                    <div>
-                      <p className="font-semibold">{currentLang.testimonial1Author}</p>
-                      <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{currentLang.testimonial1Role}</p>
-                    </div>
                   </div>
-                </div>
-
-                <div className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
-                  <div className="flex items-center mb-4">
-                    <div className="flex text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                  <p className={`mb-4 italic ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                    &quot;{currentLang.testimonial2}&quot;
-                  </p>
-                  <div className="flex items-center">
-                    <div className={`w-11 h-11 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 p-0.5 mr-3`}>
-                      <div className={`w-full h-full rounded-full ${isDark ? 'bg-gray-900' : 'bg-white'} flex items-center justify-center text-green-500 font-semibold`}>
-                        {currentLang.testimonial2Author.charAt(0)}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="font-semibold">{currentLang.testimonial2Author}</p>
-                      <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{currentLang.testimonial2Role}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={`p-6 rounded-xl ${isDark ? 'bg-gray-900' : 'bg-gray-50'} hover:scale-105 transition-transform`}>
-                  <div className="flex items-center mb-4">
-                    <div className="flex text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                  <p className={`mb-4 italic ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                    &quot;{currentLang.testimonial3}&quot;
-                  </p>
-                  <div className="flex items-center">
-                    <div className={`w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-0.5 mr-3`}>
-                      <div className={`w-full h-full rounded-full ${isDark ? 'bg-gray-900' : 'bg-white'} flex items-center justify-center text-purple-500 font-semibold`}>
-                        {currentLang.testimonial3Author.charAt(0)}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="font-semibold">{currentLang.testimonial3Author}</p>
-                      <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{currentLang.testimonial3Role}</p>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
             {/* Pricing Section */}
             <div id="pricing" className="py-20">
               <div className="text-center">
-                <h2 className="text-3xl font-bold mb-8">
+                <h2 className="text-3xl font-semibold mb-10">
                   {currentLang.pricing}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                  {/* Free Plan */}
-                  <div
-                    className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${selectedPlan === 'free'
-                      ? `${isDark ? 'border-gray-400 bg-gray-800 shadow-xl scale-105' : 'border-gray-500 bg-white shadow-xl scale-105'}`
-                      : `${isDark ? 'border-transparent bg-gray-800 hover:border-gray-600' : 'border-transparent bg-white hover:border-gray-300'}`
-                      }`}
-                    onClick={() => setSelectedPlan('free')}
-                  >
-                    <h3 className="text-xl font-bold mb-4">{currentLang.free}</h3>
-                    <p className="text-3xl font-bold mb-6">$0</p>
-                    <ul className="text-left space-y-2 mb-8 flex-grow">
-                      {currentLang.freeFeatures.map((feature, index) => (
-                        <li key={index} className="flex items-center text-sm">
-                          <span className="text-green-500 mr-2">✓</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <button className={`w-full py-3 rounded-lg font-semibold mt-auto ${isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-800'}`}>
-                      {currentLang.comingSoon}
-                    </button>
-                  </div>
-
-                  {/* Pro Monthly Plan */}
-                  <div
-                    className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col ${selectedPlan === 'pro'
-                      ? `border-blue-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
-                      : `border-transparent ${isDark ? 'bg-gray-800 hover:border-blue-400' : 'bg-white hover:border-blue-300'}`
-                      }`}
-                    onClick={() => setSelectedPlan('pro')}
-                  >
-                    <h3 className="text-xl font-bold mb-4 text-blue-600">{currentLang.pro}</h3>
-                    <p className="text-3xl font-bold mb-6">{currentLang.proPrice}</p>
-                    <ul className="text-left space-y-2 mb-8 flex-grow">
-                      {currentLang.proFeatures.map((feature, index) => (
-                        <li key={index} className="flex items-center text-sm">
-                          <span className="text-green-500 mr-2">✓</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <button className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 rounded-lg font-semibold hover:from-blue-500 hover:to-blue-600 transition-all duration-300 mt-auto hover:shadow-lg hover:shadow-blue-500/30">
-                      {currentLang.comingSoon}
-                    </button>
-                  </div>
-
-                  {/* Pro Annual Plan */}
-                  <div
-                    className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${selectedPlan === 'annual'
-                      ? `border-orange-600 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
-                      : `border-transparent ${isDark ? 'bg-gray-800 hover:border-orange-400' : 'bg-white hover:border-orange-300'}`
-                      }`}
-                    onClick={() => setSelectedPlan('annual')}
-                  >
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-1 rounded-full text-xs font-semibold shadow-lg">
-                        {currentLang.annualSavings}
-                      </span>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+                  {([
+                    { key: 'free', name: currentLang.free, price: '$0', features: currentLang.freeFeatures, badge: null },
+                    { key: 'pro', name: currentLang.pro, price: currentLang.proPrice, features: currentLang.proFeatures, badge: null },
+                    { key: 'annual', name: currentLang.annual, price: currentLang.annualPrice, features: currentLang.proFeatures, badge: currentLang.annualSavings },
+                    { key: 'lifetime', name: currentLang.lifetime, price: currentLang.lifetimePrice, features: currentLang.proFeatures, badge: currentLang.lifetimeBest },
+                  ] as const).map((plan) => (
+                    <div
+                      key={plan.key}
+                      className={`relative flex flex-col p-6 rounded-xl border cursor-pointer transition-colors duration-300 ${selectedPlan === plan.key
+                        ? isDark ? 'border-white bg-gray-900' : 'border-black bg-white'
+                        : isDark ? 'border-gray-800 bg-gray-900 hover:border-gray-600' : 'border-gray-200 bg-white hover:border-gray-400'
+                        }`}
+                      onClick={() => setSelectedPlan(plan.key)}
+                    >
+                      {plan.badge && (
+                        <span className={`self-start mb-3 px-2.5 py-1 rounded-md text-xs font-medium ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-black'}`}>
+                          {plan.badge}
+                        </span>
+                      )}
+                      <h3 className="text-base font-medium mb-3">{plan.name}</h3>
+                      <p className="text-2xl font-semibold mb-6">{plan.price}</p>
+                      <ul className="text-left space-y-2 mb-8 flex-grow text-sm">
+                        {plan.features.map((feature) => (
+                          <li key={feature} className={`flex items-start gap-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <span className={isDark ? 'text-gray-500' : 'text-gray-400'}>✓</span>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                      <button className={`w-full py-3 rounded-lg font-medium mt-auto transition-opacity hover:opacity-80 ${isDark ? 'bg-white/10 text-white' : 'bg-black/5 text-black'}`}>
+                        {currentLang.comingSoon}
+                      </button>
                     </div>
-                    <h3 className="text-xl font-bold mb-4 text-orange-600">{currentLang.annual}</h3>
-                    <p className="text-3xl font-bold mb-6">{currentLang.annualPrice}</p>
-                    <ul className="text-left space-y-2 mb-8 flex-grow">
-                      {currentLang.proFeatures.map((feature, index) => (
-                        <li key={index} className="flex items-center text-sm">
-                          <span className="text-green-500 mr-2">✓</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <button className="w-full bg-gradient-to-r from-orange-600 to-amber-500 text-white py-3 rounded-lg font-semibold hover:from-orange-500 hover:to-amber-600 transition-all duration-300 mt-auto hover:shadow-lg hover:shadow-orange-500/30">
-                      {currentLang.comingSoon}
-                    </button>
-                  </div>
-
-                  {/* Lifetime Plan */}
-                  <div
-                    className={`p-6 rounded-xl shadow-lg border-2 cursor-pointer transition-all duration-300 flex flex-col relative ${selectedPlan === 'lifetime'
-                      ? `border-purple-500 ${isDark ? 'bg-gray-800 shadow-xl scale-105' : 'bg-white shadow-xl scale-105'}`
-                      : `border-transparent ${isDark ? 'bg-gray-800 hover:border-purple-400' : 'bg-white hover:border-purple-300'}`
-                      }`}
-                    onClick={() => setSelectedPlan('lifetime')}
-                  >
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-4 py-1 rounded-full text-xs font-semibold shadow-lg">
-                        {currentLang.lifetimeBest}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold mb-4 text-purple-600">{currentLang.lifetime}</h3>
-                    <p className="text-3xl font-bold mb-6">{currentLang.lifetimePrice}</p>
-                    <ul className="text-left space-y-2 mb-8 flex-grow">
-                      {currentLang.proFeatures.map((feature, index) => (
-                        <li key={index} className="flex items-center text-sm">
-                          <span className="text-green-500 mr-2">✓</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <button className="w-full bg-gradient-to-r from-purple-600 to-violet-500 text-white py-3 rounded-lg font-semibold hover:from-purple-500 hover:to-violet-600 transition-all duration-300 mt-auto hover:shadow-lg hover:shadow-purple-500/30">
-                      {currentLang.comingSoon}
-                    </button>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1012,29 +773,27 @@ export default function Home() {
             {/* FAQ Section */}
             <div id="faq" className="py-20">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold mb-4">{currentLang.faqTitle}</h2>
+                <h2 className="text-3xl font-semibold mb-4">{currentLang.faqTitle}</h2>
                 <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{currentLang.faqSubtitle}</p>
               </div>
-              <div className="max-w-3xl mx-auto space-y-6">
-                <div className={`p-6 rounded-lg border-l-4 border-blue-500 transition-all duration-300 hover:shadow-lg ${isDark ? 'bg-gray-900/80 hover:shadow-blue-500/10' : 'bg-gray-50 hover:shadow-blue-500/20'}`}>
-                  <h3 className="text-lg font-semibold mb-2">{currentLang.faq1Question}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.faq1Answer}</p>
-                </div>
-                <div className={`p-6 rounded-lg border-l-4 border-purple-500 transition-all duration-300 hover:shadow-lg ${isDark ? 'bg-gray-900/80 hover:shadow-purple-500/10' : 'bg-gray-50 hover:shadow-purple-500/20'}`}>
-                  <h3 className="text-lg font-semibold mb-2">{currentLang.faq2Question}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.faq2Answer}</p>
-                </div>
-                <div className={`p-6 rounded-lg border-l-4 border-green-500 transition-all duration-300 hover:shadow-lg ${isDark ? 'bg-gray-900/80 hover:shadow-green-500/10' : 'bg-gray-50 hover:shadow-green-500/20'}`}>
-                  <h3 className="text-lg font-semibold mb-2">{currentLang.faq3Question}</h3>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>{currentLang.faq3Answer}</p>
-                </div>
+              <div className={`max-w-3xl mx-auto divide-y ${isDark ? 'divide-gray-800' : 'divide-gray-200'}`}>
+                {[
+                  { q: currentLang.faq1Question, a: currentLang.faq1Answer },
+                  { q: currentLang.faq2Question, a: currentLang.faq2Answer },
+                  { q: currentLang.faq3Question, a: currentLang.faq3Answer },
+                ].map((item) => (
+                  <div key={item.q} className="py-6">
+                    <h3 className="text-lg font-medium mb-2">{item.q}</h3>
+                    <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>{item.a}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Waitlist Section */}
             <div id="waitlist" className="py-20 text-center">
               <div>
-                <h2 className="text-3xl font-bold mb-4">
+                <h2 className="text-3xl font-semibold mb-4">
                   {currentLang.waitlistTitle}
                 </h2>
                 <p className={`text-lg mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -1072,7 +831,7 @@ export default function Home() {
                             placeholder={currentLang.emailPlaceholder}
                             required
                             disabled={isSubmitting}
-                            className={`w-full px-4 py-3 border rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:shadow-[0_0_20px_rgba(59,130,246,0.3)] ${submitStatus === 'error'
+                            className={`w-full px-4 py-3 border rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 ${isDark ? 'focus:ring-white/30' : 'focus:ring-black/20'} ${submitStatus === 'error'
                               ? isDark ? 'bg-red-900/20 border-red-800 text-white placeholder-red-400' : 'bg-red-50 border-red-300 text-gray-900 placeholder-red-400'
                               : showValidation
                                 ? isEmailValid
@@ -1105,9 +864,9 @@ export default function Home() {
                       <button
                         type="submit"
                         disabled={isSubmitting || !email.trim() || (showValidation && !isEmailValid)}
-                        className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 self-start ${isSubmitting || !email.trim() || (showValidation && !isEmailValid)
+                        className={`px-6 py-3 rounded-lg font-medium transition-opacity duration-300 self-start ${isSubmitting || !email.trim() || (showValidation && !isEmailValid)
                           ? isDark ? 'bg-gray-700 text-gray-400 cursor-not-allowed' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                          : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] hover:scale-105'
+                          : isDark ? 'bg-white text-black hover:opacity-80' : 'bg-black text-white hover:opacity-80'
                           }`}
                       >
                         {isSubmitting ? currentLang.joining : currentLang.join}

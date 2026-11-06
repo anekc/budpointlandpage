@@ -72,9 +72,7 @@ export default function Footer({ isDark: isDarkProp }: FooterProps) {
   const currentLang = t[language as keyof typeof t]
 
   return (
-    <footer className={`transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
-      {/* Gradient separator */}
-      <div className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+    <footer className={`border-t transition-colors duration-300 ${isDark ? 'bg-black text-white border-gray-800' : 'bg-white text-gray-900 border-gray-200'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}

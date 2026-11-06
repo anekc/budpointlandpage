@@ -35,7 +35,7 @@ export default function TermsOfService() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="prose prose-lg max-w-none">
           <h1 className={`text-4xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>Terms of Service</h1>
-          <p className={`mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Last updated: July 2025</p>
+          <p className={`mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Last updated: August 2026</p>
 
           <section className="mb-8">
             <h2 className={`text-2xl font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>Agreement to Terms</h2>
@@ -70,13 +70,14 @@ export default function TermsOfService() {
             <div className={`leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
               <p className="mb-3">Budpoint offers the following subscription options:</p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong>Monthly Subscription:</strong> Automatically renews every month</li>
-                <li><strong>Annual Subscription:</strong> Automatically renews every year</li>
-                <li><strong>Lifetime Purchase:</strong> One-time payment for permanent access</li>
+                <li><strong>Monthly Subscription — $4.99/month:</strong> Automatically renews every month. New subscribers get a 7-day free trial.</li>
+                <li><strong>Annual Subscription — $39.99/year:</strong> Automatically renews every year. New subscribers get a 14-day free trial.</li>
+                <li><strong>Lifetime Purchase — $79.99:</strong> One-time payment for permanent access. No free trial applies to this option.</li>
               </ul>
               <div className="mt-4 space-y-2">
-                <p><strong>• Auto-Renewal:</strong> Subscriptions automatically renew unless cancelled at least 24 hours before expiration</p>
-                <p><strong>• Payment:</strong> Payment will be charged to your Apple ID account at confirmation of purchase</p>
+                <p><strong>• Free Trial:</strong> If you start a subscription with a free trial, you won&apos;t be charged until the trial ends. You can cancel anytime during the trial at no cost through your Apple ID account settings. If you don&apos;t cancel before the trial ends, you will automatically be charged the subscription price shown above.</p>
+                <p><strong>• Auto-Renewal:</strong> Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period (or, if applicable, the free trial period)</p>
+                <p><strong>• Payment:</strong> Payment will be charged to your Apple ID account at confirmation of purchase, or at the end of the free trial if one applies</p>
                 <p><strong>• Cancellation:</strong> You can manage and cancel subscriptions through your Apple ID account settings</p>
                 <p><strong>• Refunds:</strong> Refunds are handled by Apple according to their refund policy</p>
               </div>
