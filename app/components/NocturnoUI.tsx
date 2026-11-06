@@ -188,7 +188,7 @@ const txns: {
   {
     name: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` },
     tags: [{ label: { en: 'Debit', es: 'Débito' }, kind: 'account' }, { label: { en: 'Home', es: 'Hogar' }, kind: 'category' }],
-    amount: { es: -3250, en: -975 }, color: 'var(--c3)', icon: 'home',
+    amount: { es: -6500, en: -975 }, color: 'var(--c3)', icon: 'home',
     sharedBy: 'Diego',
   },
 ]
@@ -408,7 +408,7 @@ const sharedCopy = {
 // You paid the Friday dinner from the transactions card and sent Mariana her half;
 // Diego paid the rent and sent you yours.
 const sentItem = { who: 'Mariana', title: { en: () => 'Friday dinner', es: () => 'Cena del viernes' }, amount: { es: 450, en: 38.5 }, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 9:40 PM', es: 'Hoy a las 21:40' } }
-const receivedItem = { who: 'Diego', title: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` }, amount: { es: 3250, en: 975 }, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 9:15 AM', es: 'Ayer a las 09:15' } }
+const receivedItem = { who: 'Diego', title: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` }, amount: { es: 6500, en: 975 }, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 9:15 AM', es: 'Ayer a las 09:15' } }
 
 function StatusPill({ accepted, lang }: { accepted: boolean; lang: Lang }) {
   const t = sharedCopy[lang]
