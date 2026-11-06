@@ -11,6 +11,11 @@ const EASE = [0.22, 1, 0.36, 1] as const
 
 const money = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
+/** Sample amounts are written in pesos; English visitors see them as dollars at a
+ *  tenth of the size, so a month of spending looks realistic in either currency. */
+const amt = (pesos: number, lang: Lang) => (lang === 'es' ? pesos : pesos / 10)
+const currency = (lang: Lang) => (lang === 'es' ? 'MXN' : 'USD')
+
 function useReveal<T extends Element>() {
   const ref = useRef<T>(null)
   const inView = useInView(ref, { once: true, margin: '-15% 0px' })
@@ -124,15 +129,15 @@ export function BalanceCard({ lang }: { lang: Lang }) {
   return (
     <div ref={ref} className="nb-card p-5" style={{ boxShadow: 'var(--shadow)' }}>
       <div className="nb-label">{lang === 'es' ? 'Balance del periodo' : 'Period balance'}</div>
-      <div className="mt-2"><Amount value={24860.4} active={inView} size={40} /></div>
+      <div className="mt-2"><Amount value={amt(24860.4, lang)} active={inView} size={40} /></div>
       <div className="mt-4 grid grid-cols-2 gap-3">
         <div className="rounded-2xl p-3.5" style={{ background: 'var(--income-bg)' }}>
           <div className="text-sm font-medium" style={{ color: 'var(--income)' }}>↑ {lang === 'es' ? 'Ingresos' : 'Income'}</div>
-          <div className="mt-1"><Amount value={42000} active={inView} size={19} /></div>
+          <div className="mt-1"><Amount value={amt(42000, lang)} active={inView} size={19} /></div>
         </div>
         <div className="rounded-2xl p-3.5" style={{ background: 'var(--expense-bg)' }}>
           <div className="text-sm font-medium" style={{ color: 'var(--expense)' }}>↓ {lang === 'es' ? 'Gastos' : 'Expenses'}</div>
-          <div className="mt-1"><Amount value={17139.6} active={inView} size={19} /></div>
+          <div className="mt-1"><Amount value={amt(17139.6, lang)} active={inView} size={19} /></div>
         </div>
       </div>
     </div>
@@ -184,7 +189,7 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
             </div>
           </div>
           <div className="nb-num font-medium whitespace-nowrap" style={{ color: t.amount > 0 ? 'var(--income)' : 'var(--text)' }}>
-            {t.amount > 0 ? '+' : '−'}{money.format(Math.abs(t.amount))}
+            {t.amount > 0 ? '+' : '−'}{money.format(amt(Math.abs(t.amount), lang))}
           </div>
         </motion.div>
       ))}
@@ -219,7 +224,7 @@ export function AccountSplitsCard({ lang }: { lang: Lang }) {
           <div key={i}>
             <div className="flex justify-between text-sm">
               <span>{a.name[lang]}</span>
-              <span className="nb-num" style={{ color: 'var(--muted)' }}>{money.format(a.value)}</span>
+              <span className="nb-num" style={{ color: 'var(--muted)' }}>{money.format(amt(a.value, lang))}</span>
             </div>
             <div className="mt-1.5"><Bar pct={(a.value / max) * 100} active={inView} color={a.color} height={6} delay={i * 0.08} /></div>
           </div>
@@ -253,8 +258,8 @@ export function AccountSplitsCard({ lang }: { lang: Lang }) {
 export function BudgetCard({ lang }: { lang: Lang }) {
   const [ref, inView] = useReveal<HTMLDivElement>()
   const reduce = useReducedMotion()
-  const spent = 9612
-  const budget = 15000
+  const spent = amt(9612, lang)
+  const budget = amt(15000, lang)
   const pct = spent / budget
   const shownPct = useCountUp(Math.round(pct * 100), inView)
   const r = 44
@@ -359,7 +364,7 @@ export function SharedCard({ lang }: { lang: Lang }) {
               {col.label}
             </div>
             <motion.div key={col.value} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="nb-num mt-1.5 text-2xl font-medium" style={{ color: col.color }}>
-              ${money.format(col.value)}
+              ${money.format(amt(col.value, lang))}
             </motion.div>
           </div>
         ))}
@@ -399,7 +404,7 @@ export function SharedCard({ lang }: { lang: Lang }) {
             <div className="mt-2 text-lg">{item.title[lang](month)}</div>
             <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2">
               <span className="text-sm" style={{ color: 'var(--muted)' }}>{t.share}:</span>
-              <span className="nb-num text-2xl font-medium">{money.format(item.amount)} MXN</span>
+              <span className="nb-num text-2xl font-medium">{money.format(amt(item.amount, lang))} {currency(lang)}</span>
               <span className="text-sm" style={{ color: 'var(--muted)' }}>· {item.tag[lang]}</span>
             </div>
             <div className="mt-1.5 text-sm" style={{ color: 'var(--muted)' }}>
@@ -436,7 +441,8 @@ export function ApplePayBanner({ lang, delay = 0.9 }: { lang: Lang; delay?: numb
     return () => clearTimeout(id)
   }, [reduce, delay])
 
-  const subtitle = count === 1 ? 'Café Olmo · $89.00' : `Oxxo ${t.and} Café Olmo · $214.50`
+  const cafe = `Café Olmo · $${money.format(amt(89, lang))}`
+  const subtitle = count === 1 ? cafe : `${lang === 'es' ? 'Oxxo' : 'Corner Mart'} ${t.and} Café Olmo · $${money.format(amt(214.5, lang))}`
 
   return (
     <motion.div
