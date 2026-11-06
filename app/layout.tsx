@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import "./nocturno.css";
 import { Providers } from "./providers";
 
 const geistSans = Geist({
@@ -10,6 +11,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -57,8 +63,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Dynamic theme color meta tags for mobile status bar */}
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#F4F5F7" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0D0E12" media="(prefers-color-scheme: dark)" />
         {/* iOS Safari status bar styling */}
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         {/* Viewport meta for proper mobile rendering */}
@@ -79,7 +85,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased preload`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased preload`}
         suppressHydrationWarning
       >
         <script
