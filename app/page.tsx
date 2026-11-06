@@ -21,7 +21,7 @@ const copy = {
     hero: {
       eyebrow: 'Personal finance for iPhone',
       title: ['Know where your money went.', 'Before the month ends.'],
-      body: 'Your accounts, budgets and shared expenses in one place. Pick up the whole check without wrecking your budget.',
+      body: 'Your accounts, budgets and shared expenses in one place. Log the whole check without wrecking your budget.',
       cta: 'Try the beta',
       secondary: 'See how it works',
       meta: 'Free beta on TestFlight · Pro from $4.99/mo · Spanish & English',
@@ -92,7 +92,7 @@ const copy = {
     hero: {
       eyebrow: 'Tus finanzas en tu iPhone',
       title: ['Descubre en qué se te va el dinero,', 'antes de que se acabe el mes.'],
-      body: 'Tus cuentas, tus presupuestos y los gastos que compartes, todo en un mismo lugar. Paga la cuenta de todos sin que tu balance lo resienta.',
+      body: 'Tus cuentas, tus presupuestos y los gastos que compartes, todo en un mismo lugar. Registra el gasto de todos sin que tu balance lo resienta.',
       cta: 'Prueba la beta',
       secondary: 'Mira cómo funciona',
       meta: 'Beta gratis en TestFlight · Pro desde $4.99 al mes · En español e inglés',
