@@ -19,8 +19,6 @@ const sample = {
   balance: { es: 24860.4, en: 3315.63 },
   income: { es: 42000, en: 5600 },
   expenses: { es: 17139.6, en: 2284.37 },
-  spent: { es: 9612, en: 1281.6 },
-  budget: { es: 15000, en: 2000 },
   cafe: { es: 89, en: 6.75 },
   twoPurchases: { es: 214.5, en: 19.15 },
 } satisfies Record<string, Money>
@@ -267,14 +265,15 @@ export function AccountSplitsCard({ lang }: { lang: Lang }) {
 export function BudgetCard({ lang }: { lang: Lang }) {
   const [ref, inView] = useReveal<HTMLDivElement>()
   const reduce = useReducedMotion()
-  const spent = sample.spent[lang]
-  const budget = sample.budget[lang]
+  const spent = sample.expenses[lang]
+  // The plan splits the whole monthly income, so the budget is the income
+  const budget = sample.income[lang]
   const pct = spent / budget
   const shownPct = useCountUp(Math.round(pct * 100), inView)
   const r = 44
   const rules = [
-    { name: { en: 'Needs · 50%', es: 'Necesidades · 50%' }, pct: 72, color: 'var(--c1)' },
-    { name: { en: 'Wants · 30%', es: 'Gustos · 30%' }, pct: 58, color: 'var(--c2)' },
+    { name: { en: 'Needs · 50%', es: 'Necesidades · 50%' }, pct: 54, color: 'var(--c1)' },
+    { name: { en: 'Wants · 30%', es: 'Gustos · 30%' }, pct: 46, color: 'var(--c2)' },
     { name: { en: 'Savings · 20%', es: 'Ahorro · 20%' }, pct: 40, color: 'var(--c5)' },
   ]
   return (
