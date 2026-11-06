@@ -6,7 +6,7 @@ import { useLanguage } from './components/LanguageContext'
 import { AccentButton, SiteFooter, SiteHeader, TESTFLIGHT_URL } from './components/SiteChrome'
 import {
   AccountSplitsCard,
-  ApplePayToast,
+  ApplePayBanner,
   BalanceCard,
   BudgetCard,
   PeriodCard,
@@ -242,10 +242,10 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto w-full max-w-[440px]">
-          <div className="absolute -top-6 right-0 left-6 z-20 sm:-right-8 sm:left-auto sm:w-[320px]">
-            <ApplePayToast lang={lang} />
-          </div>
-          <Reveal delay={0.15} className="relative z-10 pt-14"><PeriodCard lang={lang} /></Reveal>
+          <Reveal delay={0.15} className="relative z-10">
+            <PeriodCard lang={lang} />
+            <ApplePayBanner lang={lang} />
+          </Reveal>
           <Reveal delay={0.3} className="relative z-0 mt-3 sm:ml-10 sm:-mr-6"><BalanceCard lang={lang} /></Reveal>
         </div>
       </section>

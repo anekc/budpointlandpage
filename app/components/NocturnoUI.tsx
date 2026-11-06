@@ -394,28 +394,53 @@ export function SharedCard({ lang }: { lang: Lang }) {
   )
 }
 
-/* ---------- Apple Pay notification ---------- */
+/* ---------- Apple Pay pending banner (mirrors ApplePayPendingBanner on the Dashboard) ---------- */
 
-export function ApplePayToast({ lang, delay = 1.1 }: { lang: Lang; delay?: number }) {
+const bannerCopy = {
+  en: { one: '1 purchase to confirm', other: (n: number) => `${n} purchases to confirm`, and: 'and', review: 'Review' },
+  es: { one: '1 compra por confirmar', other: (n: number) => `${n} compras por confirmar`, and: 'y', review: 'Revisar' },
+}
+
+export function ApplePayBanner({ lang, delay = 0.9 }: { lang: Lang; delay?: number }) {
   const reduce = useReducedMotion()
+  const t = bannerCopy[lang]
+  // A second Apple Pay purchase lands a moment after the banner shows up
+  const [count, setCount] = useState(reduce ? 2 : 1)
+
+  useEffect(() => {
+    if (reduce) return
+    const id = setTimeout(() => setCount(2), (delay + 2.2) * 1000)
+    return () => clearTimeout(id)
+  }, [reduce, delay])
+
+  const subtitle = count === 1 ? 'Café Olmo · $89.00' : `Oxxo ${t.and} Café Olmo · $214.50`
+
   return (
     <motion.div
-      initial={reduce ? false : { opacity: 0, y: -16, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      initial={reduce ? false : { opacity: 0, height: 0, marginTop: 0 }}
+      animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
       transition={{ duration: 0.6, ease: EASE, delay }}
-      className="flex items-center gap-3 rounded-[22px] p-3 pr-4 backdrop-blur-xl"
-      style={{ background: 'color-mix(in srgb, var(--card) 88%, transparent)', border: '1px solid var(--stroke)', boxShadow: 'var(--shadow)' }}
+      className="overflow-hidden"
     >
-      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px]" style={{ background: 'var(--accent)', color: 'var(--on-accent)' }}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M12 5v14M5 12h14" /></svg>
-      </div>
-      <div className="min-w-0 flex-1 text-sm leading-snug">
-        <div className="flex justify-between gap-2">
-          <span className="font-semibold">Budpoint</span>
-          <span style={{ color: 'var(--muted)' }}>{lang === 'es' ? 'ahora' : 'now'}</span>
+      <div className="flex items-center gap-3 rounded-[18px] p-3.5" style={{ background: 'var(--accent)', color: 'var(--on-accent)' }}>
+        <motion.div
+          key={count}
+          initial={reduce ? false : { scale: 0.7 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 22 }}
+          className="nb-num grid h-9 w-9 shrink-0 place-items-center rounded-[10px] text-base font-bold"
+          style={{ background: 'var(--on-accent)', color: 'var(--accent)' }}
+        >
+          {count}
+        </motion.div>
+        <div className="min-w-0 flex-1 leading-snug">
+          <div className="text-[15px] font-semibold">{count === 1 ? t.one : t.other(count)}</div>
+          <div className="nb-num truncate text-xs" style={{ opacity: 0.75 }}>{subtitle}</div>
         </div>
-        <div className="truncate">{lang === 'es' ? 'Guardado por confirmar' : 'Saved for review'} · Apple Pay</div>
-        <div className="nb-num truncate" style={{ color: 'var(--muted)' }}>Café Olmo · $89.00</div>
+        <span className="flex shrink-0 items-center gap-0.5 text-[13px] font-semibold">
+          {t.review}
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="m9 6 6 6-6 6" /></svg>
+        </span>
       </div>
     </motion.div>
   )
