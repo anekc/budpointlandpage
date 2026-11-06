@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLanguage } from './components/LanguageContext'
-import { AccentButton, SiteFooter, SiteHeader } from './components/SiteChrome'
+import { AccentButton, SiteFooter, SiteHeader, TESTFLIGHT_URL } from './components/SiteChrome'
 import {
   AccountSplitsCard,
   ApplePayToast,
@@ -22,9 +22,9 @@ const copy = {
       eyebrow: 'Personal finance for iPhone',
       title: ['Know where your money went.', 'Before the month ends.'],
       body: 'Budpoint keeps your accounts, budgets and the expenses you share with other people in one place, and keeps what’s yours apart from what isn’t.',
-      cta: 'Join the waitlist',
+      cta: 'Try the beta',
       secondary: 'See how it works',
-      meta: 'Free to start · Pro from $4.99/mo · Spanish & English',
+      meta: 'Free beta on TestFlight · Pro from $4.99/mo · Spanish & English',
     },
     chapters: [
       {
@@ -71,13 +71,17 @@ const copy = {
     ],
     faqTitle: 'Questions',
     faq: [
-      { q: 'When is Budpoint available?', a: 'It’s in final testing on iOS. Join the list and we’ll email you the day it’s on the App Store.' },
+      { q: 'Can I use Budpoint yet?', a: 'Yes, it’s in beta. Get it free through TestFlight, Apple’s app for trying apps before they reach the App Store. If you’d rather wait for the final version, leave your email and we’ll let you know.' },
+      { q: 'Do I pay for Pro in the beta?', a: 'No. In TestFlight, purchases are test purchases and you aren’t charged. Once Budpoint is on the App Store, Pro is bought normally.' },
       { q: 'Does Budpoint connect to my bank?', a: 'No. Nothing asks for your bank password. Purchases come in through Apple Pay Shortcuts, your bank’s email alerts, CSV import, or by hand.' },
       { q: 'Who can see my data?', a: 'Your data lives on your iPhone and in your own iCloud account. Only the expenses you share go through our servers, so they can reach the other person.' },
       { q: 'Can I use it with my partner or roommates?', a: 'Yes. Each person uses their own Budpoint and you send each other shared expenses with your Budpoint codes.' },
     ],
-    ctaTitle: 'Start next month with a plan.',
-    ctaBody: 'Leave your email and we’ll let you know when Budpoint is live.',
+    ctaTitle: 'Try Budpoint today.',
+    ctaBody: 'The beta is free on TestFlight. Install it, use it, and tell us what you think.',
+    betaCta: 'Get the beta on TestFlight',
+    betaNote: 'It’s a beta: you may run into bugs, and Pro purchases are test purchases, so you won’t be charged.',
+    waitTitle: 'Rather wait for the App Store version? Leave your email.',
     email: 'you@email.com',
     join: 'Join',
     joining: 'Joining…',
@@ -89,9 +93,9 @@ const copy = {
       eyebrow: 'Tus finanzas en tu iPhone',
       title: ['Descubre en qué se te va el dinero,', 'antes de que se acabe el mes.'],
       body: 'Tus cuentas, tus presupuestos y los gastos que compartes, todo en un mismo lugar. Y lo que no es tuyo no se mezcla con lo tuyo.',
-      cta: 'Quiero estar en la lista',
+      cta: 'Prueba la beta',
       secondary: 'Mira cómo funciona',
-      meta: 'Empieza gratis · Pro desde $4.99 al mes · En español e inglés',
+      meta: 'Beta gratis en TestFlight · Pro desde $4.99 al mes · En español e inglés',
     },
     chapters: [
       {
@@ -138,13 +142,17 @@ const copy = {
     ],
     faqTitle: 'Preguntas frecuentes',
     faq: [
-      { q: '¿Cuándo sale Budpoint?', a: 'Estamos en la última etapa de pruebas en iOS. Déjanos tu correo y te avisamos el día que llegue al App Store.' },
+      { q: '¿Ya puedo usar Budpoint?', a: 'Sí, ya está en beta. Descárgala gratis con TestFlight, la app de Apple para probar apps antes de que lleguen al App Store. Si prefieres esperar la versión final, déjanos tu correo y te avisamos.' },
+      { q: '¿Pago Pro en la beta?', a: 'No. En TestFlight las compras son de prueba y no se te cobra nada. Cuando Budpoint llegue al App Store, Pro se compra de forma normal.' },
       { q: '¿Necesito conectar mi banco?', a: 'No, y nunca te vamos a pedir la contraseña de tu banco. Tus compras llegan con los Atajos de Apple Pay, con los correos de tu banco, desde un archivo CSV o las registras a mano.' },
       { q: '¿Quién puede ver mi información?', a: 'Tu información se guarda en tu iPhone y en tu propia cuenta de iCloud. Lo único que pasa por nuestros servidores son los gastos que compartes, para que le lleguen a la otra persona.' },
       { q: '¿Puedo usarlo con mi pareja o con mis roomies?', a: 'Sí. Cada quien tiene su Budpoint y se mandan los gastos compartidos con su código.' },
     ],
-    ctaTitle: 'Que tu próximo mes empiece con un plan.',
-    ctaBody: 'Déjanos tu correo y te avisamos en cuanto Budpoint esté disponible.',
+    ctaTitle: 'Pruébala desde hoy.',
+    ctaBody: 'La beta es gratis en TestFlight. Instálala, úsala y cuéntanos qué te parece.',
+    betaCta: 'Descarga la beta en TestFlight',
+    betaNote: 'Es una beta: puede tener errores, y las compras de Pro son de prueba, así que no se te cobra nada.',
+    waitTitle: '¿Prefieres esperar a la versión del App Store? Déjanos tu correo.',
     email: 'tu@correo.com',
     join: 'Avísame',
     joining: 'Enviando…',
@@ -224,7 +232,7 @@ export default function Home() {
             <p className="mt-6 max-w-[34rem] text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>{c.hero.body}</p>
           </Reveal>
           <Reveal delay={0.18} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <AccentButton href="#join">{c.hero.cta}</AccentButton>
+            <AccentButton href={TESTFLIGHT_URL}>{c.hero.cta}</AccentButton>
             <a href="#features" className="group inline-flex items-center gap-1.5 text-[15px] font-medium">
               {c.hero.secondary}
               <span className="transition-transform group-hover:translate-x-0.5">→</span>
@@ -360,30 +368,37 @@ export default function Home() {
         <Reveal className="mx-auto max-w-6xl">
           <div className="relative overflow-hidden rounded-[28px] px-6 py-14 sm:px-12 sm:py-20" style={{ background: 'var(--cta-bg)', border: '1px solid var(--stroke)', color: '#F2F3F5' }}>
             <div className="nb-dots pointer-events-none absolute inset-0 opacity-40" style={{ ['--stroke' as string]: '#2A2D36' }} />
-            <div className="relative grid items-end gap-10 lg:grid-cols-2">
+            <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center">
               <div>
                 <h2 className="text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-5xl">{c.ctaTitle}</h2>
                 <p className="mt-4 max-w-md text-lg" style={{ color: '#9BA1AD' }}>{c.ctaBody}</p>
+                <div className="mt-8"><AccentButton href={TESTFLIGHT_URL}>{c.betaCta} ↗</AccentButton></div>
+                <p className="mt-4 max-w-md text-sm" style={{ color: '#9BA1AD' }}>{c.betaNote}</p>
               </div>
-              {status === 'ok' ? (
-                <p className="text-lg font-medium" style={{ color: '#C8F25A' }}>{c.ok}</p>
-              ) : (
-                <form onSubmit={submit} className="w-full min-w-0">
-                  <div className="flex flex-col gap-2 rounded-[22px] p-1.5 sm:flex-row sm:rounded-full" style={{ background: '#0D0E12', border: '1px solid #2A2D36' }}>
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={e => { setEmail(e.target.value); if (status === 'err') setStatus('idle') }}
-                      placeholder={c.email}
-                      aria-label={c.email}
-                      className="min-w-0 flex-1 bg-transparent px-4 py-3 text-[16px] outline-none placeholder:text-[#5F6573] sm:py-0"
-                    />
-                    <AccentButton type="submit" disabled={status === 'sending'}>{status === 'sending' ? c.joining : c.join}</AccentButton>
-                  </div>
-                  {status === 'err' && <p className="mt-3 pl-4 text-sm" style={{ color: '#FF9C7A' }}>{c.err}</p>}
-                </form>
-              )}
+              <div className="lg:border-l lg:pl-12" style={{ borderColor: '#2A2D36' }}>
+                <p className="mb-4 text-[15px] font-medium">{c.waitTitle}</p>
+                {status === 'ok' ? (
+                  <p className="text-lg font-medium" style={{ color: '#C8F25A' }}>{c.ok}</p>
+                ) : (
+                  <form onSubmit={submit} className="w-full min-w-0">
+                    <div className="flex flex-col gap-2 rounded-[22px] p-1.5 sm:flex-row sm:rounded-full" style={{ background: '#0D0E12', border: '1px solid #2A2D36' }}>
+                      <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={e => { setEmail(e.target.value); if (status === 'err') setStatus('idle') }}
+                        placeholder={c.email}
+                        aria-label={c.email}
+                        className="min-w-0 flex-1 bg-transparent px-4 py-3 text-[16px] outline-none placeholder:text-[#5F6573] sm:py-0"
+                      />
+                      <button type="submit" disabled={status === 'sending'} className="rounded-full px-5 py-3 text-[15px] font-semibold disabled:opacity-60" style={{ background: '#23262E', color: '#F2F3F5' }}>
+                        {status === 'sending' ? c.joining : c.join}
+                      </button>
+                    </div>
+                    {status === 'err' && <p className="mt-3 pl-4 text-sm" style={{ color: '#FF9C7A' }}>{c.err}</p>}
+                  </form>
+                )}
+              </div>
             </div>
           </div>
         </Reveal>

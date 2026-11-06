@@ -6,9 +6,11 @@ import { usePathname } from 'next/navigation'
 import { useTheme } from './ThemeContext'
 import { useLanguage } from './LanguageContext'
 
+export const TESTFLIGHT_URL = 'https://testflight.apple.com/join/GZth4W4d'
+
 const chrome = {
-  en: { features: 'Features', pricing: 'Pricing', faq: 'FAQ', blog: 'Blog', cta: 'Join the list', support: 'Support', privacy: 'Privacy', terms: 'Terms' },
-  es: { features: 'Funciones', pricing: 'Precios', faq: 'Preguntas', blog: 'Blog', cta: 'Avísame', support: 'Soporte', privacy: 'Privacidad', terms: 'Términos' },
+  en: { features: 'Features', pricing: 'Pricing', faq: 'FAQ', blog: 'Blog', cta: 'Try the beta', support: 'Support', privacy: 'Privacy', terms: 'Terms' },
+  es: { features: 'Funciones', pricing: 'Precios', faq: 'Preguntas', blog: 'Blog', cta: 'Prueba la beta', support: 'Soporte', privacy: 'Privacidad', terms: 'Términos' },
 }
 
 export function AccentButton({ children, href, onClick, type, disabled }: {
@@ -20,7 +22,10 @@ export function AccentButton({ children, href, onClick, type, disabled }: {
 }) {
   const cls = 'inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[15px] font-semibold transition-transform active:scale-[0.97] hover:brightness-[1.04] disabled:opacity-60'
   const style = { background: 'var(--accent)', color: 'var(--on-accent)' }
-  if (href) return <a href={href} className={cls} style={style}>{children}</a>
+  if (href) {
+    const external = href.startsWith('http')
+    return <a href={href} className={cls} style={style} {...(external && { target: '_blank', rel: 'noopener noreferrer' })}>{children}</a>
+  }
   return <button type={type ?? 'button'} onClick={onClick} disabled={disabled} className={cls} style={style}>{children}</button>
 }
 
@@ -55,7 +60,7 @@ export function SiteHeader() {
                 : <path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z" />}
             </svg>
           </button>
-          <span className="ml-1 hidden sm:block"><AccentButton href="/#join">{c.cta}</AccentButton></span>
+          <span className="ml-1 hidden sm:block"><AccentButton href={TESTFLIGHT_URL}>{c.cta}</AccentButton></span>
         </div>
       </div>
     </header>

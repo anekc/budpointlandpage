@@ -2,12 +2,12 @@
 
 import Link from 'next/link'
 import { useLanguage } from '../components/LanguageContext'
-import { AccentButton } from '../components/SiteChrome'
+import { AccentButton, TESTFLIGHT_URL } from '../components/SiteChrome'
 import { posts } from './posts'
 
 const copy = {
-  es: { back: 'Volver al blog', readTime: 'de lectura', ctaTitle: 'Pon esto en práctica con Budpoint.', cta: 'Quiero estar en la lista' },
-  en: { back: 'Back to blog', readTime: 'read', ctaTitle: 'Put this into practice with Budpoint.', cta: 'Join the waitlist' },
+  es: { back: 'Volver al blog', readTime: 'de lectura', ctaTitle: 'Pon esto en práctica con Budpoint.', cta: 'Prueba la beta' },
+  en: { back: 'Back to blog', readTime: 'read', ctaTitle: 'Put this into practice with Budpoint.', cta: 'Try the beta' },
 }
 
 /** Frame for one blog post: meta line, the MDX article in the reading column, and a closing CTA. */
@@ -45,7 +45,7 @@ export function BlogPost({ slug, ContentEs, ContentEn }: {
 
       <div className="nb-card mt-16 flex flex-col items-start gap-5 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
         <div className="text-xl font-semibold tracking-tight">{t.ctaTitle}</div>
-        <AccentButton href="/#join">{t.cta}</AccentButton>
+        <AccentButton href={TESTFLIGHT_URL}>{t.cta}</AccentButton>
       </div>
     </div>
   )
