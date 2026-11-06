@@ -198,6 +198,22 @@ const tagStyle = {
   category: { background: 'var(--income-bg)', color: 'var(--income)' },
 }
 
+/** Pro: how long you worked for an expense. Monthly income over monthly work hours:
+ *  192 in Mexico (the legal maximum), ~173 in the US (40 h × 52 weeks / 12). */
+const HOURS_PER_MONTH: Money = { es: 192, en: 173.33 }
+
+function WorkTime({ amount, lang }: { amount: number; lang: Lang }) {
+  const minutes = Math.round((amount / (sample.income[lang] / HOURS_PER_MONTH[lang])) * 60)
+  const h = Math.floor(minutes / 60)
+  const label = h ? `${h}h ${minutes % 60}min` : `${minutes}min`
+  return (
+    <span className="nb-num inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-xs font-medium" style={{ background: 'color-mix(in srgb, #F2A93B 18%, transparent)', color: 'color-mix(in srgb, #F2A93B 75%, var(--text))' }}>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M9 4h6a1 1 0 0 1 1 1v2h3a2 2 0 0 1 2 2v3H3V9a2 2 0 0 1 2-2h3V5a1 1 0 0 1 1-1Zm1 3h4V6h-4v1ZM3 14h7v1h4v-1h7v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4Z" /></svg>
+      {label}
+    </span>
+  )
+}
+
 const PERSON = 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0H5Z'
 
 function TxIcon({ kind, color }: { kind: string; color: string }) {
@@ -245,6 +261,7 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
                 {t.tags.map((tag, j) => (
                   <span key={j} className="rounded-md px-1.5 py-0.5 text-xs font-medium" style={tagStyle[tag.kind]}>{tag.label[lang]}</span>
                 ))}
+                {value < 0 && !t.split && <WorkTime amount={total} lang={lang} />}
               </div>
               {t.sharedBy && (
                 <div className="mt-3 pt-2.5 text-[13px]" style={{ borderTop: '1px dashed var(--stroke)' }}>
@@ -258,10 +275,11 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
               {t.split && (
                 <div className="mt-3 pt-2.5 text-[13px]" style={{ borderTop: '1px dashed var(--stroke)' }}>
                   <div className="font-medium">{lang === 'es' ? 'División del gasto' : 'Split'}</div>
-                  {t.split.map(part => (
+                  {t.split.map((part, j) => (
                     <div key={part.who.en} className="nb-num mt-1 flex items-center gap-1.5" style={{ color: 'var(--muted)' }}>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d={PERSON} /></svg>
                       {part.who[lang]}: {money.format(part.amount[lang])} {currency(lang)} ({Math.round((part.amount[lang] / total) * 100)}%)
+                      {j === 0 && <WorkTime amount={part.amount[lang]} lang={lang} />}
                     </div>
                   ))}
                 </div>
