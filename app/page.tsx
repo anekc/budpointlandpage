@@ -231,7 +231,7 @@ export default function Home() {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="mx-auto grid max-w-6xl items-center gap-14 px-4 pt-14 pb-20 sm:px-6 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pb-28">
+      <section className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 px-4 pt-14 pb-20 sm:px-6 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pb-28">
         <div>
           <Reveal><div className="nb-label">{c.hero.eyebrow}</div></Reveal>
           <Reveal delay={0.05}>
@@ -269,7 +269,7 @@ export default function Home() {
           const Companion = chapterCompanions[i]
           const flip = i % 2 === 1
           return (
-            <div key={ch.label} className="grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-20 lg:py-24" style={{ borderTop: '1px solid var(--stroke)' }}>
+            <div key={ch.label} className="grid grid-cols-1 items-center gap-10 py-16 lg:grid-cols-2 lg:gap-20 lg:py-24" style={{ borderTop: '1px solid var(--stroke)' }}>
               <Reveal className={flip ? 'lg:order-2' : ''}>
                 <div className="nb-label flex items-center gap-3">
                   <span className="nb-num" style={{ color: 'var(--accent-text)' }}>0{i + 1}</span>
@@ -299,7 +299,7 @@ export default function Home() {
       <section className="py-20 lg:py-28" style={{ borderTop: '1px solid var(--stroke)' }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal><h2 className="max-w-xl text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-[44px]">{c.moreTitle}</h2></Reveal>
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {c.more.map((m, i) => (
               <Reveal key={m.t} delay={(i % 3) * 0.06}>
                 <div className="nb-card h-full p-6">
@@ -322,7 +322,7 @@ export default function Home() {
             <h2 className="text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-[44px]">{c.pricingTitle}</h2>
             <p className="mt-4 max-w-lg text-lg" style={{ color: 'var(--muted)' }}>{c.pricingBody}</p>
           </Reveal>
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {c.plans.map((p, i) => {
               const featured = i === 2
               return (
@@ -357,7 +357,7 @@ export default function Home() {
 
       {/* FAQ */}
       <section id="faq" className="py-20 lg:py-28" style={{ borderTop: '1px solid var(--stroke)' }}>
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_2fr]">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_2fr]">
           <Reveal><h2 className="text-3xl font-semibold tracking-[-0.03em] sm:text-[44px]">{c.faqTitle}</h2></Reveal>
           <div>
             {c.faq.map((f, i) => (
@@ -380,7 +380,7 @@ export default function Home() {
         <Reveal className="mx-auto max-w-6xl">
           <div className="relative overflow-hidden rounded-[28px] px-6 py-14 sm:px-12 sm:py-20" style={{ background: 'var(--cta-bg)', border: '1px solid var(--stroke)', color: '#F2F3F5' }}>
             <div className="nb-dots pointer-events-none absolute inset-0 opacity-40" style={{ ['--stroke' as string]: '#2A2D36' }} />
-            <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
               <div>
                 <h2 className="text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-5xl">{c.ctaTitle}</h2>
                 <p className="mt-4 max-w-md text-lg" style={{ color: '#9BA1AD' }}>{c.ctaBody}</p>
