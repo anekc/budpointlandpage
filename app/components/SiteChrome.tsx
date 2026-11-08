@@ -36,8 +36,9 @@ export function SiteHeader() {
   const c = chrome[lang]
   const linkCls = (active: boolean) => active ? 'text-[var(--text)]' : 'hover:text-[var(--text)]'
 
+  // Solid background: iOS Safari tints the status bar from a sticky header, and skips translucent ones
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl" style={{ background: 'color-mix(in srgb, var(--bg) 82%, transparent)', borderBottom: '1px solid var(--stroke)' }}>
+    <header className="sticky top-0 z-50" style={{ background: 'var(--bg)', borderBottom: '1px solid var(--stroke)' }}>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2.5">
           <Image src="/logo.png" alt="" width={28} height={28} className="rounded-[8px]" />

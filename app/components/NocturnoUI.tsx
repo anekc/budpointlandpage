@@ -155,6 +155,13 @@ export function BalanceCard({ lang }: { lang: Lang }) {
 
 type Tag = { label: Record<Lang, string>; kind: 'account' | 'category' }
 
+
+// The people in the sample, with names that fit each market
+const people = {
+  friend: { es: 'Mariana', en: 'Emily' },
+  roommate: { es: 'Diego', en: 'Jake' },
+}
+
 const txns: {
   name: Record<Lang, string | ((month: string) => string)>
   tags: Tag[]
@@ -162,7 +169,7 @@ const txns: {
   color: string
   icon: string
   split?: { who: Record<Lang, string>; amount: Money }[]
-  sharedBy?: string
+  sharedBy?: Record<Lang, string>
 }[] = [
   {
     name: { en: 'Paycheck', es: 'Nómina' },
@@ -176,7 +183,7 @@ const txns: {
     amount: { es: -900, en: -77 }, color: 'var(--c3)', icon: 'down',
     split: [
       { who: { en: 'You', es: 'Tú' }, amount: { es: 450, en: 38.5 } },
-      { who: { en: 'Mariana', es: 'Mariana' }, amount: { es: 450, en: 38.5 } },
+      { who: people.friend, amount: { es: 450, en: 38.5 } },
     ],
   },
   // Diego's rent, once accepted from Shared: it lands here as your share only
@@ -184,7 +191,7 @@ const txns: {
     name: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` },
     tags: [{ label: { en: 'Debit', es: 'Débito' }, kind: 'account' }, { label: { en: 'Home', es: 'Hogar' }, kind: 'category' }],
     amount: { es: -6500, en: -975 }, color: 'var(--c3)', icon: 'home',
-    sharedBy: 'Diego',
+    sharedBy: people.roommate,
   },
 ]
 
@@ -262,7 +269,7 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
                   <div className="font-medium">{lang === 'es' ? 'Compartido por' : 'Shared by'}</div>
                   <div className="mt-1 flex items-center gap-1.5" style={{ color: 'var(--muted)' }}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d={PERSON} /></svg>
-                    {t.sharedBy}
+                    {t.sharedBy[lang]}
                   </div>
                 </div>
               )}
@@ -401,8 +408,8 @@ const sharedCopy = {
 
 // You paid the Friday dinner from the transactions card and sent Mariana her half;
 // Diego paid the rent and sent you yours.
-const sentItem = { who: 'Mariana', title: { en: () => 'Friday dinner', es: () => 'Cena del viernes' }, amount: { es: 450, en: 38.5 }, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 9:40 PM', es: 'Hoy a las 21:40' } }
-const receivedItem = { who: 'Diego', title: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` }, amount: { es: 6500, en: 975 }, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 9:15 AM', es: 'Ayer a las 09:15' } }
+const sentItem = { who: people.friend, title: { en: () => 'Friday dinner', es: () => 'Cena del viernes' }, amount: { es: 450, en: 38.5 }, tag: { en: 'Restaurants', es: 'Restaurantes' }, time: { en: 'Today at 9:40 PM', es: 'Hoy a las 21:40' } }
+const receivedItem = { who: people.roommate, title: { en: (m: string) => `${m} rent`, es: (m: string) => `Renta de ${m}` }, amount: { es: 6500, en: 975 }, tag: { en: 'Home', es: 'Hogar' }, time: { en: 'Yesterday at 9:15 AM', es: 'Ayer a las 09:15' } }
 
 function StatusPill({ accepted, lang }: { accepted: boolean; lang: Lang }) {
   const t = sharedCopy[lang]
@@ -499,7 +506,7 @@ export function SharedCard({ lang }: { lang: Lang }) {
         transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
       >
         <div className="flex items-start justify-between gap-3">
-          <div className="text-lg font-semibold">{sent ? t.to : t.from}: {item.who}</div>
+          <div className="text-lg font-semibold">{sent ? t.to : t.from}: {item.who[lang]}</div>
           <StatusPill accepted={isAccepted} lang={lang} />
         </div>
         <div className="mt-2 text-lg">{item.title[lang](month)}</div>
