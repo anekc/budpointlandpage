@@ -37,9 +37,15 @@ function useToday() {
   return today
 }
 
+// Spelled out instead of Intl: some Android builds format a lone Spanish month as "de noviembre"
+const MONTHS: Record<Lang, string[]> = {
+  es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+}
+
 function monthName(date: Date, lang: Lang, style: 'short' | 'long') {
-  const name = date.toLocaleDateString(lang === 'es' ? 'es-MX' : 'en-US', { month: style }).replace('.', '')
-  return style === 'short' ? name[0].toUpperCase() + name.slice(1) : name
+  const name = MONTHS[lang][date.getMonth()]
+  return style === 'short' ? name[0].toUpperCase() + name.slice(1, 3) : name
 }
 
 function useCountUp(target: number, active: boolean, duration = 1.4) {
@@ -111,7 +117,7 @@ export function PeriodCard({ lang }: { lang: Lang }) {
     <div ref={ref} className="nb-card p-5" style={{ boxShadow: 'var(--shadow)' }}>
       <div className="nb-label">{lang === 'es' ? 'Periodo actual' : 'Current period'}</div>
       <div className="mt-2 flex items-center gap-2 text-[28px] font-medium tracking-tight">
-        1 {month} – {total} {month}
+        <span className="whitespace-nowrap">1 {month} – {total} {month}</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" className="opacity-60" aria-hidden><path d="m6 9 6 6 6-6" /></svg>
       </div>
       <div className="mt-4"><Bar pct={(day / total) * 100} active={inView} /></div>
