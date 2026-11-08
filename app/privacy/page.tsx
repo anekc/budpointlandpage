@@ -72,7 +72,7 @@ const content: Record<'en' | 'es', LegalContent> = {
         title: 'Purchases',
         body: (
           <p>
-            Subscriptions and the lifetime purchase are processed by Apple through the App Store. We never see your card or
+            Subscriptions are processed by Apple through the App Store. We never see your card or
             payment details. To confirm that your Pro purchase is valid, the app sends us the transaction record that
             Apple signs.
           </p>
@@ -252,7 +252,7 @@ const content: Record<'en' | 'es', LegalContent> = {
         title: 'Compras',
         body: (
           <p>
-            Las suscripciones y la compra de por vida las procesa Apple a través del App Store. Nunca vemos tu tarjeta ni tus
+            Las suscripciones las procesa Apple a través del App Store. Nunca vemos tu tarjeta ni tus
             datos de pago. Para confirmar que tu compra de Pro es válida, la app nos envía el comprobante de la transacción
             firmado por Apple.
           </p>

@@ -51,9 +51,8 @@ const content: Record<'en' | 'es', LegalContent> = {
           <>
             <p>Budpoint offers the following subscription options:</p>
             <ul>
-              <li><strong>Monthly Subscription — $4.99/month:</strong> Automatically renews every month. New subscribers get a 7-day free trial.</li>
-              <li><strong>Annual Subscription — $39.99/year:</strong> Automatically renews every year. New subscribers get a 14-day free trial.</li>
-              <li><strong>Lifetime Purchase — $79.99:</strong> One-time payment for permanent access. No free trial applies to this option.</li>
+              <li><strong>Monthly Subscription — $5.99 USD/month ($59 MXN in Mexico):</strong> Automatically renews every month. New subscribers get a 7-day free trial.</li>
+              <li><strong>Annual Subscription — $39.99 USD/year ($399 MXN in Mexico):</strong> Automatically renews every year. New subscribers get a 14-day free trial.</li>
             </ul>
             <ul>
               <li><strong>Free Trial:</strong> If you start a subscription with a free trial, you won’t be charged until the trial ends. You can cancel anytime during the trial at no cost through your Apple ID account settings. If you don’t cancel before the trial ends, you will automatically be charged the subscription price shown above.</li>
@@ -215,9 +214,8 @@ const content: Record<'en' | 'es', LegalContent> = {
           <>
             <p>Budpoint ofrece estas opciones:</p>
             <ul>
-              <li><strong>Suscripción mensual — $4.99 al mes:</strong> Se renueva cada mes. Si te suscribes por primera vez, tienes 7 días de prueba gratis.</li>
-              <li><strong>Suscripción anual — $39.99 al año:</strong> Se renueva cada año. Si te suscribes por primera vez, tienes 14 días de prueba gratis.</li>
-              <li><strong>Compra de por vida — $79.99:</strong> Un solo pago para tener acceso permanente. Esta opción no incluye prueba gratis.</li>
+              <li><strong>Suscripción mensual — $59 MXN al mes ($5.99 USD en Estados Unidos):</strong> Se renueva cada mes. Si te suscribes por primera vez, tienes 7 días de prueba gratis.</li>
+              <li><strong>Suscripción anual — $399 MXN al año ($39.99 USD en Estados Unidos):</strong> Se renueva cada año. Si te suscribes por primera vez, tienes 14 días de prueba gratis.</li>
             </ul>
             <ul>
               <li><strong>Prueba gratis:</strong> Si empiezas una suscripción con prueba gratis, no se te cobra nada hasta que termine. Puedes cancelarla sin costo en cualquier momento durante la prueba desde los ajustes de tu Apple ID. Si no la cancelas antes de que termine, se te cobrará automáticamente el precio de la suscripción indicado arriba.</li>

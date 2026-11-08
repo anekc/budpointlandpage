@@ -64,9 +64,8 @@ const copy = {
     pricingBody: 'Start free. Upgrade when you need more accounts, more people or iCloud sync. During the beta, you can try Pro without paying.',
     plans: [
       { name: 'Free', price: '$0', per: '', note: 'Forever', features: ['2 accounts', '5 tags', '2 people for splits', '3 budgets per period', 'Widgets'] },
-      { name: 'Monthly', price: '$4.99', per: '/mo', note: '7-day free trial', features: ['Everything unlimited', 'iCloud sync & restore', 'Shared expenses', 'Recurring entries', 'CSV & PDF export'] },
-      { name: 'Annual', price: '$39.99', per: '/yr', note: '14-day free trial', badge: 'Save 33%', features: ['Everything in Monthly', 'About $3.33 a month'] },
-      { name: 'Lifetime', price: '$79.99', per: '', note: 'Pay once', features: ['Everything in Pro, forever', 'No subscription'] },
+      { name: 'Monthly', price: '$5.99', per: '/mo', note: '7-day free trial', features: ['Everything unlimited', 'iCloud sync & restore', 'Shared expenses', 'Recurring entries', 'CSV & PDF export'] },
+      { name: 'Annual', price: '$39.99', per: '/yr', note: '14-day free trial', badge: 'Save 44%', features: ['Everything in Monthly', 'About $3.33 a month'] },
     ],
     faqTitle: 'Questions',
     faq: [
@@ -134,9 +133,8 @@ const copy = {
     pricingBody: 'Empieza gratis. Cuando necesites más cuentas, más personas o sincronizar con iCloud, pásate a Pro. Durante la beta, pruébalo sin pagar nada.',
     plans: [
       { name: 'Gratis', price: '$0', per: '', note: 'Siempre gratis', features: ['2 cuentas', '5 etiquetas', '2 personas para dividir gastos', '3 presupuestos por periodo', 'Widgets'] },
-      { name: 'Mensual', price: '$4.99', per: '/mes', note: '7 días gratis para probar', features: ['Todo sin límites', 'Sincronización y respaldo en iCloud', 'Gastos compartidos', 'Pagos recurrentes', 'Exporta a CSV y PDF'] },
-      { name: 'Anual', price: '$39.99', per: '/año', note: '14 días gratis para probar', badge: 'Ahorras 33%', features: ['Todo lo del plan mensual', 'Te sale en $3.33 al mes'] },
-      { name: 'De por vida', price: '$79.99', per: '', note: 'Pagas una sola vez', features: ['Pro para siempre', 'Sin suscripciones'] },
+      { name: 'Mensual', price: '$59', per: 'MXN/mes', note: '7 días gratis para probar', features: ['Todo sin límites', 'Sincronización y respaldo en iCloud', 'Gastos compartidos', 'Pagos recurrentes', 'Exporta a CSV y PDF'] },
+      { name: 'Anual', price: '$399', per: 'MXN/año', note: '14 días gratis para probar', badge: 'Ahorras 44%', features: ['Todo lo del plan mensual', 'Te sale en $33 al mes'] },
     ],
     faqTitle: 'Preguntas frecuentes',
     faq: [
@@ -322,7 +320,7 @@ export default function Home() {
             <h2 className="text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-[44px]">{c.pricingTitle}</h2>
             <p className="mt-4 max-w-lg text-lg" style={{ color: 'var(--muted)' }}>{c.pricingBody}</p>
           </Reveal>
-          <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-3 md:grid-cols-3">
             {c.plans.map((p, i) => {
               const featured = i === 2
               return (
