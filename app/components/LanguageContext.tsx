@@ -14,8 +14,13 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const [lang, setLang] = useState<Lang>('en')
 
-    // Saved choice first, then the browser language
+    // ?lang= first (the app opens the legal pages in its own language), then the saved choice, then the browser language
     useEffect(() => {
+        const fromURL = new URLSearchParams(window.location.search).get('lang')
+        if (fromURL === 'en' || fromURL === 'es') {
+            setLang(fromURL)
+            return
+        }
         try {
             const saved = localStorage.getItem('budpoint-lang')
             if (saved === 'en' || saved === 'es') {

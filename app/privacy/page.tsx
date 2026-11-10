@@ -13,7 +13,7 @@ const content: Record<'en' | 'es', LegalContent> = {
       <p>
         The short version: your finances live on your iPhone and in your own iCloud, encrypted. We only handle what’s needed
         to share expenses with other people and to confirm your Pro purchase. We don’t sell your data, we don’t show ads,
-        and analytics are turned off.
+        and our usage analytics never include your financial data (you can turn them off).
       </p>
     ),
     sections: [
@@ -95,9 +95,29 @@ const content: Record<'en' | 'es', LegalContent> = {
           <ul>
             <li>We don’t sell, rent or trade your information.</li>
             <li>We don’t show ads or track you across other apps and websites.</li>
-            <li>Analytics and crash reporting are turned off in the app.</li>
+            <li>We don’t send amounts, names, notes or any financial data to analytics.</li>
             <li>We don’t connect to your bank.</li>
           </ul>
+        ),
+      },
+      {
+        id: 'analytics',
+        title: 'Usage analytics',
+        body: (
+          <>
+            <p>
+              To understand where the app can improve (for example, which tutorial step people stop at), Budpoint sends a few
+              anonymous usage events to Google Analytics for Firebase: tutorial progress, when the Pro screen is shown, whether
+              a purchase was completed or cancelled and which plan, and that something was created (a transaction, budget or
+              goal) or a file was imported.
+            </p>
+            <ul>
+              <li>Events never include amounts, names, notes, tags, accounts or any other financial data.</li>
+              <li>No advertising identifier is used, ad personalization is turned off, and nothing is shared with ad networks.</li>
+              <li>Crash reporting is turned off.</li>
+              <li>You can turn analytics off anytime in Settings ▸ Security ▸ Share usage statistics.</li>
+            </ul>
+          </>
         ),
       },
       {
@@ -107,7 +127,7 @@ const content: Record<'en' | 'es', LegalContent> = {
           <>
             <ul>
               <li><strong>Apple:</strong> iCloud, Sign in with Apple, the App Store and Shortcuts.</li>
-              <li><strong>Google Firebase:</strong> Authentication, Cloud Firestore, Cloud Functions and Cloud Messaging, only for the sharing features described above. These servers may be located outside your country, including the United States.</li>
+              <li><strong>Google Firebase:</strong> Authentication, Cloud Firestore, Cloud Functions and Cloud Messaging for the sharing features described above, and Analytics for the anonymous usage events. These servers may be located outside your country, including the United States.</li>
               <li><strong>Formspree:</strong> stores the email you give us on this website to join the waitlist.</li>
               <li><strong>Vercel:</strong> hosts this website.</li>
             </ul>
@@ -194,7 +214,7 @@ const content: Record<'en' | 'es', LegalContent> = {
       <p>
         En pocas palabras: tus finanzas viven en tu iPhone y en tu propio iCloud, cifradas. Nosotros solo manejamos lo
         necesario para que compartas gastos con otras personas y para confirmar tu compra de Pro. No vendemos tus datos, no
-        mostramos anuncios y la analítica está desactivada.
+        mostramos anuncios y nuestras estadísticas de uso nunca incluyen tus datos financieros (puedes apagarlas).
       </p>
     ),
     sections: [
@@ -275,9 +295,29 @@ const content: Record<'en' | 'es', LegalContent> = {
           <ul>
             <li>No vendemos, rentamos ni intercambiamos tu información.</li>
             <li>No mostramos anuncios ni te rastreamos en otras apps o sitios web.</li>
-            <li>La analítica y los reportes de fallos están desactivados en la app.</li>
+            <li>No enviamos montos, nombres, notas ni ningún dato financiero a las estadísticas.</li>
             <li>No nos conectamos a tu banco.</li>
           </ul>
+        ),
+      },
+      {
+        id: 'analytics',
+        title: 'Estadísticas de uso',
+        body: (
+          <>
+            <p>
+              Para entender qué mejorar en la app (por ejemplo, en qué paso del tutorial se queda la gente), Budpoint envía
+              algunos eventos de uso anónimos a Google Analytics para Firebase: el avance del tutorial, cuándo se muestra la
+              pantalla de Pro, si una compra se completó o se canceló y de qué plan, y que se creó algo (una transacción, un
+              presupuesto o una meta) o se importó un archivo.
+            </p>
+            <ul>
+              <li>Los eventos nunca incluyen montos, nombres, notas, etiquetas, cuentas ni ningún otro dato financiero.</li>
+              <li>No se usa el identificador de publicidad, la personalización de anuncios está apagada y no se comparte nada con redes de anuncios.</li>
+              <li>Los reportes de fallos están apagados.</li>
+              <li>Puedes apagar las estadísticas cuando quieras en Ajustes ▸ Seguridad ▸ Compartir estadísticas de uso.</li>
+            </ul>
+          </>
         ),
       },
       {
@@ -287,7 +327,7 @@ const content: Record<'en' | 'es', LegalContent> = {
           <>
             <ul>
               <li><strong>Apple:</strong> iCloud, Iniciar sesión con Apple, el App Store y Atajos.</li>
-              <li><strong>Google Firebase:</strong> Authentication, Cloud Firestore, Cloud Functions y Cloud Messaging, solo para las funciones de compartir que describimos arriba. Estos servidores pueden estar fuera de tu país, incluso en Estados Unidos.</li>
+              <li><strong>Google Firebase:</strong> Authentication, Cloud Firestore, Cloud Functions y Cloud Messaging para las funciones de compartir que describimos arriba, y Analytics para las estadísticas de uso anónimas. Estos servidores pueden estar fuera de tu país, incluso en Estados Unidos.</li>
               <li><strong>Formspree:</strong> guarda el correo que nos dejas en este sitio para la lista de espera.</li>
               <li><strong>Vercel:</strong> aloja este sitio web.</li>
             </ul>
