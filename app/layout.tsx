@@ -19,24 +19,31 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://budpoint.app";
+const TITLE = "Budpoint: budgets and shared expenses for iPhone";
+const DESCRIPTION = "Track your spending, budgets and shared expenses on iPhone. Split a bill and only your share counts in your budget. Free beta on TestFlight.";
+
 export const metadata: Metadata = {
-  title: "Budpoint - Smart Finance App for iOS",
-  description: "Take control of your finances with Budpoint. Smart budgeting, expense tracking, and financial analytics designed for today's economy. Coming soon to iOS.",
-  keywords: ["budgeting", "finance", "iOS app", "expense tracking", "financial planning", "money management"],
-  authors: [{ name: "Budpoint Team" }],
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  keywords: ["budget app", "expense tracker", "split expenses", "personal finance", "iPhone", "presupuesto", "gastos compartidos", "finanzas personales"],
+  authors: [{ name: "Budpoint" }],
   creator: "Budpoint",
   publisher: "Budpoint",
   openGraph: {
-    title: "Budpoint - Smart Finance App for iOS",
-    description: "Take control of your finances with Budpoint. Smart budgeting, expense tracking, and financial analytics designed for today's economy.",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: "Budpoint",
     type: "website",
     locale: "en_US",
-    alternateLocale: "es_ES",
+    alternateLocale: "es_MX",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Budpoint - Smart Finance App for iOS",
-    description: "Take control of your finances with Budpoint. Smart budgeting, expense tracking, and financial analytics designed for today's economy.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
   robots: {
     index: true,

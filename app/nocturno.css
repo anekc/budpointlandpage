@@ -72,6 +72,12 @@ html.dark .nb {
   letter-spacing: -0.02em;
 }
 
+/* Keyboard focus: a visible ring on every control (mouse clicks don't show it) */
+.nb :focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
 /* Faint dot grid, same texture the app uses behind charts */
 .nb-dots {
   background-image: radial-gradient(var(--stroke) 1px, transparent 1px);

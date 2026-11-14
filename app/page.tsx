@@ -10,6 +10,7 @@ import {
   BudgetCard,
   PeriodCard,
   SharedCard,
+  SplitMathCard,
   TransactionsCard,
 } from './components/NocturnoUI'
 import { APPLE_LOGO, PhoneHero } from './components/PhoneHero'
@@ -21,7 +22,7 @@ const copy = {
     hero: {
       eyebrow: 'Personal finance for iPhone',
       title: ['Know where your money went.', 'Before the month ends.'],
-      body: 'Your accounts, budgets and shared expenses in one place. Log the whole check without wrecking your budget.',
+      body: 'Budpoint is an iPhone app that shows what you’ve spent, what’s left and where it’s all going. Set up a budget in minutes, and when you pay for other people, only your share counts.',
       cta: 'Try the beta',
       secondary: 'See how it works',
       meta: 'For iPhone · iOS 17 or later · Free beta on TestFlight',
@@ -30,55 +31,64 @@ const copy = {
       {
         label: 'Dashboard',
         title: 'The whole month on one screen.',
-        body: 'See which day of the period you’re on, how much is left, and which account the money is coming out of. No digging through menus.',
-        points: ['Your month starts on the day you choose, like payday', 'Spending split by account and by person', 'Every account with its live balance', 'Seven widgets: show the ones you use, in your order'],
+        body: 'Open the app and know in seconds whether you’re on track: what you’ve spent, how many days are left, and which account the money is coming from. So you can tell if that purchase fits this month, or can wait.',
+        points: ['Your month starts on the day you choose, like payday', 'Spending by account and by person', 'Every account’s balance in one place', 'Seven sections you can show, hide and reorder'],
       },
       {
         label: 'Transactions',
-        title: 'Log it once. Or don’t log it at all.',
-        body: 'Pay with Apple Pay and the purchase lands in Budpoint on its own, waiting for you to confirm it. Bank email alerts work too.',
-        points: ['Income, expenses and transfers', 'Recurring entries that create themselves', 'Bought something for someone else? Give them 100% of the split and it stays out of your balance', 'Pro: see how many hours of work each expense cost you'],
+        title: 'Logging an expense takes seconds.',
+        body: 'Add it by hand in a few taps, or let it come in on its own: set up a Shortcuts automation once, and every Apple Pay purchase shows up in Budpoint, in the right account, waiting for you to confirm it.',
+        points: ['Income, expenses and transfers between your accounts', 'Fixed bills like rent or Spotify log themselves every period', 'Bank email alerts too: build a Shortcuts automation for your bank that pulls the amount and store from the email (in Apple Mail) and sends them to Budpoint', 'Pro: see how many hours of work each expense cost you'],
       },
       {
         label: 'Budgets & goals',
         title: 'A plan that splits your income for you.',
-        body: 'Pick a rule like 50/30/20 and Budpoint divides what comes in. Anything outside the plan shows up separately, so it doesn’t hide in the totals.',
-        points: ['Budgets by tag, with live progress', 'Savings goals tied to real accounts', 'Untagged spending gets its own bucket'],
+        body: 'A budget just means deciding ahead of time how much goes where, so the end of the month holds no surprises. Pick a rule like 50/30/20, Budpoint splits what comes in, and you see what’s left in each bucket as you spend.',
+        points: ['On $5,600 a month: $2,800 for needs, $1,680 for wants, $1,120 for savings', 'Category budgets that update with every expense', 'Savings goals tied to your real accounts', 'Spending without a category shows up on its own, so nothing hides'],
       },
       {
         label: 'Shared',
         title: 'Split the bill. Skip the spreadsheet.',
-        body: 'Send someone their share with their Budpoint code. They accept it and it’s in their app, already tagged. You always know who owes whom.',
-        points: ['Split by fixed amounts or percentages', 'Pending and accepted at a glance', 'Settle up straight from your card balances'],
+        body: 'Paid for everyone’s dinner? Log the full check and split it. Only your share hits your balance, and everyone gets theirs through their Budpoint code: they accept it and it lands in their app.',
+        points: ['Pay for others without throwing off your budget', 'See who owes you and who you owe', 'Mark it paid when they pay you back, and settle up from your card balances', 'Split by amount or by percentage', 'Pro: sharing needs Pro on your side or theirs'],
       },
     ],
-    moreTitle: 'And the details that make it stick.',
+    howTitle: 'How Budpoint works.',
+    how: [
+      { t: 'Add your accounts', d: 'Checking, credit cards, cash. Enter today’s balance and you’re set. We never ask for your bank password.' },
+      { t: 'Log what comes and goes', d: 'By hand in a few taps, through Apple Pay with Shortcuts, or by importing a file from your bank (Pro).' },
+      { t: 'Understand your money', d: 'Your dashboard and budgets show what you’ve spent, what’s left and where to cut back.' },
+    ],
+    moreTitle: 'And the details you’ll use every day.',
     more: [
-      { t: 'Put Shortcuts to work', d: 'Apple Pay purchases and your bank’s email alerts can log themselves. Set it up once and you’re done.', i: 'bolt' },
-      { t: 'Card reconciliation', d: 'Know exactly how much to pay on each card, and who still owes you.', i: 'scale' },
-      { t: 'CSV import with drafts', d: 'Bring your history from a spreadsheet. Review each row before it’s saved.', i: 'table' },
-      { t: 'iCloud backup & restore', d: 'New phone? Sign in and everything comes back. We never see your data.', i: 'cloud' },
-      { t: 'Widgets', d: 'Useful info right on your Home Screen, and a shortcut straight into the app when you need to log something.', i: 'grid' },
+      { t: 'Put Shortcuts to work', d: 'Set it up once and your Apple Pay purchases arrive on their own, ready to confirm. One automation covers all your cards.', i: 'bolt' },
+      { t: 'Card settle-up', d: 'Pay off your cards from your own accounts, and log what friends pay you back, card by card. Every balance stays right.', i: 'scale' },
+      { t: 'CSV import with drafts', d: 'Pro: don’t start from zero. Bring your history from a spreadsheet and review each row before it’s saved.', i: 'table' },
+      { t: 'iCloud backup & sync', d: 'Pro: new phone? Sign in to iCloud and everything comes back. Your backup lives in your own private iCloud, not on our servers.', i: 'cloud' },
+      { t: 'Widgets', d: 'See what’s left of your budget from the Home Screen, and log an expense, income or transfer in one tap.', i: 'grid' },
     ],
     pricingTitle: 'Simple pricing.',
     pricingBody: 'Start free. Upgrade when you need more accounts, more people or iCloud sync. During the beta, you can try Pro without paying.',
     plans: [
-      { name: 'Free', price: '$0', per: '', note: 'Forever', features: ['2 accounts', '5 tags', '2 people for splits', '3 budgets per period', 'Widgets'] },
-      { name: 'Monthly', price: '$5.99', per: '/mo', note: '7-day free trial', features: ['Everything unlimited', 'iCloud sync & restore', 'Shared expenses', 'Recurring entries', 'CSV & PDF export'] },
+      { name: 'Free', price: '$0', per: '', note: 'Forever', features: ['2 accounts', '15 categories', '2 people for splits', '3 budgets per period', '3 savings goals', 'Recurring entries', 'Widgets'] },
+      { name: 'Monthly', price: '$5.99', per: '/mo', note: '7-day free trial', features: ['Everything unlimited', 'iCloud backup & sync', 'Shared expenses', 'CSV import and export', 'Hours of work per expense', 'PDF report of what each person owes you'] },
       { name: 'Annual', price: '$39.99', per: '/yr', note: '14-day free trial', badge: 'Save 44%', features: ['Everything in Monthly', 'About $3.33 a month'] },
     ],
+    priceNote: 'Prices in US dollars on the US App Store. In other countries, the App Store shows the price for your region.',
     faqTitle: 'Questions',
     faq: [
       { q: 'Can I use Budpoint yet?', a: 'Yes, it’s in beta. Get it free through TestFlight, Apple’s app for trying apps before they reach the App Store. If you’d rather wait for the final version, leave your email and we’ll let you know.' },
       { q: 'Do I pay for Pro in the beta?', a: 'No. In TestFlight, purchases are test purchases and you aren’t charged. Once Budpoint is on the App Store, Pro is bought normally.' },
-      { q: 'Does Budpoint connect to my bank?', a: 'No. Nothing asks for your bank password. Purchases come in through Apple Pay Shortcuts, your bank’s email alerts, CSV import, or by hand.' },
-      { q: 'Who can see my data?', a: 'Your data lives on your iPhone and in your own iCloud account. Only the expenses you share go through our servers, so they can reach the other person.' },
+      { q: 'Does Budpoint connect to my bank?', a: 'No. Nothing asks for your bank password. Purchases come in through an Apple Pay Shortcuts automation, CSV import (Pro), or by hand.' },
+      { q: 'Who can see my data?', a: 'Your finances live on your iPhone and, if you turn on iCloud sync (Pro), in your own private iCloud. If you sign in to share expenses, our servers keep only what sharing needs: your name and Budpoint code, your connections and the expenses you share. Anonymous usage stats never include financial data, and you can turn them off.' },
       { q: 'Can I use it with my partner or roommates?', a: 'Yes. Each person uses their own Budpoint and you send each other shared expenses with your Budpoint codes.' },
     ],
     ctaTitle: 'Try Budpoint today.',
     ctaBody: 'The beta is free on TestFlight. Install it, use it, and tell us what you think.',
     betaCta: 'Get the beta on TestFlight',
     betaNote: 'It’s a beta: you may run into bugs, and Pro purchases are test purchases, so you won’t be charged.',
+    stepsTitle: 'How to join',
+    steps: ['Install TestFlight from the App Store on your iPhone.', 'Open the Budpoint invite on your iPhone and tap Accept.', 'Install Budpoint. Send feedback from TestFlight or write to support@budpoint.app.'],
     waitTitle: 'Rather wait for the App Store version? Leave your email.',
     email: 'you@email.com',
     join: 'Join',
@@ -90,7 +100,7 @@ const copy = {
     hero: {
       eyebrow: 'Tus finanzas en tu iPhone',
       title: ['Descubre en qué se te va el dinero,', 'antes de que se acabe el mes.'],
-      body: 'Tus cuentas, tus presupuestos y los gastos que compartes, todo en un mismo lugar. Registra el gasto de todos sin que tu balance lo resienta.',
+      body: 'Budpoint es una app para iPhone que te dice cuánto llevas gastado, cuánto te queda y en qué se te va. Arma tu presupuesto en minutos y, si pagas por otros, solo cuenta lo que de verdad fue tuyo.',
       cta: 'Prueba la beta',
       secondary: 'Mira cómo funciona',
       meta: 'Para iPhone · iOS 17 o posterior · Beta gratis en TestFlight',
@@ -99,55 +109,64 @@ const copy = {
       {
         label: 'Dashboard',
         title: 'Tu mes completo, de un vistazo.',
-        body: 'En qué día del periodo vas, cuánto te queda y de qué cuenta está saliendo el dinero. Sin perderte entre menús.',
-        points: ['Tu mes empieza el día que tú elijas, como el día de pago', 'Cuánto gastaste por cuenta y por persona', 'El saldo de cada cuenta, siempre al día', 'Siete widgets: deja los que uses, en el orden que quieras'],
+        body: 'Abres la app y en segundos sabes si vas bien: cuánto llevas gastado, cuántos días le quedan al periodo y de qué cuenta está saliendo el dinero. Así decides si ese gasto cabe este mes o mejor esperas.',
+        points: ['Tu mes empieza el día que tú elijas, como tu día de pago', 'Cuánto se ha ido por cada cuenta y por cada persona', 'El saldo de todas tus cuentas en un solo lugar', 'Siete secciones que puedes mostrar, ocultar y ordenar'],
       },
       {
         label: 'Movimientos',
-        title: 'Registra tus gastos sin escribir nada.',
-        body: 'Pagas con Apple Pay y la compra aparece sola en Budpoint; tú solo la confirmas. Si tu banco te manda un correo por cada cargo, también sirve.',
-        points: ['Ingresos, gastos y transferencias', 'Pagos recurrentes que se registran solos', '¿Compraste algo para alguien más? Asígnale el 100% y no cuenta en tu balance', 'Pro: ve cuántas horas de trabajo te costó cada gasto'],
+        title: 'Registra un gasto en segundos.',
+        body: 'Anótalo a mano en unos toques o deja que llegue solo: configuras una vez una automatización en Atajos y cada compra con Apple Pay aparece en Budpoint, en la cuenta correcta, esperando que la confirmes.',
+        points: ['Ingresos, gastos y transferencias entre tus cuentas', 'Pagos fijos, como la renta o Spotify, que se registran solos cada periodo', 'También los correos de tu banco: armas en Atajos una automatización para tu banco que tome el monto y el comercio del correo (en la app Mail de Apple) y los mande a Budpoint', 'Pro: ve cuántas horas de trabajo te costó cada gasto'],
       },
       {
         label: 'Presupuestos y metas',
         title: 'Tu ingreso, repartido sin hacer cuentas.',
-        body: 'Elige una regla como la 50/30/20 y Budpoint reparte lo que te entra. Lo que se sale del plan aparece por separado, para que no se pierda entre los totales.',
-        points: ['Presupuestos por etiqueta que avanzan en tiempo real', 'Metas de ahorro conectadas a tus cuentas', 'Los gastos sin etiqueta también tienen su lugar'],
+        body: 'Un presupuesto es decidir antes cuánto va a cada cosa, para que el fin de mes no te tome por sorpresa. Elige una regla como la 50/30/20, Budpoint reparte lo que te entra y ves cuánto te queda en cada parte conforme gastas.',
+        points: ['Si te entran $42,000: $21,000 para necesidades, $12,600 para gustos y $8,400 para ahorro', 'Presupuestos por categoría que avanzan con cada gasto', 'Metas de ahorro conectadas a tus cuentas', 'Lo que gastas sin categoría aparece aparte, para que no se esconda'],
       },
       {
         label: 'Compartidos',
         title: 'Divide la cuenta sin pelearte con el Excel.',
-        body: 'Manda a cada quien su parte con su código de Budpoint. La acepta y le aparece en su app, ya con etiqueta. Así nadie pierde la cuenta de quién le debe a quién.',
-        points: ['Divide por monto o por porcentaje', 'Ve qué está pendiente y qué ya aceptaron', 'Salda cuentas desde el saldo de tus tarjetas'],
+        body: '¿Pagaste la cena de todos? Regístrala completa y divídela. A tu balance solo entra tu parte, y a cada quien le mandas lo suyo con su código de Budpoint: lo acepta y le aparece en su app.',
+        points: ['Paga por otros sin que se te desacomode el presupuesto', 'Ve quién te debe y a quién le debes', 'Marca cuando te pagan y salda desde el saldo de tus tarjetas', 'Divide por monto o por porcentaje', 'Pro: para compartir, tú o la otra persona necesitan Pro'],
       },
     ],
-    moreTitle: 'Los detalles que hacen la diferencia.',
+    howTitle: 'Cómo funciona Budpoint.',
+    how: [
+      { t: 'Agrega tus cuentas', d: 'Tu débito, tus tarjetas, tu efectivo. Pones el saldo de hoy y listo. Nunca te pedimos la contraseña de tu banco.' },
+      { t: 'Registra lo que entra y sale', d: 'A mano en unos toques, con Apple Pay a través de Atajos, o importando un archivo de tu banco (Pro).' },
+      { t: 'Entiende tu dinero', d: 'Tu Dashboard y tus presupuestos te dicen cuánto llevas, cuánto te queda y dónde conviene ajustar.' },
+    ],
+    moreTitle: 'Y los detalles que vas a usar todos los días.',
     more: [
-      { t: 'Aprovecha los Atajos', d: 'Tus compras con Apple Pay y los correos de tu banco pueden registrarse solos. Lo configuras una vez y listo.', i: 'bolt' },
-      { t: 'Cuadre de tarjetas', d: 'Sabrás cuánto pagar de cada tarjeta y quién te sigue debiendo.', i: 'scale' },
-      { t: 'Importa tu historial', d: 'Sube un CSV desde tu hoja de cálculo y revisa cada movimiento antes de guardarlo.', i: 'table' },
-      { t: 'Respaldo en iCloud', d: '¿Cambiaste de iPhone? Inicias sesión y todo vuelve a su lugar. Nosotros nunca vemos tu información.', i: 'cloud' },
-      { t: 'Widgets', d: 'Lo importante a la vista en tu pantalla de inicio, y un acceso directo a la app cuando necesites registrar algo.', i: 'grid' },
+      { t: 'Aprovecha los Atajos', d: 'Lo configuras una vez y tus compras con Apple Pay llegan solas, listas para confirmar. Una sola automatización sirve para todas tus tarjetas.', i: 'bolt' },
+      { t: 'Cuadre de tarjetas', d: 'Paga tus tarjetas desde tus cuentas y registra lo que otros te reponen, tarjeta por tarjeta. Así cada saldo queda correcto.', i: 'scale' },
+      { t: 'Importa tu historial', d: 'Pro: no empieces de cero. Sube un CSV o el estado de cuenta en PDF de BBVA, Banamex, Banorte, Nu o Revolut, y revisa cada movimiento antes de guardarlo.', i: 'table' },
+      { t: 'Respaldo en iCloud', d: 'Pro: ¿cambiaste de iPhone? Inicias sesión en iCloud y todo vuelve a su lugar. Tu respaldo vive en tu propio iCloud privado, no en nuestros servidores.', i: 'cloud' },
+      { t: 'Widgets', d: 'Ve cuánto te queda del presupuesto desde la pantalla de inicio, y registra un gasto, un ingreso o una transferencia con un toque.', i: 'grid' },
     ],
     pricingTitle: 'Precios claros.',
     pricingBody: 'Empieza gratis. Cuando necesites más cuentas, más personas o sincronizar con iCloud, pásate a Pro. Durante la beta, pruébalo sin pagar nada.',
     plans: [
-      { name: 'Gratis', price: '$0', per: '', note: 'Siempre gratis', features: ['2 cuentas', '5 etiquetas', '2 personas para dividir gastos', '3 presupuestos por periodo', 'Widgets'] },
-      { name: 'Mensual', price: '$59', per: 'MXN/mes', note: '7 días gratis para probar', features: ['Todo sin límites', 'Sincronización y respaldo en iCloud', 'Gastos compartidos', 'Pagos recurrentes', 'Exporta a CSV y PDF'] },
+      { name: 'Gratis', price: '$0', per: '', note: 'Siempre gratis', features: ['2 cuentas', '15 categorías', '2 personas para dividir gastos', '3 presupuestos por periodo', '3 metas de ahorro', 'Pagos recurrentes', 'Widgets'] },
+      { name: 'Mensual', price: '$59', per: 'MXN/mes', note: '7 días gratis para probar', features: ['Todo sin límites', 'Respaldo y sincronización en iCloud', 'Gastos compartidos', 'Importa CSV y estados de cuenta en PDF, exporta a CSV', 'Horas de trabajo por gasto', 'Reporte PDF de lo que te debe cada quien'] },
       { name: 'Anual', price: '$399', per: 'MXN/año', note: '14 días gratis para probar', badge: 'Ahorras 44%', features: ['Todo lo del plan mensual', 'Te sale en $33 al mes'] },
     ],
+    priceNote: 'Precios en pesos mexicanos en la App Store de México. En otros países, la App Store muestra el precio de tu región.',
     faqTitle: 'Preguntas frecuentes',
     faq: [
       { q: '¿Ya puedo usar Budpoint?', a: 'Sí, ya está en beta. Descárgala gratis con TestFlight, la app de Apple para probar apps antes de que lleguen al App Store. Si prefieres esperar la versión final, déjanos tu correo y te avisamos.' },
       { q: '¿Pago Pro en la beta?', a: 'No. En TestFlight las compras son de prueba y no se te cobra nada. Cuando Budpoint llegue al App Store, Pro se compra de forma normal.' },
-      { q: '¿Necesito conectar mi banco?', a: 'No, y nunca te vamos a pedir la contraseña de tu banco. Tus compras llegan con los Atajos de Apple Pay, con los correos de tu banco, desde un archivo CSV o las registras a mano.' },
-      { q: '¿Quién puede ver mi información?', a: 'Tu información se guarda en tu iPhone y en tu propia cuenta de iCloud. Lo único que pasa por nuestros servidores son los gastos que compartes, para que le lleguen a la otra persona.' },
+      { q: '¿Necesito conectar mi banco?', a: 'No, y nunca te vamos a pedir la contraseña de tu banco. Tus compras llegan con una automatización de Atajos para Apple Pay, con los correos de alerta de tu banco, importando un CSV o un PDF de tu banco (Pro), o las registras a mano.' },
+      { q: '¿Quién puede ver mi información?', a: 'Tus finanzas se guardan en tu iPhone y, si activas la sincronización con iCloud (Pro), en tu propio iCloud privado. Si inicias sesión para compartir gastos, en nuestros servidores solo queda lo necesario para eso: tu nombre y tu código de Budpoint, tus conexiones y los gastos que compartes. Las estadísticas de uso son anónimas, nunca incluyen datos financieros y puedes apagarlas.' },
       { q: '¿Puedo usarlo con mi pareja o con mis roomies?', a: 'Sí. Cada quien tiene su Budpoint y se mandan los gastos compartidos con su código.' },
     ],
     ctaTitle: 'Pruébala desde hoy.',
     ctaBody: 'La beta es gratis en TestFlight. Instálala, úsala y cuéntanos qué te parece.',
     betaCta: 'Descarga la beta en TestFlight',
     betaNote: 'Es una beta: puede tener errores, y las compras de Pro son de prueba, así que no se te cobra nada.',
+    stepsTitle: 'Cómo entrar',
+    steps: ['Instala TestFlight desde la App Store en tu iPhone.', 'Abre la invitación de Budpoint en tu iPhone y toca Aceptar.', 'Instala Budpoint. Mándanos comentarios desde TestFlight o escríbenos a support@budpoint.app.'],
     waitTitle: '¿Prefieres esperar a la versión del App Store? Déjanos tu correo.',
     email: 'tu@correo.com',
     join: 'Avísame',
@@ -181,7 +200,7 @@ function Reveal({ children, delay = 0, className }: { children: React.ReactNode;
 }
 
 const chapterCards = [AccountSplitsCard, TransactionsCard, BudgetCard, SharedCard]
-const chapterCompanions = [PeriodCard, BalanceCard, null, null]
+const chapterCompanions = [PeriodCard, BalanceCard, null, SplitMathCard]
 
 export default function Home() {
   const { lang } = useLanguage()
@@ -226,6 +245,8 @@ export default function Home() {
 
   return (
     <div className="nb min-h-screen overflow-x-clip">
+      {/* React hoists this into <head>; only the home page claims the root URL */}
+      <link rel="canonical" href="https://budpoint.app/" />
       <SiteHeader />
 
       {/* Hero */}
@@ -290,6 +311,24 @@ export default function Home() {
         })}
       </section>
 
+      {/* How it works */}
+      <section id="how" className="py-20 lg:py-28" style={{ borderTop: '1px solid var(--stroke)' }}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <Reveal><h2 className="max-w-xl text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-[44px]">{c.howTitle}</h2></Reveal>
+          <ol className="mt-12 grid grid-cols-1 gap-3 md:grid-cols-3">
+            {c.how.map((step, i) => (
+              <li key={step.t}>
+                <Reveal delay={i * 0.06} className="nb-card h-full p-6">
+                  <span className="nb-num grid h-9 w-9 place-items-center rounded-full text-[15px] font-semibold" style={{ background: 'var(--accent)', color: 'var(--on-accent)' }}>{i + 1}</span>
+                  <h3 className="mt-5 text-lg font-semibold tracking-tight">{step.t}</h3>
+                  <p className="mt-2 leading-relaxed" style={{ color: 'var(--muted)' }}>{step.d}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* More */}
       <section className="py-20 lg:py-28" style={{ borderTop: '1px solid var(--stroke)' }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -347,6 +386,7 @@ export default function Home() {
               )
             })}
           </div>
+          <p className="mt-6 text-sm" style={{ color: 'var(--muted)' }}>{c.priceNote}</p>
         </div>
       </section>
 
@@ -381,6 +421,15 @@ export default function Home() {
                 <p className="mt-4 max-w-md text-lg" style={{ color: '#9BA1AD' }}>{c.ctaBody}</p>
                 <div className="mt-8"><AccentButton href={TESTFLIGHT_URL}>{c.betaCta} ↗</AccentButton></div>
                 <p className="mt-4 max-w-md text-sm" style={{ color: '#9BA1AD' }}>{c.betaNote}</p>
+                <h3 className="mt-8 text-[15px] font-medium">{c.stepsTitle}</h3>
+                <ol className="mt-3 max-w-md space-y-2.5 text-sm" style={{ color: '#9BA1AD' }}>
+                  {c.steps.map((step, i) => (
+                    <li key={step} className="flex gap-3">
+                      <span className="nb-num grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs font-semibold" style={{ background: '#23262E', color: '#C8F25A' }}>{i + 1}</span>
+                      <span className="pt-0.5">{step}</span>
+                    </li>
+                  ))}
+                </ol>
               </div>
               <div className="lg:border-l lg:pl-12" style={{ borderColor: '#2A2D36' }}>
                 <p className="mb-4 text-[15px] font-medium">{c.waitTitle}</p>
@@ -388,7 +437,7 @@ export default function Home() {
                   <p className="text-lg font-medium" style={{ color: '#C8F25A' }}>{c.ok}</p>
                 ) : (
                   <form onSubmit={submit} className="w-full min-w-0">
-                    <div className="flex flex-col gap-2 rounded-[22px] p-1.5 sm:flex-row sm:rounded-full" style={{ background: '#0D0E12', border: '1px solid #2A2D36' }}>
+                    <div className="flex flex-col gap-2 rounded-[22px] p-1.5 focus-within:ring-2 focus-within:ring-[#C8F25A] sm:flex-row sm:rounded-full" style={{ background: '#0D0E12', border: '1px solid #2A2D36' }}>
                       <input
                         type="email"
                         required

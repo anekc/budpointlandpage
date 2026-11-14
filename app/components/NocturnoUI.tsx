@@ -239,6 +239,7 @@ function TxIcon({ kind, color }: { kind: string; color: string }) {
 
 export function TransactionsCard({ lang }: { lang: Lang }) {
   const [ref, inView] = useReveal<HTMLDivElement>()
+  const reduce = useReducedMotion()
   const month = monthName(useToday(), lang, 'long')
   return (
     <div ref={ref} className="nb-card overflow-hidden" style={{ boxShadow: 'var(--shadow)' }}>
@@ -251,7 +252,7 @@ export function TransactionsCard({ lang }: { lang: Lang }) {
             key={i}
             className="flex items-start gap-3 px-5 py-3.5"
             style={{ borderTop: i ? '1px solid var(--stroke)' : undefined }}
-            initial={{ opacity: 0, y: 8 }}
+            initial={reduce ? false : { opacity: 0, y: 8 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, ease: EASE, delay: 0.15 + i * 0.12 }}
           >
@@ -419,10 +420,11 @@ const receivedItem = { who: people.roommate, title: { en: (m: string) => `${m} r
 
 function StatusPill({ accepted, lang }: { accepted: boolean; lang: Lang }) {
   const t = sharedCopy[lang]
+  const reduce = useReducedMotion()
   return (
     <motion.span
       key={accepted ? 'a' : 'p'}
-      initial={{ scale: 0.9, opacity: 0 }}
+      initial={reduce ? false : { scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       className="rounded-full px-3 py-1 text-sm font-medium"
       style={accepted
@@ -478,7 +480,7 @@ export function SharedCard({ lang }: { lang: Lang }) {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={col.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d={col.icon} /></svg>
               {col.label}
             </div>
-            <motion.div key={col.value} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="nb-num mt-1.5 text-2xl font-medium" style={{ color: col.color }}>
+            <motion.div key={col.value} initial={reduce ? false : { opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="nb-num mt-1.5 text-2xl font-medium" style={{ color: col.color }}>
               ${money.format(col.value)}
             </motion.div>
           </div>
@@ -507,7 +509,7 @@ export function SharedCard({ lang }: { lang: Lang }) {
         key={tab}
         className="nb-card p-5"
         style={{ boxShadow: 'var(--shadow)' }}
-        initial={{ opacity: 0, y: 8 }}
+        initial={reduce ? false : { opacity: 0, y: 8 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
       >
@@ -579,5 +581,40 @@ export function ApplePayBanner({ lang, delay = 0.9 }: { lang: Lang; delay?: numb
         </span>
       </div>
     </motion.div>
+  )
+}
+
+/* ---------- Split math: what you paid vs. what was yours ---------- */
+
+const splitMathCopy = {
+  en: { title: 'Friday dinner', paid: 'You paid', yours: 'Your expense', owed: (who: string) => `${who} owes you`, note: 'Only your share counts in your period balance and your budgets.' },
+  es: { title: 'Cena del viernes', paid: 'Pagaste', yours: 'Tu gasto', owed: (who: string) => `${who} te debe`, note: 'Solo tu parte cuenta en el balance del periodo y en tus presupuestos.' },
+}
+
+/** The same dinner as in TransactionsCard: what left your card, what was really yours, and what you're owed.
+ *  Mirrors PeriodSummaryCalculator, which counts only the owner's split in the period's expenses. */
+export function SplitMathCard({ lang }: { lang: Lang }) {
+  const t = splitMathCopy[lang]
+  const dinner = txns[1]
+  const total = Math.abs(dinner.amount[lang])
+  const [mine, theirs] = dinner.split!.map(s => s.amount[lang])
+  const tiles = [
+    { label: t.paid, value: total, bg: 'var(--track)', color: 'var(--muted)' },
+    { label: t.yours, value: mine, bg: 'var(--expense-bg)', color: 'var(--expense)' },
+    { label: t.owed(people.friend[lang]), value: theirs, bg: 'var(--income-bg)', color: 'var(--income)' },
+  ]
+  return (
+    <div className="nb-card p-5" style={{ boxShadow: 'var(--shadow)' }}>
+      <div className="nb-label">{t.title}</div>
+      <dl className="mt-3 grid grid-cols-3 gap-2">
+        {tiles.map(tile => (
+          <div key={tile.label} className="flex min-w-0 flex-col justify-between rounded-2xl p-3" style={{ background: tile.bg }}>
+            <dt className="text-xs font-medium leading-tight" style={{ color: tile.color }}>{tile.label}</dt>
+            <dd className="nb-num mt-1.5 text-[17px] font-semibold">${money.format(tile.value)}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="mt-3 text-sm" style={{ color: 'var(--muted)' }}>{t.note}</p>
+    </div>
   )
 }
