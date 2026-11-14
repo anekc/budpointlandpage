@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useTheme } from './ThemeContext'
 import { useLanguage } from './LanguageContext'
+import { track, type LandingEvent } from './track'
 
 export const TESTFLIGHT_URL = 'https://testflight.apple.com/join/GZth4W4d'
 
@@ -13,18 +14,24 @@ const chrome = {
   es: { features: 'Funciones', pricing: 'Precios', faq: 'Preguntas', blog: 'Blog', cta: 'Prueba la beta', support: 'Soporte', privacy: 'Privacidad', terms: 'Términos' },
 }
 
-export function AccentButton({ children, href, onClick, type, disabled }: {
+export function AccentButton({ children, href, onClick, type, disabled, event }: {
   children: React.ReactNode
   href?: string
   onClick?: () => void
   type?: 'submit'
   disabled?: boolean
+  /** Analytics event sent when the link is clicked */
+  event?: { name: LandingEvent; props?: Record<string, string> }
 }) {
   const cls = 'inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[15px] font-semibold transition-transform active:scale-[0.97] hover:brightness-[1.04] disabled:opacity-60'
   const style = { background: 'var(--accent)', color: 'var(--on-accent)' }
   if (href) {
     const external = href.startsWith('http')
-    return <a href={href} className={cls} style={style} {...(external && { target: '_blank', rel: 'noopener noreferrer' })}>{children}</a>
+    return (
+      <a href={href} className={cls} style={style} onClick={event && (() => track(event.name, event.props))} {...(external && { target: '_blank', rel: 'noopener noreferrer' })}>
+        {children}
+      </a>
+    )
   }
   return <button type={type ?? 'button'} onClick={onClick} disabled={disabled} className={cls} style={style}>{children}</button>
 }
@@ -51,7 +58,7 @@ export function SiteHeader() {
           <Link href="/blog" className={linkCls(pathname.startsWith('/blog'))}>{c.blog}</Link>
         </nav>
         <div className="flex items-center gap-1.5">
-          <button onClick={switchLang} className="h-9 rounded-full px-3 text-sm font-medium hover:bg-[var(--track)]" aria-label={lang === 'en' ? 'Cambiar a español' : 'Switch to English'}>
+          <button onClick={() => { track('language_switch', { to: lang === 'en' ? 'es' : 'en' }); switchLang() }} className="h-9 rounded-full px-3 text-sm font-medium hover:bg-[var(--track)]" aria-label={lang === 'en' ? 'Cambiar a español' : 'Switch to English'}>
             {lang === 'en' ? 'ES' : 'EN'}
           </button>
           <button onClick={toggleTheme} className="grid h-9 w-9 place-items-center rounded-full hover:bg-[var(--track)]" aria-label={isDark ? 'Light mode' : 'Dark mode'}>
@@ -61,7 +68,7 @@ export function SiteHeader() {
                 : <path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z" />}
             </svg>
           </button>
-          <span className="ml-1 hidden sm:block"><AccentButton href={TESTFLIGHT_URL}>{c.cta}</AccentButton></span>
+          <span className="ml-1 hidden sm:block"><AccentButton href={TESTFLIGHT_URL} event={{ name: 'testflight_click', props: { placement: 'header', lang } }}>{c.cta}</AccentButton></span>
         </div>
       </div>
     </header>

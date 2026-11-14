@@ -43,3 +43,20 @@ Rama: `landing-audit`. **Nada está publicado.** Los cambios están en el árbol
 | Ruta `/es` indexable y `hreflang` | Requiere reestructurar el ruteo; P2 |
 | Borrar componentes sin uso y `app-preview.png` vacío | Limpieza sin impacto para el usuario; P2 |
 | Deduplicar la lista de espera | Depende de la configuración de Formspree |
+
+## Analítica (agregada después, con aprobación del dueño)
+
+- `@vercel/analytics@2.0.1`. `<Analytics />` va en `app/layout.tsx` y cuenta vistas de página sin cookies.
+- Eventos en `app/components/track.ts`. Ninguno lleva datos personales:
+
+  | Evento | Cuándo | Propiedades |
+  |---|---|---|
+  | `testflight_click` | Clic en un botón de TestFlight | `placement` (header / hero / cta) y `lang` |
+  | `waitlist_submit` / `waitlist_error` | Respuesta de Formspree | `lang` |
+  | `pricing_view` | La sección de precios aparece en pantalla, una vez por carga | `lang` |
+  | `language_switch` | Uso del botón ES/EN | `to` |
+
+- Política de privacidad: la sección de servicios y la de "Este sitio web" ahora mencionan Vercel Web Analytics (sin cookies, solo totales, nunca recibe el correo de la lista de espera).
+- **Requisitos en Vercel:**
+  - Activar Web Analytics en el proyecto (Analytics ▸ Enable).
+  - Los eventos personalizados solo aparecen en los planes Pro y Enterprise. En Hobby se ven solo las visitas.

@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useLanguage } from './components/LanguageContext'
 import { AccentButton, SiteFooter, SiteHeader, TESTFLIGHT_URL } from './components/SiteChrome'
 import {
@@ -14,6 +14,7 @@ import {
   TransactionsCard,
 } from './components/NocturnoUI'
 import { APPLE_LOGO, PhoneHero } from './components/PhoneHero'
+import { track } from './components/track'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -208,6 +209,14 @@ export default function Home() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'err'>('idle')
   const c = copy[lang]
 
+  // One pricing_view per page load, when the plans actually reach the screen
+  const pricingRef = useRef<HTMLElement>(null)
+  const pricingSeen = useInView(pricingRef, { once: true, amount: 0.3 })
+  useEffect(() => {
+    if (pricingSeen) track('pricing_view', { lang })
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- fire once, with the language at that moment
+  }, [pricingSeen])
+
   // Mobile Safari restores the old scroll offset on reload, but the animated hero
   // changes height while loading, so it lands mid-page. Always start at the top
   // unless the link points at a section.
@@ -237,9 +246,11 @@ export default function Home() {
         body: JSON.stringify({ email, source: 'Budpoint Landing Page', language: lang, timestamp: new Date().toISOString() }),
       })
       setStatus(res.ok ? 'ok' : 'err')
+      track(res.ok ? 'waitlist_submit' : 'waitlist_error', { lang })
       if (res.ok) setEmail('')
     } catch {
       setStatus('err')
+      track('waitlist_error', { lang })
     }
   }
 
@@ -263,7 +274,7 @@ export default function Home() {
             <p className="mt-6 max-w-[34rem] text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>{c.hero.body}</p>
           </Reveal>
           <Reveal delay={0.18} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <AccentButton href={TESTFLIGHT_URL}>
+            <AccentButton href={TESTFLIGHT_URL} event={{ name: 'testflight_click', props: { placement: 'hero', lang } }}>
               <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden className="-mt-0.5"><path d={APPLE_LOGO} /></svg>
               {c.hero.cta}
             </AccentButton>
@@ -350,7 +361,7 @@ export default function Home() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="py-20 lg:py-28" style={{ borderTop: '1px solid var(--stroke)' }}>
+      <section id="pricing" ref={pricingRef} className="py-20 lg:py-28" style={{ borderTop: '1px solid var(--stroke)' }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <h2 className="text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-[44px]">{c.pricingTitle}</h2>
@@ -419,7 +430,7 @@ export default function Home() {
               <div>
                 <h2 className="text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-5xl">{c.ctaTitle}</h2>
                 <p className="mt-4 max-w-md text-lg" style={{ color: '#9BA1AD' }}>{c.ctaBody}</p>
-                <div className="mt-8"><AccentButton href={TESTFLIGHT_URL}>{c.betaCta} ↗</AccentButton></div>
+                <div className="mt-8"><AccentButton href={TESTFLIGHT_URL} event={{ name: 'testflight_click', props: { placement: 'cta', lang } }}>{c.betaCta} ↗</AccentButton></div>
                 <p className="mt-4 max-w-md text-sm" style={{ color: '#9BA1AD' }}>{c.betaNote}</p>
                 <h3 className="mt-8 text-[15px] font-medium">{c.stepsTitle}</h3>
                 <ol className="mt-3 max-w-md space-y-2.5 text-sm" style={{ color: '#9BA1AD' }}>

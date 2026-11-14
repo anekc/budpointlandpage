@@ -129,7 +129,7 @@ const content: Record<'en' | 'es', LegalContent> = {
               <li><strong>Apple:</strong> iCloud, Sign in with Apple, the App Store and Shortcuts.</li>
               <li><strong>Google Firebase:</strong> Authentication, Cloud Firestore, Cloud Functions and Cloud Messaging for the sharing features described above, and Analytics for the anonymous usage events. These servers may be located outside your country, including the United States.</li>
               <li><strong>Formspree:</strong> stores the email you give us on this website to join the waitlist.</li>
-              <li><strong>Vercel:</strong> hosts this website.</li>
+              <li><strong>Vercel:</strong> hosts this website and counts its visits anonymously with Vercel Web Analytics.</li>
             </ul>
             <p>Each of these services has its own privacy policy.</p>
           </>
@@ -142,6 +142,8 @@ const content: Record<'en' | 'es', LegalContent> = {
           <p>
             If you join the waitlist, we keep your email only to tell you when Budpoint launches, and you can ask us to remove
             it at any time. The site remembers your theme and language in your browser. We don’t use tracking cookies.
+            To know how many people visit and which buttons they use (for example, the TestFlight button), we use Vercel
+            Web Analytics. It doesn’t use cookies, we only see totals, and it never receives your waitlist email.
           </p>
         ),
       },
@@ -329,7 +331,7 @@ const content: Record<'en' | 'es', LegalContent> = {
               <li><strong>Apple:</strong> iCloud, Iniciar sesión con Apple, el App Store y Atajos.</li>
               <li><strong>Google Firebase:</strong> Authentication, Cloud Firestore, Cloud Functions y Cloud Messaging para las funciones de compartir que describimos arriba, y Analytics para las estadísticas de uso anónimas. Estos servidores pueden estar fuera de tu país, incluso en Estados Unidos.</li>
               <li><strong>Formspree:</strong> guarda el correo que nos dejas en este sitio para la lista de espera.</li>
-              <li><strong>Vercel:</strong> aloja este sitio web.</li>
+              <li><strong>Vercel:</strong> aloja este sitio web y cuenta sus visitas de forma anónima con Vercel Web Analytics.</li>
             </ul>
             <p>Cada uno de estos servicios tiene su propia política de privacidad.</p>
           </>
@@ -342,7 +344,9 @@ const content: Record<'en' | 'es', LegalContent> = {
           <p>
             Si te unes a la lista de espera, guardamos tu correo solo para avisarte cuando salga Budpoint, y puedes pedirnos
             que lo borremos cuando quieras. El sitio recuerda en tu navegador el tema y el idioma que elegiste. No usamos
-            cookies de rastreo.
+            cookies de rastreo. Para saber cuántas personas nos visitan y qué botones usan (por ejemplo, el de TestFlight),
+            usamos Vercel Web Analytics. No usa cookies, nosotros solo vemos totales y nunca recibe el correo de la lista
+            de espera.
           </p>
         ),
       },

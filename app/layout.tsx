@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./nocturno.css";
+import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./providers";
 
 const geistSans = Geist({
@@ -108,6 +109,8 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        {/* Cookieless page views and the landing events in components/track.ts */}
+        <Analytics />
       </body>
     </html>
   );
