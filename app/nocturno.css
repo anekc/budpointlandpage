@@ -78,6 +78,30 @@ html.dark .nb {
   background-size: 6px 6px;
 }
 
+/* Hero iPhone: drawn at real size (390 pt screen + bezel) and scaled with --s.
+   The wrapper takes the scaled size so the page layout sees the phone as it looks. */
+.nb-phone-wrap {
+  --s: 0.74;
+  width: calc(414px * var(--s));
+  height: calc(868px * var(--s));
+}
+@media (min-width: 640px) { .nb-phone-wrap { --s: 0.82; } }
+@media (min-width: 1024px) { .nb-phone-wrap { --s: 0.86; } }
+
+.nb-phone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 414px;
+  height: 868px;
+  padding: 12px;
+  border-radius: 66px;
+  background: #050506;
+  box-shadow: 0 0 0 1.5px #3A3D45, 0 0 0 4px #15161A, 0 50px 100px -30px rgba(13, 14, 18, 0.55);
+  transform: scale(var(--s));
+  transform-origin: top left;
+}
+
 .nb details > summary {
   list-style: none;
 }

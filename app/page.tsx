@@ -6,13 +6,13 @@ import { useLanguage } from './components/LanguageContext'
 import { AccentButton, SiteFooter, SiteHeader, TESTFLIGHT_URL } from './components/SiteChrome'
 import {
   AccountSplitsCard,
-  ApplePayBanner,
   BalanceCard,
   BudgetCard,
   PeriodCard,
   SharedCard,
   TransactionsCard,
 } from './components/NocturnoUI'
+import { APPLE_LOGO, PhoneHero } from './components/PhoneHero'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -24,7 +24,7 @@ const copy = {
       body: 'Your accounts, budgets and shared expenses in one place. Log the whole check without wrecking your budget.',
       cta: 'Try the beta',
       secondary: 'See how it works',
-      meta: 'Free beta on TestFlight · Try Pro without paying a cent',
+      meta: 'For iPhone · iOS 17 or later · Free beta on TestFlight',
     },
     chapters: [
       {
@@ -93,7 +93,7 @@ const copy = {
       body: 'Tus cuentas, tus presupuestos y los gastos que compartes, todo en un mismo lugar. Registra el gasto de todos sin que tu balance lo resienta.',
       cta: 'Prueba la beta',
       secondary: 'Mira cómo funciona',
-      meta: 'Beta gratis en TestFlight · Prueba Pro sin pagar un peso',
+      meta: 'Para iPhone · iOS 17 o posterior · Beta gratis en TestFlight',
     },
     chapters: [
       {
@@ -242,7 +242,10 @@ export default function Home() {
             <p className="mt-6 max-w-[34rem] text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>{c.hero.body}</p>
           </Reveal>
           <Reveal delay={0.18} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <AccentButton href={TESTFLIGHT_URL}>{c.hero.cta}</AccentButton>
+            <AccentButton href={TESTFLIGHT_URL}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden className="-mt-0.5"><path d={APPLE_LOGO} /></svg>
+              {c.hero.cta}
+            </AccentButton>
             <a href="#features" onClick={toFeatures} className="group inline-flex items-center gap-1.5 text-[15px] font-medium">
               {c.hero.secondary}
               <span className="transition-transform group-hover:translate-x-0.5">→</span>
@@ -251,13 +254,7 @@ export default function Home() {
           <Reveal delay={0.24}><p className="mt-8 text-sm" style={{ color: 'var(--muted)' }}>{c.hero.meta}</p></Reveal>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[440px]">
-          <Reveal delay={0.15} className="relative z-10">
-            <PeriodCard lang={lang} />
-            <ApplePayBanner lang={lang} />
-          </Reveal>
-          <Reveal delay={0.3} className="relative z-0 mt-3"><BalanceCard lang={lang} /></Reveal>
-        </div>
+        <PhoneHero lang={lang} />
       </section>
 
       {/* Chapters */}
