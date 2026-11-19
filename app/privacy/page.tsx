@@ -28,8 +28,10 @@ const content: Record<'en' | 'es', LegalContent> = {
             </p>
             <p>
               <strong>iCloud backup and sync (Pro, optional).</strong> If you turn it on, Budpoint saves your data in your
-              private iCloud database. It’s end-to-end encrypted with a key kept in your iCloud Keychain, so neither we nor
-              Apple can read it. That’s also how your data comes back when you set up a new iPhone.
+              private iCloud database, which we can’t access. On top of that, amounts, names, notes and descriptions are
+              encrypted on your iPhone before upload, with a key kept in your iCloud Keychain. Other data, like dates and
+              currencies, is protected by iCloud’s standard encryption. That’s also how your data comes back when you set
+              up a new iPhone.
             </p>
           </>
         ),
@@ -231,9 +233,10 @@ const content: Record<'en' | 'es', LegalContent> = {
             </p>
             <p>
               <strong>Respaldo y sincronización con iCloud (Pro, opcional).</strong> Si lo activas, Budpoint guarda tu
-              información en tu base de datos privada de iCloud. Va cifrada de extremo a extremo con una llave que se queda
-              en tu Llavero de iCloud, así que ni nosotros ni Apple podemos leerla. Así es también como recuperas todo
-              cuando estrenas iPhone.
+              información en tu base de datos privada de iCloud, a la que nosotros no tenemos acceso. Además, los montos,
+              nombres, notas y descripciones se cifran en tu iPhone antes de subirse, con una llave que se queda en tu
+              Llavero de iCloud. Otros datos, como fechas y monedas, quedan protegidos por el cifrado estándar de iCloud.
+              Así es también como recuperas todo cuando estrenas iPhone.
             </p>
           </>
         ),
